@@ -1,19 +1,16 @@
-import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ThemeProvider } from 'styled-components/native';
-import {theme} from "./src/infrastructure/theme";
-import { CompaniesScreen } from "./src/features/categories/screens/companies.screen";
-
-
-
+import { ThemeExtension } from './src/infrastructure/theme-extension/theme-extension';
+import { UserProvider } from './src/contexts/user-context';
+import { Navigation } from './src/infrastructure/navigation/navigation';
 
 export default function App() {
   return (
     <>
-    <ThemeProvider theme = {theme}>
-   <CompaniesScreen />
-   </ThemeProvider>
-    <ExpoStatusBar style='auto'/>
+      <ThemeExtension>
+        <UserProvider>
+          <Navigation/>
+        </UserProvider>
+      </ThemeExtension>
     </>
   );
 }

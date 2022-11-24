@@ -12,7 +12,8 @@ export const fonts = {
   
   export const fontSizes = {
     caption: "12px",
-    button: "14px",
+    button: "20px",
+    input: "16px",
     body: "16px",
     title: "20px",
     h5: "24px",
