@@ -28,5 +28,5 @@ export const UserProvider = ({ children }) => {
 };
 
 UserProvider.propTypes = {
-    children: PropTypes.Component,
+    children: PropTypes.node.isRequired,
 };
