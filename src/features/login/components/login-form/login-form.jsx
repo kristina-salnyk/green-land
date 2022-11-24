@@ -1,23 +1,34 @@
 import React, { useState } from 'react';
-import { Field, Icon, Input } from '../../../common/input/input.styled';
-import { Button, Group, Text } from '../../../common/button/button.styled';
+import {
+  Field,
+  Icon,
+  Input,
+} from '../../../common/components/input/input.styled';
+import {
+  Button,
+  Group,
+  Text,
+} from '../../../common/components/button/button.styled';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../api/api';
 import { useUser } from '../../../../contexts/user-context';
-import { Loader } from '../../../common/loader/loader';
+import { Loader } from '../../../common/components/loader/loader';
+import { useAuthData } from '../../../common/hooks/use-auth-data';
 
 export const LoginForm = ({ navigation }) => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const {
+    login,
+    password,
+    isPasswordHidden,
+    changeLogin,
+    changePassword,
+    toggleIsPasswordHidden,
+  } = useAuthData();
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { logIn } = useUser();
-
-  const loginChangeHandler = text => setLogin(text);
-  const passwordChangeHandler = text => setPassword(text);
-  const isPasswordHiddenHandler = () => setIsPasswordHidden(!isPasswordHidden);
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -56,7 +67,7 @@ export const LoginForm = ({ navigation }) => {
           <Input
             placeholder="E-mail or phone number"
             value={login}
-            onChangeText={loginChangeHandler}
+            onChangeText={changeLogin}
           ></Input>
         </Field>
         <Field>
@@ -64,9 +75,9 @@ export const LoginForm = ({ navigation }) => {
             placeholder="Password"
             value={password}
             secureTextEntry={isPasswordHidden}
-            onChangeText={passwordChangeHandler}
+            onChangeText={changePassword}
           />
-          <Icon onPress={isPasswordHiddenHandler}>
+          <Icon onPress={toggleIsPasswordHidden}>
             <MaterialCommunityIcons
               name={isPasswordHidden ? 'eye' : 'eye-off'}
               size={22}

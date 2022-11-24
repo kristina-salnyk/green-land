@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
-import { Field, Icon, Input } from '../../../common/input/input.styled';
-import { Button, Group, Text } from '../../../common/button/button.styled';
-import { Checkbox } from '../../../common/checkbox/checkbox';
+import {
+  Field,
+  Icon,
+  Input,
+} from '../../../common/components/input/input.styled';
+import {
+  Button,
+  Group,
+  Text,
+} from '../../../common/components/button/button.styled';
+import { Checkbox } from '../../../common/components/checkbox/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
 import api from '../../../../api/api';
-import { Loader } from '../../../common/loader/loader';
+import { Loader } from '../../../common/components/loader/loader';
+import { useAuthData } from '../../../common/hooks/use-auth-data';
 
 export const RegisterForm = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const {
+    name,
+    login,
+    password,
+    isAdmin,
+    isPasswordHidden,
+    changeName,
+    changeLogin,
+    changePassword,
+    changeIsAdmin,
+    toggleIsPasswordHidden,
+  } = useAuthData();
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const { logIn } = useUser();
-
-  const nameChangeHandler = text => setName(text);
-  const loginChangeHandler = text => setLogin(text);
-  const passwordChangeHandler = text => setPassword(text);
-  const isAdminChangeHandler = () => setIsAdmin(!isAdmin);
-  const isPasswordHiddenHandler = () => setIsPasswordHidden(!isPasswordHidden);
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -55,14 +66,14 @@ export const RegisterForm = ({ navigation }) => {
           <Input
             placeholder="Name"
             value={name}
-            onChangeText={nameChangeHandler}
+            onChangeText={changeName}
           ></Input>
         </Field>
         <Field>
           <Input
             placeholder="E-mail or phone number"
             value={login}
-            onChangeText={loginChangeHandler}
+            onChangeText={changeLogin}
           ></Input>
         </Field>
         <Field>
@@ -70,9 +81,9 @@ export const RegisterForm = ({ navigation }) => {
             placeholder="Password"
             value={password}
             secureTextEntry={isPasswordHidden}
-            onChangeText={passwordChangeHandler}
+            onChangeText={changePassword}
           />
-          <Icon onPress={isPasswordHiddenHandler}>
+          <Icon onPress={toggleIsPasswordHidden}>
             <MaterialCommunityIcons
               name={isPasswordHidden ? 'eye' : 'eye-off'}
               size={22}
@@ -81,7 +92,7 @@ export const RegisterForm = ({ navigation }) => {
         </Field>
         <Checkbox
           value={isAdmin}
-          onPress={isAdminChangeHandler}
+          onPress={changeIsAdmin}
           text="I am an administrator"
         />
         <Button color="primary" onPress={onSubmit}>

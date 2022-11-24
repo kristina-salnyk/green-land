@@ -1,8 +1,8 @@
 import React from 'react';
-import { Logo } from '../../common/logo/logo';
-import { Heading } from '../../common/heading/heading.styled';
-import { Container } from '../../common/container/container.styled';
-import { Group, Button, Text } from '../../common/button/button.styled';
+import { Logo } from '../../common/components/logo/logo';
+import { Heading } from '../../common/components/heading/heading.styled';
+import { Container } from '../../common/components/container/container.styled';
+import { Group, Button, Text } from '../../common/components/button/button.styled';
 
 export const HomeScreen = ({ navigation }) => {
   return (
