@@ -4,13 +4,13 @@ import { UserProvider } from './src/contexts/user-context';
 import { Navigation } from './src/infrastructure/navigation/navigation';
 
 export default function App() {
-  return (
-    <>
-      <ThemeExtension>
-        <UserProvider>
-          <Navigation/>
-        </UserProvider>
-      </ThemeExtension>
-    </>
-  );
+    return (
+        <>
+            <ThemeExtension>
+                <UserProvider>
+                    <Navigation/>
+                </UserProvider>
+            </ThemeExtension>
+        </>
+    );
 }

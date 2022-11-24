@@ -1,7 +1,7 @@
-import React from "react";
-import styled from 'styled-components/native'
-import { StatusBar, StyleSheet, SafeAreaView, Text, View, Platform } from 'react-native';
-import { CompaniesInfoCard } from "../components/companies-info-card";
+import React from 'react';
+import styled from 'styled-components/native';
+import { StatusBar, SafeAreaView, Text } from 'react-native';
+import { CompaniesInfoCard } from '../components/companies-info-card';
 
 
 const SafeArea = styled(SafeAreaView)`
@@ -20,12 +20,12 @@ const CompanyListContainer = styled.View`
 
 export const CompaniesScreen = () => (
     <SafeArea >
-    <SearchContainer >
-      <Text>Header</Text>
-    </SearchContainer>
-    <CompanyListContainer >
-      <CompaniesInfoCard/>
-    </CompanyListContainer>
+        <SearchContainer >
+            <Text>Header</Text>
+        </SearchContainer>
+        <CompanyListContainer >
+            <CompaniesInfoCard/>
+        </CompanyListContainer>
     </SafeArea>
 );
 
