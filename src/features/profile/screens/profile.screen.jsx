@@ -1,17 +1,15 @@
 import React from 'react';
-import { Heading } from '../../common/components/heading/heading.styled';
 import { Container } from '../../common/components/container/container.styled';
-import { useUser } from '../../../contexts/user-context';
 import { Text } from '../../common/components/link/link.styled';
 import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import { Profile } from '../components/avatar/profile';
 
 export const ProfileScreen = ({ navigation }) => {
-    const {userName} = useUser();
-
     return (
         <Container>
-            <Heading style={{flex: 1}}>Hello, {userName}!</Heading>
+            {/*<Heading style={{flex: 1}}>Hello, {userName}!</Heading>*/}
+            <Profile />
 
             <TouchableOpacity
                 onPress={() => navigation.reset({
