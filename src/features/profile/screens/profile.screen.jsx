@@ -8,9 +8,7 @@ import { Profile } from '../components/avatar/profile';
 export const ProfileScreen = ({ navigation }) => {
     return (
         <Container>
-            {/*<Heading style={{flex: 1}}>Hello, {userName}!</Heading>*/}
             <Profile />
-
             <TouchableOpacity
                 onPress={() => navigation.reset({
                     index: 0,
