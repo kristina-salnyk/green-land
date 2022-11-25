@@ -1,31 +1,51 @@
-import React from "react";
+import React, {useContext} from "react";
+import { Searchbar } from "react-native-paper";
 import styled from 'styled-components/native'
-import { StatusBar, StyleSheet, SafeAreaView, Text, View, Platform } from 'react-native';
+import { StatusBar, StyleSheet, SafeAreaView, Text, View, Platform, FlatList, TouchableOpacity } from 'react-native';
 import { CompaniesInfoCard } from "../components/companies-info-card";
+import { SafeArea } from "../../../components/utility/safe-area.component";
+
+import { CompaniesContext } from "../../../services/companies/companies.context";
+import { Search } from "../components/search.component";
 
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1;
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
-`;
 
-const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
 
-const CompanyListContainer = styled.View`
-  flex: 1;
-  padding: ${(props) => props.theme.space[3]};
-`;
+// const CompanyListContainer = styled.View`
+//   flex: 1;
+//   padding: ${(props) => props.theme.space[3]};
+// `;
 
-export const CompaniesScreen = () => (
+export const CompaniesScreen = ({navigation}) => {
+  const {isLoading, companies, error} = useContext(CompaniesContext);
+  return  (
     <SafeArea >
-    <SearchContainer >
-      <Text>Header</Text>
-    </SearchContainer>
-    <CompanyListContainer >
-      <CompaniesInfoCard/>
-    </CompanyListContainer>
+<Search />
+    <FlatList
+      data ={companies}
+      renderItem={({item})=>{ 
+      return(
+        <TouchableOpacity 
+        onPress={()=>
+        navigation.navigate('CompanyDetailt', {
+          company:item,
+        })
+        }
+        >
+      <CompaniesInfoCard company={item}/>
+      </TouchableOpacity>
+      )}}
+      keyExtractor={(item)=> item.name}
+      contentContainerStyle={{padding:16}}
+    
+    
+    />
+    {/* <CompanyListContainer > */}
+    
+    {/* </CompanyListContainer> */}
     </SafeArea>
-);
+    
+)
+  };
+  
 

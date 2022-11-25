@@ -2,11 +2,13 @@ import React from "react";
 import styled from 'styled-components/native'
 import {StyleSheet, Text} from 'react-native';
 import { Card } from 'react-native-paper';
+import GeneralStarExample from '../../../../assets/star'
 
 
 
 const CompanyCard = styled(Card)`
 background-color: ${(props) => props.theme.colors.bg.primary};
+margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 const CompanyCardCover = styled(Card.Cover)`
@@ -24,14 +26,14 @@ const Info = styled.View`
 padding: ${(props) => props.theme.space[3]};
 `;
 
-export const CompaniesInfoCard = ({category = {}}) => {
+export const CompaniesInfoCard = ({company = {}}) => {
     const {
-        name = 'Some company',
+        name = 'Some compeeeany',
         address = 'Some random address',
         openingDays = 'Mon - Fri',
         openingHours= '9 a.m - 6 p.m',
         rating = 4,
-    } = category;
+    } = company;
 
     return (
         <CompanyCard elevation={5}>
@@ -42,6 +44,7 @@ export const CompaniesInfoCard = ({category = {}}) => {
           <Title>{openingDays}</Title>
           <Title>{openingHours}</Title>
           <Title>{rating}</Title>
+ 
           </Info>
         </CompanyCard>
       );
