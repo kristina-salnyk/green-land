@@ -7,26 +7,29 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState(null);
+  const [userType, setUserType] = useState(null);
 
-    const logIn = (name) => {
-        setIsLoggedIn(true);
-        setUserName(name);
-    };
+  const logIn = ({name, type}) => {
+    setIsLoggedIn(true);
+    setUserName(name);
+    setUserType(type);
+  };
 
-    const logOut = () => {
-        setIsLoggedIn(false);
-        setUserName(null);
-    };
+  const logOut = () => {
+    setIsLoggedIn(false);
+    setUserName(null);
+    setUserType(null);
+  };
 
-    return (
-        <UserContext.Provider value={{ isLoggedIn, userName, logIn, logOut }}>
-            {children}
-        </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ isLoggedIn, userName, userType, logIn, logOut }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 UserProvider.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };

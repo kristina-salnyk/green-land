@@ -5,12 +5,12 @@ import { fonts, fontWeights, fontSizes } from './fonts';
 import { radii } from './radii';
 
 export const theme = {
-    colors,
-    space,
-    lineHeights,
-    sizes,
-    fonts,
-    fontSizes,
-    fontWeights,
-    radii,
+  colors,
+  space,
+  lineHeights,
+  sizes,
+  fonts,
+  fontSizes,
+  fontWeights,
+  radii,
 };

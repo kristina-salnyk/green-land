@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components/native";
-import { Searchbar } from "react-native-paper";
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components/native';
+import { Searchbar } from 'react-native-paper';
 
-import { LocationContext } from "../../../services/location/location.context";
+import { LocationContext } from '../../../services/location/location.context';
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
@@ -13,7 +13,7 @@ export const Search = () => {
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
   useEffect(() => {
-    setSearchKeyword(keyword)
+    setSearchKeyword(keyword);
   }, [keyword]);
 
   return (

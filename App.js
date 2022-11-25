@@ -6,28 +6,19 @@ import { CompaniesContextProvider } from './src/services/companies/companies.con
 import { LocationContextProvider } from './src/services/location/location.context';
 import { Navigation } from './src/infrastructure/navigation/navigation';
 
-// const Tab = createBottomTabNavigator();
-// const Map = ()=> <SafeArea><Text>Map</Text></SafeArea>
-
 export default function App() {
-    return (
-        <>
-            <ThemeExtension>
-                <UserProvider>
-                  <LocationContextProvider>
-                    <CompaniesContextProvider>
-                      {/* <NavigationContainer>
-                        <Tab.Navigator>
-                        <Tab.Screen name="Companys" component={CompaniesScreen} />
-                          <Tab.Screen name="Map" component={Map} />
-                        </Tab.Navigator>
-                       </NavigationContainer> */}
-                    <Navigation/>
-                    </CompaniesContextProvider>
-                  </LocationContextProvider>
-                </UserProvider>
-            </ThemeExtension>
-          <ExpoStatusBar style='auto'/>
-        </>
-    );
+  return (
+    <>
+      <ThemeExtension>
+        <UserProvider>
+          <LocationContextProvider>
+            <CompaniesContextProvider>
+              <Navigation/>
+            </CompaniesContextProvider>
+          </LocationContextProvider>
+        </UserProvider>
+      </ThemeExtension>
+      <ExpoStatusBar style='auto'/>
+    </>
+  );
 }

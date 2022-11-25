@@ -3,12 +3,12 @@ import { Avatar, Name } from './profile.styled';
 import { useUser } from '../../../../contexts/user-context';
 
 export const Profile = () => {
-    const { userName } = useUser();
+  const { userName } = useUser();
 
-    return (
-        <>
-            <Avatar source={require('../../../../../assets/user-icon.png')} />
-            <Name>{userName}</Name>
-        </>
-    );
+  return (
+    <>
+      <Avatar source={require('../../../../../assets/user-icon.png')} />
+      <Name>{userName}</Name>
+    </>
+  );
 };

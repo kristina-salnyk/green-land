@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {List} from "react-native-paper"
-import { ScrollView } from "react-native";
-import { CompaniesInfoCard } from "../components/companies-info-card";
+import React, {useState} from 'react';
+import {List} from 'react-native-paper';
+import { ScrollView } from 'react-native';
+import { CompaniesInfoCard } from '../components/companies-info-card';
 
-import { SafeArea } from "../../../components/utility/safe-area.component";
+import { SafeArea } from '../../../components/utility/safe-area.component';
 
 export const CompanyDetailScreen = ({ route }) => {
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);

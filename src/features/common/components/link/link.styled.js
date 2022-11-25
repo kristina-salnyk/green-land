@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
-export const Text = styled.Text`
+export const Link = styled.Text`
+  margin-top: ${props => props.theme.space[4]};
   font-size: ${props => props.theme.fontSizes.button};
   font-weight: ${props => props.theme.fontWeights.bold};
   text-align: center;

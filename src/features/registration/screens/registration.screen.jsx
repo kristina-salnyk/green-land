@@ -6,17 +6,17 @@ import { RegisterForm } from '../components/register-form/register-form';
 import PropTypes from 'prop-types';
 
 export const RegistrationScreen = ({ navigation }) => {
-    return (
-        <Container style={{ position: 'relative' }}>
-            <Heading>Registration</Heading>
-            <Logo />
-            <RegisterForm navigation={navigation} />
-        </Container>
-    );
+  return (
+    <Container style={{ position: 'relative' }}>
+      <Heading>Registration</Heading>
+      <Logo />
+      <RegisterForm navigation={navigation} />
+    </Container>
+  );
 };
 
 RegistrationScreen.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func,
-    }),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
 };

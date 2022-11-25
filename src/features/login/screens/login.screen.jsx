@@ -6,17 +6,17 @@ import { LoginForm } from '../components/login-form/login-form';
 import PropTypes from 'prop-types';
 
 export const LoginScreen = ({navigation}) => {
-    return (
-        <Container>
-            <Heading>Log in</Heading>
-            <Logo />
-            <LoginForm navigation={navigation}/>
-        </Container>
-    );
+  return (
+    <Container>
+      <Heading>Log in</Heading>
+      <Logo />
+      <LoginForm navigation={navigation}/>
+    </Container>
+  );
 };
 
 LoginScreen.propTypes = {
-    navigation: PropTypes.shape({
-        navigate: PropTypes.func
-    })
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
 };

@@ -11,28 +11,28 @@ import { NavigationContainer } from '@react-navigation/native';
 const MainStack = createStackNavigator();
 
 export const Navigation = () => {
-    const theme = useTheme();
-    const {isLoggedIn} = useUser();
+  const theme = useTheme();
+  const {isLoggedIn} = useUser();
 
-    const screenOptions = {
-        headerShown: false,
-        contentStyle: { backgroundColor: theme.colors.bg.primary },
-    };
+  const screenOptions = {
+    headerShown: false,
+    contentStyle: { backgroundColor: theme.colors.bg.primary },
+  };
 
-    return (
-        <NavigationContainer>
-            <MainStack.Navigator
-                initialRouteName={isLoggedIn ? 'Profile' : 'Home'}
-                screenOptions={screenOptions}
-            >
-                <MainStack.Screen
-                    name="Registration"
-                    component={RegistrationScreen}
-                />
-                <MainStack.Screen name="Login" component={LoginScreen} />
-                <MainStack.Screen name="Home" component={HomeScreen} />
-                <MainStack.Screen name="Profile" component={ProfileScreen} />
-            </MainStack.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <MainStack.Navigator
+        initialRouteName={isLoggedIn ? 'Profile' : 'Home'}
+        screenOptions={screenOptions}
+      >
+        <MainStack.Screen
+          name="Registration"
+          component={RegistrationScreen}
+        />
+        <MainStack.Screen name="Login" component={LoginScreen} />
+        <MainStack.Screen name="Home" component={HomeScreen} />
+        <MainStack.Screen name="Profile" component={ProfileScreen} />
+      </MainStack.Navigator>
+    </NavigationContainer>
+  );
 };
