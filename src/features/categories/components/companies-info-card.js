@@ -1,14 +1,14 @@
-import React from "react";
-import styled from 'styled-components/native'
+import React from 'react';
+import styled from 'styled-components/native';
 import {StyleSheet, Text} from 'react-native';
 import { Card } from 'react-native-paper';
-import GeneralStarExample from '../../../../assets/star'
+import GeneralStarExample from '../../../../assets/star';
 
 
 
 const CompanyCard = styled(Card)`
-background-color: ${(props) => props.theme.colors.bg.primary};
-margin-bottom: ${(props) => props.theme.space[3]};
+  background-color: ${(props) => props.theme.colors.bg.primary};
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 const CompanyCardCover = styled(Card.Cover)`
@@ -37,21 +37,21 @@ export const CompaniesInfoCard = ({company = {}}) => {
 
     return (
         <CompanyCard elevation={5}>
-          {/* <CompanyCardCover key={name}/> */}
-          <Info>
-          <Title>{name}</Title>
-          <Title>{address}</Title>
-          <Title>{openingDays}</Title>
-          <Title>{openingHours}</Title>
-          <Title>{rating}</Title>
- 
-          </Info>
-        </CompanyCard>
-      );
-    };
-    
-    const styles = StyleSheet.create({
-      card: { backgroundColor: "white" },
-      cover: { padding: 20, backgroundColor: "white" },
+            {/* <CompanyCardCover key={name}/> */}
+            <Info>
+                <Title>{name}</Title>
+                <Title>{address}</Title>
+                <Title>{openingDays}</Title>
+                <Title>{openingHours}</Title>
+                <Title>{rating}</Title>
 
-    });
+            </Info>
+        </CompanyCard>
+    );
+};
+
+const styles = StyleSheet.create({
+    card: { backgroundColor: 'white' },
+    cover: { padding: 20, backgroundColor: 'white' },
+
+});

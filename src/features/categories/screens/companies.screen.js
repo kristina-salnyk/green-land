@@ -1,12 +1,12 @@
-import React, {useContext} from "react";
-import { Searchbar } from "react-native-paper";
-import styled from 'styled-components/native'
+import React, {useContext} from 'react';
+import { Searchbar } from 'react-native-paper';
+import styled from 'styled-components/native';
 import { StatusBar, StyleSheet, SafeAreaView, Text, View, Platform, FlatList, TouchableOpacity } from 'react-native';
-import { CompaniesInfoCard } from "../components/companies-info-card";
-import { SafeArea } from "../../../components/utility/safe-area.component";
+import { CompaniesInfoCard } from '../components/companies-info-card';
+import { SafeArea } from '../../../components/utility/safe-area.component';
 
-import { CompaniesContext } from "../../../services/companies/companies.context";
-import { Search } from "../components/search.component";
+import { CompaniesContext } from '../../../services/companies/companies.context';
+import { Search } from '../components/search.component';
 
 
 
@@ -17,35 +17,33 @@ import { Search } from "../components/search.component";
 // `;
 
 export const CompaniesScreen = ({navigation}) => {
-  const {isLoading, companies, error} = useContext(CompaniesContext);
-  return  (
-    <SafeArea >
-<Search />
-    <FlatList
-      data ={companies}
-      renderItem={({item})=>{ 
-      return(
-        <TouchableOpacity 
-        onPress={()=>
-        navigation.navigate('CompanyDetailt', {
-          company:item,
-        })
-        }
-        >
-      <CompaniesInfoCard company={item}/>
-      </TouchableOpacity>
-      )}}
-      keyExtractor={(item)=> item.name}
-      contentContainerStyle={{padding:16}}
-    
-    
-    />
-    {/* <CompanyListContainer > */}
-    
-    {/* </CompanyListContainer> */}
-    </SafeArea>
-    
-)
-  };
-  
+    const {isLoading, companies, error} = useContext(CompaniesContext);
+    return  (
+        <SafeArea >
+            <Search />
+            <FlatList
+                data ={companies}
+                renderItem={({item})=>{
+                    return(
+                        <TouchableOpacity
+                            onPress={()=>
+                                navigation.navigate('CompanyDetailt', {
+                                    company:item,
+                                })
+                            }
+                        >
+                            <CompaniesInfoCard company={item}/>
+                        </TouchableOpacity>
+                    );}}
+                keyExtractor={(item)=> item.name}
+                contentContainerStyle={{padding:16}}
 
+
+            />
+            {/* <CompanyListContainer > */}
+
+            {/* </CompanyListContainer> */}
+        </SafeArea>
+
+    );
+};
