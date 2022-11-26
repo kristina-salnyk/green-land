@@ -11,7 +11,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useUser } from '../../../contexts/user-context';
 
 export const ProfileScreen = ({ navigation }) => {
-  const { userName, logOut } = useUser();
+  const { userData, logOut } = useUser();
 
   return (
     <ScreenContainer>
@@ -22,7 +22,7 @@ export const ProfileScreen = ({ navigation }) => {
       </Menu>
       <Profile>
         <Avatar source={require('../../../../assets/user-icon.png')} />
-        <Name>{userName}</Name>
+        <Name>{userData.name}</Name>
       </Profile>
       <Options />
     </ScreenContainer>
