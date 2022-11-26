@@ -17,7 +17,7 @@ export const Options = () => {
         />
         <Text>Edit profile</Text>
       </Button>
-      {userData.isAdmin && (
+      {userData?.isAdmin && (
         <Button color="primary" onPress={() => {}}>
           <FontAwesomeIcons
             name="building-o"
@@ -51,7 +51,7 @@ export const Options = () => {
         />
         <Text>FAQ</Text>
       </Button>
-      {userData.isAdmin && (
+      {userData?.isAdmin && (
         <Button color="secondary" size="large" onPress={() => {}}>
           <Text size="large">Go to utilize!</Text>
         </Button>

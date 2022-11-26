@@ -22,7 +22,7 @@ export const ProfileScreen = ({ navigation }) => {
       </Menu>
       <Profile>
         <Avatar source={require('../../../../assets/user-icon.png')} />
-        <Name>{userData.name}</Name>
+        <Name>{userData?.name ?? ''}</Name>
       </Profile>
       <Options />
     </ScreenContainer>

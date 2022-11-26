@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { ROUTES } from '../constants';
-import { retrieveUserData, storeUserData } from '../infrastructure/data-store/data-store';
+import { deleteUserData, retrieveUserData, storeUserData } from '../infrastructure/data-store/data-store';
 
 const UserContext = createContext();
 
@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
     if (!userData) {
       return;
     }
-    storeUserData(userData).catch();
+    storeUserData(userData);
   }, [userData]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }) => {
       }
       setUserData({ ...data });
       setIsLoggedIn(true);
-    }).catch().finally(() => setIsLoading(false));
+    }).finally(() => setIsLoading(false));
   }, [setUserData]);
 
   const logIn = (userData, navigation) => {
@@ -50,6 +50,8 @@ export const UserProvider = ({ children }) => {
   const logOut = navigation => {
     setIsLoggedIn(false);
     setUserData(null);
+
+    deleteUserData();
 
     navigation.reset({
       index: 0,
