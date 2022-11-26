@@ -7,6 +7,7 @@ import { HomeScreen } from '../../features/home/screens/home.screen';
 import { ProfileScreen } from '../../features/profile/screens/profile.screen';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { ROUTES } from '../../constants';
 
 const MainStack = createStackNavigator();
 
@@ -22,16 +23,16 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <MainStack.Navigator
-        initialRouteName={isLoggedIn ? 'Profile' : 'Home'}
+        initialRouteName={isLoggedIn ? ROUTES.PROFILE : ROUTES.HOME}
         screenOptions={screenOptions}
       >
         <MainStack.Screen
-          name="Registration"
+          name={ROUTES.REGISTER}
           component={RegistrationScreen}
         />
-        <MainStack.Screen name="Login" component={LoginScreen} />
-        <MainStack.Screen name="Home" component={HomeScreen} />
-        <MainStack.Screen name="Profile" component={ProfileScreen} />
+        <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
+        <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
+        <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

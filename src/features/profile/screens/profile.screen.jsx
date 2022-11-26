@@ -6,19 +6,17 @@ import { Profile } from '../components/avatar/profile';
 import { Options } from '../components/options/options';
 import Ionicons
   from 'react-native-vector-icons/Ionicons';
+import { useUser } from '../../../contexts/user-context';
 
 export const ProfileScreen = ({ navigation }) => {
+  const {logOut} = useUser();
+    
   return (
     <Container>
       <View style={{position: 'relative', marginLeft: 'auto'}}>
         <TouchableOpacity
           style={{position: 'absolute', right: 0, top: -24}}
-          onPress={() =>
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'Home' }],
-            })
-          }
+          onPress={()=>logOut(navigation)}
         >
           <Ionicons
             name='exit-outline' size={50}/>

@@ -19,6 +19,11 @@ import { AUTH_TYPES } from '../../../../constants';
 import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 
+const NAME = 'Name';
+const LOGIN = 'E-mail or phone number';
+const PASSWORD = 'Password';
+const IS_ADMIN = 'I am an administrator';
+
 export const AuthForm = ({ navigation, authType }) => {
   const {
     name,
@@ -65,23 +70,25 @@ export const AuthForm = ({ navigation, authType }) => {
     <>
       {isLoading && <Loader />}
       <Group>
-        {authType === AUTH_TYPES.REGISTRATION && <Field>
-          <Input
-            placeholder="Name"
-            value={name}
-            onChangeText={changeName}
-          ></Input>
-        </Field>}
+        {authType === AUTH_TYPES.REGISTRATION && (
+          <Field>
+            <Input
+              placeholder={NAME}
+              value={name}
+              onChangeText={changeName}
+            />
+          </Field>
+        )}
         <Field>
           <Input
-            placeholder="E-mail or phone number"
+            placeholder={LOGIN}
             value={login}
             onChangeText={changeLogin}
-          ></Input>
+          />
         </Field>
         <Field>
           <Input
-            placeholder="Password"
+            placeholder={PASSWORD}
             value={password}
             secureTextEntry={isPasswordHidden}
             onChangeText={changePassword}
@@ -93,11 +100,13 @@ export const AuthForm = ({ navigation, authType }) => {
             />
           </Icon>
         </Field>
-        {authType === AUTH_TYPES.REGISTRATION && <Checkbox
-          isChecked={isAdmin}
-          onPress={changeIsAdmin}
-          text="I am an administrator"
-        />}
+        {authType === AUTH_TYPES.REGISTRATION && (
+          <Checkbox
+            isChecked={isAdmin}
+            onPress={changeIsAdmin}
+            text={IS_ADMIN}
+          />
+        )}
         <Button color="primary" onPress={onSubmit}>
           <Text>Submit</Text>
         </Button>

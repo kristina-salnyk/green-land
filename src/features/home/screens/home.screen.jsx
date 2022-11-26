@@ -4,6 +4,7 @@ import { Heading } from '../../common/components/heading/heading.styled';
 import { Container } from '../../common/components/container/container.styled';
 import { Group, Button, Text } from '../../common/components/button/button.styled';
 import PropTypes from 'prop-types';
+import { ROUTES } from '../../../constants';
 
 export const HomeScreen = ({ navigation }) => {
   return (
@@ -11,10 +12,10 @@ export const HomeScreen = ({ navigation }) => {
       <Heading>Welcome to</Heading>
       <Logo />
       <Group>
-        <Button onPress={() => navigation.navigate('Login')} color="primary">
+        <Button onPress={() => navigation.navigate(ROUTES.LOGIN)} color="primary">
           <Text>Login</Text>
         </Button>
-        <Button onPress={() => navigation.navigate('Registration')}
+        <Button onPress={() => navigation.navigate(ROUTES.REGISTER)}
           color="secondary">
           <Text>Register</Text>
         </Button>
