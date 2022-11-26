@@ -10,7 +10,7 @@ import { AUTH_TYPES } from '../../../../constants';
 import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 import { FormFields } from '../screen-container/screen-container.styled';
-import { useLoading } from '../../../../contexts/loading';
+import { useLoading } from '../../../../contexts/loading-context';
 
 const NAME = 'Name';
 const LOGIN = 'E-mail or phone number';
