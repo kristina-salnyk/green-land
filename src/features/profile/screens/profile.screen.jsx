@@ -1,30 +1,31 @@
 import React from 'react';
-import { Container } from '../../common/components/container/container.styled';
-import { TouchableOpacity, View } from 'react-native';
+import {
+  ScreenContainer,
+  Menu,
+} from '../../common/components/screen-container/screen-container.styled';
+import { TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { Profile } from '../components/avatar/profile';
+import { Profile, Avatar, Name } from '../components/profile/profile.styled';
 import { Options } from '../components/options/options';
-import Ionicons
-  from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useUser } from '../../../contexts/user-context';
 
 export const ProfileScreen = ({ navigation }) => {
-  const {logOut} = useUser();
-    
+  const { userName, logOut } = useUser();
+
   return (
-    <Container>
-      <View style={{position: 'relative', marginLeft: 'auto'}}>
-        <TouchableOpacity
-          style={{position: 'absolute', right: 0, top: -24}}
-          onPress={()=>logOut(navigation)}
-        >
-          <Ionicons
-            name='exit-outline' size={50}/>
+    <ScreenContainer>
+      <Menu>
+        <TouchableOpacity onPress={() => logOut(navigation)}>
+          <Ionicons name="exit-outline" size={50} />
         </TouchableOpacity>
-      </View>
-      <Profile />
-      <Options/>
-    </Container>
+      </Menu>
+      <Profile>
+        <Avatar source={require('../../../../assets/user-icon.png')} />
+        <Name>{userName}</Name>
+      </Profile>
+      <Options />
+    </ScreenContainer>
   );
 };
 

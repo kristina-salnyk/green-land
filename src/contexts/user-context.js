@@ -23,19 +23,21 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const logOut = (navigation) => {
+  const logOut = navigation => {
     setIsLoggedIn(false);
     setUserName(null);
     setUserType(null);
 
     navigation.reset({
       index: 0,
-      routes: [{ name: ROUTES.HOME}],
+      routes: [{ name: ROUTES.HOME }],
     });
   };
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, userName, userType, logIn, logOut }}>
+    <UserContext.Provider
+      value={{ isLoggedIn, userName, userType, logIn, logOut }}
+    >
       {children}
     </UserContext.Provider>
   );

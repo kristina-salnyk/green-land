@@ -3,16 +3,13 @@ import styled from 'styled-components/native';
 export const Field = styled.View`
   margin-top: ${props => props.theme.space[3]};
   position: relative;
-  width: 100%;
 `;
 
 export const Input = styled.TextInput`
   padding: ${props => props.theme.space[3]};
-  font-size: ${(props => props.theme.fontSizes.body)};
+  font-size: ${props => props.theme.fontSizes.body};
   border: 1px solid ${props => props.theme.colors.border.input};
-  border-radius: ${(props) => props.theme.radii.normal};
-  width: 100%;
-  
+  border-radius: ${props => props.theme.radii.normal};
 `;
 
 export const Icon = styled.Pressable`
