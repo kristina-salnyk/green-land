@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react-native';
 import { createContext, useContext, useState } from 'react';
+import { USER_TYPES } from '../constants';
 
 const UserContext = createContext();
 
@@ -11,10 +12,15 @@ export const UserProvider = ({ children }) => {
   const [userName, setUserName] = useState(null);
   const [userType, setUserType] = useState(null);
 
-  const logIn = ({name, type}) => {
+  const logIn = (userData, navigation) => {
     setIsLoggedIn(true);
-    setUserName(name);
-    setUserType(type);
+    setUserName(userData.name);
+    setUserType(userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER);
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Profile' }],
+    });
   };
 
   const logOut = () => {

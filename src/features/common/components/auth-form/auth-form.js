@@ -3,27 +3,33 @@ import {
   Field,
   Icon,
   Input,
-} from '../../../common/components/input/input.styled';
+} from '../input/input.styled';
 import {
   Button,
   Group,
   Text,
-} from '../../../common/components/button/button.styled';
+} from '../button/button.styled';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import api from '../../../../api/api';
 import { useUser } from '../../../../contexts/user-context';
-import { Loader } from '../../../common/components/loader/loader';
-import { useAuthData } from '../../../common/hooks/use-auth-data';
+import { Loader } from '../loader/loader';
+import { useAuthData } from '../../hooks/use-auth-data';
 import PropTypes from 'prop-types';
-import { USER_TYPES } from '../../../../constants';
+import { authLogin } from '../../../../api/auth-login';
+import { AUTH_TYPES } from '../../../../constants';
+import { authRegister } from '../../../../api/auth-register';
+import { Checkbox } from '../checkbox/checkbox';
 
-export const LoginForm = ({ navigation }) => {
+export const AuthForm = ({ navigation, authType }) => {
   const {
+    name,
     login,
     password,
+    isAdmin,
     isPasswordHidden,
+    changeName,
     changeLogin,
     changePassword,
+    changeIsAdmin,
     toggleIsPasswordHidden,
   } = useAuthData();
 
@@ -37,25 +43,17 @@ export const LoginForm = ({ navigation }) => {
     setError(null);
 
     try {
-      const response = await api.get(`/users?login=${login}`);
-
-      if (response.data.length === 0) {
-        throw new Error('User not registered');
+      let userData = null;
+      switch (authType){
+      case AUTH_TYPES.LOGIN:
+        userData = await authLogin({login, password});
+        break;
+      case AUTH_TYPES.REGISTRATION:
+        userData = await authRegister({ name, login, password, isAdmin });
+        break;
+      default: return;
       }
-
-      const userData = response.data[0];
-      if (userData.password !== password) {
-        throw new Error('Incorrect password');
-      }
-
-      const params = {name: userData.name,
-        type: userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER};
-      logIn(params);
-
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Profile' }],
-      });
+      logIn(userData, navigation);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -67,6 +65,13 @@ export const LoginForm = ({ navigation }) => {
     <>
       {isLoading && <Loader />}
       <Group>
+        {authType === AUTH_TYPES.REGISTRATION && <Field>
+          <Input
+            placeholder="Name"
+            value={name}
+            onChangeText={changeName}
+          ></Input>
+        </Field>}
         <Field>
           <Input
             placeholder="E-mail or phone number"
@@ -88,6 +93,11 @@ export const LoginForm = ({ navigation }) => {
             />
           </Icon>
         </Field>
+        {authType === AUTH_TYPES.REGISTRATION && <Checkbox
+          isChecked={isAdmin}
+          onPress={changeIsAdmin}
+          text="I am an administrator"
+        />}
         <Button color="primary" onPress={onSubmit}>
           <Text>Submit</Text>
         </Button>
@@ -103,9 +113,10 @@ export const LoginForm = ({ navigation }) => {
   );
 };
 
-LoginForm.propTypes = {
+AuthForm.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
     reset: PropTypes.func,
-  })
+  }),
+  authType: PropTypes.string.isRequired,
 };
