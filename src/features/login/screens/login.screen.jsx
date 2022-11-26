@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FormContainer,
   Heading,
@@ -14,7 +14,13 @@ import { Loader } from '../../common/components/loader/loader';
 import { useLoading } from '../../../contexts/loading';
 
 export const LoginScreen = ({ navigation }) => {
-  const { isLoading } = useLoading();
+  const { isLoading, setError } = useLoading();
+
+  useEffect(() => {
+    return () => {
+      setError(null);
+    };
+  }, []);
 
   return (
     <ScreenContainer>
