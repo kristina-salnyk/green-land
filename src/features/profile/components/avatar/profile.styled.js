@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 
 export const Avatar = styled.Image`
   margin-top: ${props => props.theme.space[4]};
-  display: block;
   width: 80px;
   height: 95px;
   object-fit: contain;
