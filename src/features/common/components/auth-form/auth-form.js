@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Field,
-  Icon,
-  Input,
-} from '../input/input.styled';
-import {
-  Button,
-  Group,
-  Text,
-} from '../button/button.styled';
+import { Field, Icon, Input } from '../input/input.styled';
+import { Button, Group, Text } from '../button/button.styled';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
 import { Loader } from '../loader/loader';
@@ -44,14 +36,15 @@ export const AuthForm = ({ navigation, authType }) => {
 
     try {
       let userData = null;
-      switch (authType){
+      switch (authType) {
       case AUTH_TYPES.LOGIN:
-        userData = await authLogin({login, password});
+        userData = await authLogin({ login, password });
         break;
       case AUTH_TYPES.REGISTRATION:
         userData = await authRegister({ name, login, password, isAdmin });
         break;
-      default: return;
+      default:
+        return;
       }
       logIn(userData, navigation);
     } catch (error) {
@@ -65,13 +58,15 @@ export const AuthForm = ({ navigation, authType }) => {
     <>
       {isLoading && <Loader />}
       <Group>
-        {authType === AUTH_TYPES.REGISTRATION && <Field>
-          <Input
-            placeholder="Name"
-            value={name}
-            onChangeText={changeName}
-          ></Input>
-        </Field>}
+        {authType === AUTH_TYPES.REGISTRATION && (
+          <Field>
+            <Input
+              placeholder="Name"
+              value={name}
+              onChangeText={changeName}
+            ></Input>
+          </Field>
+        )}
         <Field>
           <Input
             placeholder="E-mail or phone number"
@@ -93,11 +88,13 @@ export const AuthForm = ({ navigation, authType }) => {
             />
           </Icon>
         </Field>
-        {authType === AUTH_TYPES.REGISTRATION && <Checkbox
-          isChecked={isAdmin}
-          onPress={changeIsAdmin}
-          text="I am an administrator"
-        />}
+        {authType === AUTH_TYPES.REGISTRATION && (
+          <Checkbox
+            isChecked={isAdmin}
+            onPress={changeIsAdmin}
+            text="I am an administrator"
+          />
+        )}
         <Button color="primary" onPress={onSubmit}>
           <Text>Submit</Text>
         </Button>

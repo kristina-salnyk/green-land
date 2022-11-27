@@ -14,8 +14,8 @@ export const UserProvider = ({ children }) => {
 
   const logIn = (userData, navigation) => {
     setIsLoggedIn(true);
-    setUserName(userData.name);
-    setUserType(userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER);
+    setUserName(userData?.name);
+    setUserType(userData?.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER);
 
     navigation.reset({
       index: 0,

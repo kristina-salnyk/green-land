@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {List} from 'react-native-paper';
+import React, { useState } from 'react';
+import { List } from 'react-native-paper';
 import { ScrollView } from 'react-native';
 import { CompaniesInfoCard } from '../components/companies-info-card';
 
@@ -18,7 +18,7 @@ export const CompanyDetailScreen = ({ route }) => {
       <ScrollView>
         <List.Accordion
           title="Company Details"
-          left={(props) => <List.Icon {...props} icon="" />}
+          left={props => <List.Icon {...props} icon="" />}
           expanded={breakfastExpanded}
           onPress={() => setBreakfastExpanded(!breakfastExpanded)}
         >
@@ -28,7 +28,7 @@ export const CompanyDetailScreen = ({ route }) => {
 
         <List.Accordion
           title="Services provide"
-          left={(props) => <List.Icon {...props} icon="" />}
+          left={props => <List.Icon {...props} icon="" />}
           expanded={lunchExpanded}
           onPress={() => setLunchExpanded(!lunchExpanded)}
         >
@@ -39,22 +39,20 @@ export const CompanyDetailScreen = ({ route }) => {
 
         <List.Accordion
           title="You can rate the service"
-          left={(props) => <List.Icon {...props} icon="" />}
+          left={props => <List.Icon {...props} icon="" />}
           expanded={dinnerExpanded}
           onPress={() => setDinnerExpanded(!dinnerExpanded)}
         >
           <List.Item title="11111111111111111" />
- 
         </List.Accordion>
 
         <List.Accordion
           title="You can ask the service"
-          left={(props) => <List.Icon {...props} icon="" />}
+          left={props => <List.Icon {...props} icon="" />}
           expanded={drinksExpanded}
           onPress={() => setDrinksExpanded(!drinksExpanded)}
         >
           <List.Item title="1111111111111" />
- 
         </List.Accordion>
       </ScrollView>
     </SafeArea>
