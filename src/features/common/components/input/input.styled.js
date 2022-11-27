@@ -12,7 +12,6 @@ export const Input = styled.TextInput`
   border: 1px solid ${props => props.theme.colors.border.input};
   border-radius: ${(props) => props.theme.radii.normal};
   width: 100%;
-  
 `;
 
 export const Icon = styled.Pressable`

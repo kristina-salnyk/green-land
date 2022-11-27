@@ -4,11 +4,8 @@ import {
   Icon,
   Input,
 } from '../../../common/components/input/input.styled';
-import {
-  Button,
-  Group,
-  Text,
-} from '../../../common/components/button/button.styled';
+import { Group } from '../../../common/components/button/button.styled';
+import { Button } from '../../../common/components/button/button';
 import { Checkbox } from '../../../common/components/checkbox/checkbox';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
@@ -17,6 +14,7 @@ import { Loader } from '../../../common/components/loader/loader';
 import { useAuthData } from '../../../common/hooks/use-auth-data';
 import PropTypes from 'prop-types';
 import { USER_TYPES } from '../../../../constants';
+import { Text } from 'react-native';
 
 export const RegisterForm = ({ navigation }) => {
   const {
@@ -47,8 +45,10 @@ export const RegisterForm = ({ navigation }) => {
       const response = await api.post('/users', user);
 
       const userData = response.data;
-      const params = {name: userData.name,
-        type: userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER};
+      const params = {
+        name: userData.name,
+        type: userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER,
+      };
       logIn(params);
 
       navigation.reset({
@@ -99,9 +99,7 @@ export const RegisterForm = ({ navigation }) => {
           onPress={changeIsAdmin}
           text="I am an administrator"
         />
-        <Button color="primary" onPress={onSubmit}>
-          <Text>Register</Text>
-        </Button>
+        <Button onPress={onSubmit} text="Register" />
 
         {/*TODO: error message*/}
         {error && (
@@ -117,6 +115,6 @@ export const RegisterForm = ({ navigation }) => {
 RegisterForm.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
-    reset: PropTypes.func
-  })
+    reset: PropTypes.func,
+  }),
 };

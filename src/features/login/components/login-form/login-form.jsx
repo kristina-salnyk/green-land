@@ -4,11 +4,8 @@ import {
   Icon,
   Input,
 } from '../../../common/components/input/input.styled';
-import {
-  Button,
-  Group,
-  Text,
-} from '../../../common/components/button/button.styled';
+import { Group } from '../../../common/components/button/button.styled';
+import { Button } from '../../../common/components/button/button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import api from '../../../../api/api';
 import { useUser } from '../../../../contexts/user-context';
@@ -16,6 +13,7 @@ import { Loader } from '../../../common/components/loader/loader';
 import { useAuthData } from '../../../common/hooks/use-auth-data';
 import PropTypes from 'prop-types';
 import { USER_TYPES } from '../../../../constants';
+import { Text } from 'react-native';
 
 export const LoginForm = ({ navigation }) => {
   const {
@@ -48,8 +46,10 @@ export const LoginForm = ({ navigation }) => {
         throw new Error('Incorrect password');
       }
 
-      const params = {name: userData.name,
-        type: userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER};
+      const params = {
+        name: userData.name,
+        type: userData.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER,
+      };
       logIn(params);
 
       navigation.reset({
@@ -88,9 +88,7 @@ export const LoginForm = ({ navigation }) => {
             />
           </Icon>
         </Field>
-        <Button color="primary" onPress={onSubmit}>
-          <Text>Submit</Text>
-        </Button>
+        <Button onPress={onSubmit} text="Submit" />
 
         {/*TODO: error message*/}
         {error && (
@@ -107,5 +105,5 @@ LoginForm.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
     reset: PropTypes.func,
-  })
+  }),
 };

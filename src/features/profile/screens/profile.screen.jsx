@@ -4,15 +4,14 @@ import { TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Profile } from '../components/avatar/profile';
 import { Options } from '../components/options/options';
-import Ionicons
-  from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const ProfileScreen = ({ navigation }) => {
   return (
     <Container>
-      <View style={{position: 'relative', marginLeft: 'auto'}}>
+      <View style={{ position: 'relative', marginLeft: 'auto' }}>
         <TouchableOpacity
-          style={{position: 'absolute', right: 0, top: -24}}
+          style={{ position: 'absolute', right: 0, top: -24 }}
           onPress={() =>
             navigation.reset({
               index: 0,
@@ -20,12 +19,11 @@ export const ProfileScreen = ({ navigation }) => {
             })
           }
         >
-          <Ionicons
-            name='exit-outline' size={50}/>
+          <Ionicons name="exit-outline" size={50} />
         </TouchableOpacity>
       </View>
       <Profile />
-      <Options/>
+      <Options />
     </Container>
   );
 };
