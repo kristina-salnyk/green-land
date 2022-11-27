@@ -1,23 +1,43 @@
-import React from 'react';
-import { Heading } from '../../common/components/heading/heading.styled';
-import { Container } from '../../common/components/container/container.styled';
+import React, { useEffect } from 'react';
+import {
+  FormContainer,
+  Heading,
+  Title,
+} from '../../common/components/screen-container/screen-container.styled';
+import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
 import { Logo } from '../../common/components/logo/logo';
 import PropTypes from 'prop-types';
 import { AUTH_TYPES } from '../../../constants';
 import { AuthForm } from '../../common/components/auth-form/auth-form';
+import { Platform } from 'react-native';
+import { Loader } from '../../common/components/loader/loader';
+import { useLoading } from '../../../contexts/loading';
 
-export const LoginScreen = ({navigation}) => {
+export const LoginScreen = ({ navigation }) => {
+  const { isLoading, setError } = useLoading();
+
+  useEffect(() => {
+    return () => {
+      setError(null);
+    };
+  }, []);
+
   return (
-    <Container>
-      <Heading>Log in</Heading>
-      <Logo />
-      <AuthForm navigation={navigation} authType={AUTH_TYPES.LOGIN}/>
-    </Container>
+    <ScreenContainer>
+      <Heading>
+        <Title>Log in</Title>
+        <Logo />
+      </Heading>
+      <FormContainer behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <AuthForm navigation={navigation} authType={AUTH_TYPES.LOGIN} />
+      </FormContainer>
+      {isLoading && <Loader />}
+    </ScreenContainer>
   );
 };
 
 LoginScreen.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func
-  })
+    navigate: PropTypes.func,
+  }),
 };

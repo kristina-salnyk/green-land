@@ -17,7 +17,7 @@ export const Navigation = () => {
 
   const screenOptions = {
     headerShown: false,
-    contentStyle: { backgroundColor: theme.colors.bg.primary },
+    cardStyle: { backgroundColor: theme.colors.bg.primary }
   };
 
   return (
