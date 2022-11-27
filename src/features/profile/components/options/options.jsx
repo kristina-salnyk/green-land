@@ -51,7 +51,7 @@ export const Options = () => {
         />
         <Text>FAQ</Text>
       </Button>
-      {userData?.isAdmin && (
+      {!userData?.isAdmin && (
         <Button color="secondary" size="large" onPress={() => {}}>
           <Text size="large">Go to utilize!</Text>
         </Button>
