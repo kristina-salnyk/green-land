@@ -28,3 +28,12 @@ export const ICONS = [
     component: MaterialCommunityIcons,
   },
 ];
+
+export const AUTH_TYPES = { LOGIN: 'login', REGISTRATION: 'register' };
+
+export const ROUTES = {
+  HOME: 'Home',
+  PROFILE: 'Profile',
+  REGISTER: 'Registration',
+  LOGIN: 'Login',
+};

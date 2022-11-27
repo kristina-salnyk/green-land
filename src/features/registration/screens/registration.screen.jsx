@@ -1,17 +1,34 @@
 import React from 'react';
-import { Heading } from '../../common/components/heading/heading.styled';
-import { Container } from '../../common/components/container/container.styled';
+import {
+  FormContainer,
+  Heading,
+} from '../../common/components/screen-container/screen-container.styled';
+import {
+  ScreenContainer,
+  Title,
+} from '../../common/components/screen-container/screen-container.styled';
 import { Logo } from '../../common/components/logo/logo';
-import { RegisterForm } from '../components/register-form/register-form';
 import PropTypes from 'prop-types';
+import { AuthForm } from '../../common/components/auth-form/auth-form';
+import { AUTH_TYPES } from '../../../constants';
+import { Platform } from 'react-native';
+import { Loader } from '../../common/components/loader/loader';
+import { useLoading } from '../../../contexts/loading';
 
 export const RegistrationScreen = ({ navigation }) => {
+  const { isLoading } = useLoading();
+    
   return (
-    <Container style={{ position: 'relative' }}>
-      <Heading>Registration</Heading>
-      <Logo />
-      <RegisterForm navigation={navigation} />
-    </Container>
+    <ScreenContainer>
+      <Heading>
+        <Title>Registration </Title>
+        <Logo />
+      </Heading>
+      <FormContainer behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <AuthForm navigation={navigation} authType={AUTH_TYPES.REGISTRATION} />
+      </FormContainer>
+      {isLoading && <Loader />}
+    </ScreenContainer>
   );
 };
 

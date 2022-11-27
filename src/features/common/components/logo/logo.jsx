@@ -1,4 +1,4 @@
-import React, {View } from 'react-native';
+import React, { View } from 'react-native';
 import { Text, Img } from './logo.styled';
 
 export const Logo = () => {

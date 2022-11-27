@@ -1,7 +1,11 @@
 import styled from 'styled-components/native';
 
+export const Profile = styled.View`
+  padding: ${props => props.theme.space[2]} 0;
+  align-items: center;
+`;
+
 export const Avatar = styled.Image`
-  margin-top: ${props => props.theme.space[4]};
   width: 80px;
   height: 95px;
   object-fit: contain;
