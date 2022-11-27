@@ -1,30 +1,40 @@
 import React from 'react';
 import { Logo } from '../../common/components/logo/logo';
-import { Heading } from '../../common/components/heading/heading.styled';
-import { Container } from '../../common/components/container/container.styled';
-import { Group, Button, Text } from '../../common/components/button/button.styled';
+import { Heading } from '../../common/components/screen-container/screen-container.styled';
+import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
+import { Button, Text } from '../../common/components/button/button.styled';
 import PropTypes from 'prop-types';
+import { ROUTES } from '../../../constants';
+import { Title } from '../../common/components/screen-container/screen-container.styled';
+import { View } from 'react-native';
 
 export const HomeScreen = ({ navigation }) => {
   return (
-    <Container>
-      <Heading>Welcome to</Heading>
-      <Logo />
-      <Group>
-        <Button onPress={() => navigation.navigate('Login')} color="primary">
+    <ScreenContainer>
+      <Heading>
+        <Title>Welcome to</Title>
+        <Logo />
+      </Heading>
+      <View style={{ flex: 1 }}>
+        <Button
+          onPress={() => navigation.navigate(ROUTES.LOGIN)}
+          color="primary"
+        >
           <Text>Login</Text>
         </Button>
-        <Button onPress={() => navigation.navigate('Registration')}
-          color="secondary">
+        <Button
+          onPress={() => navigation.navigate(ROUTES.REGISTER)}
+          color="secondary"
+        >
           <Text>Register</Text>
         </Button>
-      </Group>
-    </Container>
+      </View>
+    </ScreenContainer>
   );
 };
 
 HomeScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
-  })
+  }),
 };

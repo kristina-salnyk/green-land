@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react-native';
 import { createContext, useContext, useState } from 'react';
-import { USER_TYPES } from '../constants';
+import { ROUTES, USER_TYPES } from '../constants';
 
 const UserContext = createContext();
 
@@ -19,18 +19,25 @@ export const UserProvider = ({ children }) => {
 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Profile' }],
+      routes: [{ name: ROUTES.PROFILE }],
     });
   };
 
-  const logOut = () => {
+  const logOut = navigation => {
     setIsLoggedIn(false);
     setUserName(null);
     setUserType(null);
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: ROUTES.HOME }],
+    });
   };
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, userName, userType, logIn, logOut }}>
+    <UserContext.Provider
+      value={{ isLoggedIn, userName, userType, logIn, logOut }}
+    >
       {children}
     </UserContext.Provider>
   );
