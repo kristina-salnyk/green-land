@@ -4,7 +4,7 @@ import { useUser } from '../../../../contexts/user-context';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export const Options = () => {
+export const Options = ({navigation}) => {
   const { userData } = useUser();
 
   return (
