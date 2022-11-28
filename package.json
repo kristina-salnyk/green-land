@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@typescript-eslint/parser": "^5.44.0",
     "eslint": "^8.22.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",

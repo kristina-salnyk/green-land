@@ -6,7 +6,6 @@ export const Profile = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  display: block;
   width: 80px;
   height: 95px;
   object-fit: contain;

@@ -3,7 +3,8 @@ import styled from 'styled-components/native';
 export const Button = styled.TouchableOpacity`
   margin-top: ${props => props.theme.space[props.size === 'large' ? 5 : 3]};
   padding: ${props => props.theme.space[props.size === 'large' ? 4 : 3]};
-  background-color: ${props => props.theme.colors.brand[props.color]};
+  background-color: ${props =>
+    props.theme.colors.brand[props.color || 'primary']};
   border-radius: ${props => props.theme.radii.normal};
   width: 100%;
   position: relative;

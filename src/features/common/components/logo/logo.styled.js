@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const Img = styled.Image`
-  display: block;
   width: 180px;
   height: 180px;
   object-fit: contain;

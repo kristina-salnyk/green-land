@@ -32,7 +32,7 @@ export const AuthForm = ({ navigation, authType }) => {
   } = useAuthData();
 
   const { logIn } = useUser();
-  const {error, setIsLoading, setError} = useLoading();
+  const { error, setIsLoading, setError } = useLoading();
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -41,14 +41,14 @@ export const AuthForm = ({ navigation, authType }) => {
     try {
       let userData = null;
       switch (authType) {
-      case AUTH_TYPES.LOGIN:
-        userData = await authLogin({ login, password });
-        break;
-      case AUTH_TYPES.REGISTRATION:
-        userData = await authRegister({ name, login, password, isAdmin });
-        break;
-      default:
-        return;
+        case AUTH_TYPES.LOGIN:
+          userData = await authLogin({ login, password });
+          break;
+        case AUTH_TYPES.REGISTRATION:
+          userData = await authRegister({ name, login, password, isAdmin });
+          break;
+        default:
+          return;
       }
       logIn(userData, navigation);
     } catch (error) {
