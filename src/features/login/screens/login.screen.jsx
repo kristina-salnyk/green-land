@@ -11,7 +11,7 @@ import { AUTH_TYPES } from '../../../constants';
 import { AuthForm } from '../../common/components/auth-form/auth-form';
 import { Platform } from 'react-native';
 import { Loader } from '../../common/components/loader/loader';
-import { useLoading } from '../../../contexts/loading';
+import { useLoading } from '../../../contexts/loading-context';
 
 export const LoginScreen = ({ navigation }) => {
   const { isLoading, setError } = useLoading();

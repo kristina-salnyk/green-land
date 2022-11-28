@@ -5,7 +5,7 @@ import { UserProvider } from './src/contexts/user-context';
 import { CompaniesContextProvider } from './src/services/companies/companies.context';
 import { LocationContextProvider } from './src/services/location/location.context';
 import { Navigation } from './src/infrastructure/navigation/navigation';
-import { LoadingProvider } from './src/contexts/loading';
+import { LoadingProvider } from './src/contexts/loading-context';
 
 export default function App() {
   return (

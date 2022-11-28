@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react-native';
-import { createContext, useContext, useState } from 'react';
-import { ROUTES, USER_TYPES } from '../constants';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { ROUTES } from '../constants';
+import { deleteUserData, retrieveUserData, storeUserData } from '../infrastructure/data-store/data-store';
 
 const UserContext = createContext();
 
@@ -9,13 +15,31 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(null);
-  const [userType, setUserType] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (!userData) {
+      return;
+    }
+    storeUserData(userData);
+  }, [userData]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    retrieveUserData().then(data => {
+      if (!data) {
+        return;
+      }
+      setUserData({ ...data });
+      setIsLoggedIn(true);
+    }).finally(() => setIsLoading(false));
+  }, [setUserData]);
 
   const logIn = (userData, navigation) => {
+    setUserData({ ...userData });
     setIsLoggedIn(true);
-    setUserName(userData?.name);
-    setUserType(userData?.isAdmin ? USER_TYPES.ADMIN : USER_TYPES.USER);
 
     navigation.reset({
       index: 0,
@@ -25,8 +49,9 @@ export const UserProvider = ({ children }) => {
 
   const logOut = navigation => {
     setIsLoggedIn(false);
-    setUserName(null);
-    setUserType(null);
+    setUserData(null);
+
+    deleteUserData();
 
     navigation.reset({
       index: 0,
@@ -35,9 +60,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider
-      value={{ isLoggedIn, userName, userType, logIn, logOut }}
-    >
+    <UserContext.Provider value={{ isLoggedIn, userData, isLoading, logIn, logOut }}>
       {children}
     </UserContext.Provider>
   );

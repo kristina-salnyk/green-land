@@ -1,12 +1,11 @@
 import React  from 'react-native';
 import { Button, Text } from '../../../common/components/button/button.styled';
 import { useUser } from '../../../../contexts/user-context';
-import { USER_TYPES } from '../../../../constants';
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export const Options = () => {
-  const { userType } = useUser();
+export const Options = ({navigation}) => {
+  const { userData } = useUser();
 
   return (
     <>
@@ -18,7 +17,7 @@ export const Options = () => {
         />
         <Text>Edit profile</Text>
       </Button>
-      {userType === USER_TYPES.ADMIN && (
+      {userData?.isAdmin && (
         <Button color="primary" onPress={() => {}}>
           <FontAwesomeIcons
             name="building-o"
@@ -52,7 +51,7 @@ export const Options = () => {
         />
         <Text>FAQ</Text>
       </Button>
-      {userType === USER_TYPES.USER && (
+      {!userData?.isAdmin && (
         <Button color="secondary" size="large" onPress={() => {}}>
           <Text size="large">Go to utilize!</Text>
         </Button>

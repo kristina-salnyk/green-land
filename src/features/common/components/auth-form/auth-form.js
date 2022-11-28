@@ -10,7 +10,10 @@ import { AUTH_TYPES } from '../../../../constants';
 import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 import { FormFields } from '../screen-container/screen-container.styled';
-import { useLoading } from '../../../../contexts/loading';
+import { useLoading } from '../../../../contexts/loading-context';
+import { ValidationSchema } from './validation';
+import * as Yup from 'yup';
+import { Alert } from 'react-native';
 
 const NAME = 'Name';
 const LOGIN = 'E-mail or phone number';
@@ -32,27 +35,54 @@ export const AuthForm = ({ navigation, authType }) => {
   } = useAuthData();
 
   const { logIn } = useUser();
-  const { error, setIsLoading, setError } = useLoading();
+  const { setIsLoading, setError } = useLoading();
 
   const onSubmit = async () => {
+    try {
+      switch (authType) {
+      case AUTH_TYPES.LOGIN:
+        await Yup.object({
+          login: ValidationSchema.login,
+          password: ValidationSchema.password,
+        }).validate({
+          login,
+          password,
+        });
+        break;
+      case AUTH_TYPES.REGISTRATION:
+        await Yup.object({
+          name: ValidationSchema.name,
+          login: ValidationSchema.login,
+          password: ValidationSchema.password,
+        }).validate({ name, login, password });
+        break;
+      default:
+        return;
+      }
+    } catch (error) {
+      Alert.alert(error.message);
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
 
     try {
       let userData = null;
       switch (authType) {
-        case AUTH_TYPES.LOGIN:
-          userData = await authLogin({ login, password });
-          break;
-        case AUTH_TYPES.REGISTRATION:
-          userData = await authRegister({ name, login, password, isAdmin });
-          break;
-        default:
-          return;
+      case AUTH_TYPES.LOGIN:
+        userData = await authLogin({ login, password });
+        break;
+      case AUTH_TYPES.REGISTRATION:
+        userData = await authRegister({ name, login, password, isAdmin });
+        break;
+      default:
+        return;
       }
       logIn(userData, navigation);
     } catch (error) {
       setError(error.message);
+      Alert.alert(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -93,13 +123,6 @@ export const AuthForm = ({ navigation, authType }) => {
         <Button color="primary" onPress={onSubmit}>
           <Text>Submit</Text>
         </Button>
-
-        {/*TODO: error message*/}
-        {error && (
-          <Text style={{ color: 'red', marginTop: 30 }}>
-            Something went wrong :( {error}
-          </Text>
-        )}
       </FormFields>
     </>
   );
