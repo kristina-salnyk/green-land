@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, Icon, Input } from '../input/input.styled';
-import { Button, Text } from '../button/button';
+import { Button } from '../button/button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
 import { useAuthData } from '../../hooks/use-auth-data';
