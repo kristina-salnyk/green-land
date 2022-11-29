@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, Icon, Input } from '../input/input.styled';
-import { Button, Text } from '../button/button.styled';
+import { Button, Text } from '../button/button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
 import { useAuthData } from '../../hooks/use-auth-data';
@@ -120,9 +120,7 @@ export const AuthForm = ({ navigation, authType }) => {
             text={IS_ADMIN}
           />
         )}
-        <Button color="primary" onPress={onSubmit}>
-          <Text>Submit</Text>
-        </Button>
+        <Button onPress={onSubmit} color="primary" text="Submit" />
       </FormFields>
     </>
   );

@@ -10,7 +10,7 @@ const getIconByName = name => {
   return ICONS[iconIdx];
 };
 
-export const ButtonIcon = ({ iconName, iconStyle={}}) => {
+export const Icon = ({ iconName, iconStyle={}}) => {
   const icon = getIconByName(iconName);
   const IconComponent = icon.component;
 
@@ -23,7 +23,7 @@ export const ButtonIcon = ({ iconName, iconStyle={}}) => {
   );
 };
 
-ButtonIcon.propTypes = {
+Icon.propTypes = {
   iconName: PropTypes.string.isRequired,
   iconStyle : PropTypes.object
 };
