@@ -2,7 +2,7 @@ import React from 'react';
 import { Logo } from '../../common/components/logo/logo';
 import { Heading } from '../../common/components/screen-container/screen-container.styled';
 import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
-import { Button, Text } from '../../common/components/button/button.styled';
+import { Button, Text } from '../../common/components/button/button';
 import PropTypes from 'prop-types';
 import { ROUTES } from '../../../constants';
 import { Title } from '../../common/components/screen-container/screen-container.styled';
@@ -18,16 +18,13 @@ export const HomeScreen = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <Button
           onPress={() => navigation.navigate(ROUTES.LOGIN)}
-          color="primary"
-        >
-          <Text>Login</Text>
-        </Button>
+          text='Login'
+        />
         <Button
           onPress={() => navigation.navigate(ROUTES.REGISTER)}
           color="secondary"
-        >
-          <Text>Register</Text>
-        </Button>
+          text='Register'
+        />
       </View>
     </ScreenContainer>
   );

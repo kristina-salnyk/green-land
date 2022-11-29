@@ -1,12 +1,12 @@
 import React from 'react-native';
 import { Button as ButtonStyled, Text } from './button.styled';
 import PropTypes from 'prop-types';
-import { ButtonIcon } from './button-icon';
+import { Icon } from './icon';
 
-export const Button = ({ onPress, text, color, size, iconName, iconStyle }) => {
+export const Button = ({ onPress, text, color, size = 'normal', iconName, iconStyle }) => {
   return (
     <ButtonStyled onPress={onPress} color={color} size={size}>
-      {iconName && <ButtonIcon iconName={iconName} iconStyle={iconStyle} />}
+      {iconName && <Icon iconName={iconName} iconStyle={iconStyle} />}
       <Text size={size}>{text}</Text>
     </ButtonStyled>
   );
