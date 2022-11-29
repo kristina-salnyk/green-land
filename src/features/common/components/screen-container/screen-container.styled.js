@@ -25,7 +25,3 @@ export const FormContainer = styled.KeyboardAvoidingView`
 export const FormFields = styled.ScrollView`
   padding: 0 ${props => props.theme.space[2]};
 `;
-
-export const Menu = styled.View`
-  margin-left: auto;
-`;

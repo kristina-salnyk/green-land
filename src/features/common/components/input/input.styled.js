@@ -9,7 +9,7 @@ export const Input = styled.TextInput`
   padding: ${props => props.theme.space[3]};
   font-size: ${props => props.theme.fontSizes.body};
   border: 1px solid ${props => props.theme.colors.border.input};
-  border-radius: ${(props) => props.theme.radii.normal};
+  border-radius: ${props => props.theme.radii.normal};
 `;
 
 export const Icon = styled.Pressable`

@@ -6,9 +6,10 @@ export const Profile = styled.View`
 `;
 
 export const Avatar = styled.Image`
-  width: 80px;
-  height: 95px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
+  border-radius: 100%;
 `;
 
 export const Name = styled.Text`

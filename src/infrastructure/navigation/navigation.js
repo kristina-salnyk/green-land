@@ -8,6 +8,7 @@ import { ProfileScreen } from '../../features/profile/screens/profile.screen';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
+import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
 
 const MainStack = createStackNavigator();
 
@@ -35,9 +36,13 @@ export const Navigation = () => {
             <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
             <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
             <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
+            <MainStack.Screen
+              name={ROUTES.EDIT_PROFILE}
+              component={EditProfileScreen}
+            />
           </MainStack.Navigator>
-        </NavigationContainer>)
-        : null}
+        </NavigationContainer>
+      ) : null}
     </>
   );
 };

@@ -18,12 +18,12 @@ export const HomeScreen = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <Button
           onPress={() => navigation.navigate(ROUTES.LOGIN)}
-          text='Login'
+          text="Login"
         />
         <Button
           onPress={() => navigation.navigate(ROUTES.REGISTER)}
           color="secondary"
-          text='Register'
+          text="Register"
         />
       </View>
     </ScreenContainer>

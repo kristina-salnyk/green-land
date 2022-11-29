@@ -2,6 +2,7 @@ import React from 'react-native';
 import { Button } from '../../../common/components/button/button';
 import { useUser } from '../../../../contexts/user-context';
 import PropTypes from 'prop-types';
+import { ROUTES } from '../../../../constants';
 
 export const Options = ({ navigation }) => {
   const { userData } = useUser();
@@ -9,7 +10,8 @@ export const Options = ({ navigation }) => {
   return (
     <>
       <Button
-        onPress={() => {}}
+        navigation={navigation}
+        onPress={() => navigation.navigate(ROUTES.EDIT_PROFILE)}
         text="Edit profile"
         iconName="edit"
         iconStyle={{ top: 12 }}

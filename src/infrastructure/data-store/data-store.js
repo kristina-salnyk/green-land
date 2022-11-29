@@ -1,6 +1,6 @@
 import * as SecureStore from 'expo-secure-store';
 
-export const storeUserData = async (data) => {
+export const storeUserData = async data => {
   await SecureStore.setItemAsync('user-data', JSON.stringify(data));
 };
 

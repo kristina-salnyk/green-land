@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  ScreenContainer,
-  Menu,
-} from '../../common/components/screen-container/screen-container.styled';
-import { TouchableOpacity } from 'react-native';
+import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
+import { TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Profile, Avatar, Name } from '../components/profile/profile.styled';
 import { Options } from '../components/options/options';
@@ -13,18 +10,22 @@ import { useUser } from '../../../contexts/user-context';
 export const ProfileScreen = ({ navigation }) => {
   const { userData, logOut } = useUser();
 
+  const imagePath = userData?.image
+    ? { uri: userData.image }
+    : require('../../../../assets/user-icon.png');
+
   return (
     <ScreenContainer>
-      <Menu>
+      <View style={{ marginLeft: 'auto', marginBottom: 5 }}>
         <TouchableOpacity onPress={() => logOut(navigation)}>
           <Ionicons name="exit-outline" size={50} />
         </TouchableOpacity>
-      </Menu>
+      </View>
       <Profile>
-        <Avatar source={require('../../../../assets/user-icon.png')} />
+        <Avatar source={imagePath} />
         <Name>{userData?.name ?? ''}</Name>
       </Profile>
-      <Options navigation={navigation}/>
+      <Options navigation={navigation} />
     </ScreenContainer>
   );
 };

@@ -1,16 +1,8 @@
 import React from 'react-native';
-import { ICONS } from '../../../../constants';
 import PropTypes from 'prop-types';
+import { getIconByName } from './getIconByName';
 
-const getIconByName = name => {
-  const iconIdx = ICONS.findIndex(item => item.name === name);
-  if (iconIdx === -1) {
-    return null;
-  }
-  return ICONS[iconIdx];
-};
-
-export const Icon = ({ iconName, iconStyle={}}) => {
+export const Icon = ({ iconName, iconStyle = {} }) => {
   const icon = getIconByName(iconName);
   const IconComponent = icon.component;
 
@@ -25,5 +17,5 @@ export const Icon = ({ iconName, iconStyle={}}) => {
 
 Icon.propTypes = {
   iconName: PropTypes.string.isRequired,
-  iconStyle : PropTypes.object
+  iconStyle: PropTypes.object,
 };

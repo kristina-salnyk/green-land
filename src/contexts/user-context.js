@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react-native';
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ROUTES } from '../constants';
-import { deleteUserData, retrieveUserData, storeUserData } from '../infrastructure/data-store/data-store';
+import {
+  deleteUserData,
+  retrieveUserData,
+  storeUserData,
+} from '../infrastructure/data-store/data-store';
 
 const UserContext = createContext();
 
@@ -28,13 +27,15 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    retrieveUserData().then(data => {
-      if (!data) {
-        return;
-      }
-      setUserData({ ...data });
-      setIsLoggedIn(true);
-    }).finally(() => setIsLoading(false));
+    retrieveUserData()
+      .then(data => {
+        if (!data) {
+          return;
+        }
+        setUserData({ ...data });
+        setIsLoggedIn(true);
+      })
+      .finally(() => setIsLoading(false));
   }, [setUserData]);
 
   const logIn = (userData, navigation) => {
@@ -60,7 +61,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, userData, isLoading, logIn, logOut }}>
+    <UserContext.Provider
+      value={{ isLoggedIn, userData, setUserData, isLoading, logIn, logOut }}
+    >
       {children}
     </UserContext.Provider>
   );
