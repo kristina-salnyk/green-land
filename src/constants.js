@@ -25,6 +25,15 @@ export const ICONS = [
     name: 'message-question-outline',
     component: MaterialCommunityIcons,
   },
+  {
+    name: 'shopping-bag',
+    component: FontAwesomeIcons,
+  },
+  {
+    name: 'map-marker',
+    component: FontAwesomeIcons,
+  },
+  
 ];
 
 export const AUTH_TYPES = { LOGIN: 'login', REGISTRATION: 'register' };

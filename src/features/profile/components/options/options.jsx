@@ -42,7 +42,9 @@ export const Options = ({ navigation }) => {
       />
       {!userData?.isAdmin && (
         <Button
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("SearchOptions")
+          }}
           text="Go to utilize!"
           color="secondary"
           size="large"
