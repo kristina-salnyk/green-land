@@ -1,6 +1,6 @@
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Entypo, Ionicons } from '@expo/vector-icons';
+import { Entypo, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 // TODO: replace to backend URL
 export const BASE_URL = 'https://637e5719cfdbfd9a63aeea44.mockapi.io/';
@@ -37,6 +37,18 @@ export const ICONS = [
   {
     name: 'search',
     component: Ionicons,
+  },
+  {
+    name: 'person',
+    component: Ionicons,
+  },
+  {
+    name: 'phone',
+    component: FontAwesome,
+  },
+  {
+    name: 'email',
+    component: MaterialCommunityIcons
   }
 ];
 

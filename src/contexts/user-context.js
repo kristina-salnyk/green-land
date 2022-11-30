@@ -38,8 +38,8 @@ export const UserProvider = ({ children }) => {
       .finally(() => setIsLoading(false));
   }, [setUserData]);
 
-  const logIn = (userData, navigation) => {
-    setUserData({ ...userData });
+  const logIn = (data, navigation) => {
+    setUserData({ ...data });
     setIsLoggedIn(true);
 
     navigation.reset({
@@ -60,9 +60,13 @@ export const UserProvider = ({ children }) => {
     });
   };
 
+  const updateData = data => {
+    setUserData(prevState => ({ ...prevState, ...data }));
+  };
+
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, userData, setUserData, isLoading, logIn, logOut }}
+      value={{ isLoggedIn, userData, isLoading, logIn, logOut, updateData }}
     >
       {children}
     </UserContext.Provider>

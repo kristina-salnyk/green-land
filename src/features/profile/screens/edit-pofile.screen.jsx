@@ -1,4 +1,3 @@
-import { useUser } from '../../../contexts/user-context';
 import {
   FormFields,
   ScreenContainer,
@@ -9,15 +8,33 @@ import { Menu } from '../../common/components/menu/menu';
 import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
 import { Platform, Text, TouchableOpacity } from 'react-native';
-import { FormContainer, Field, Info, Input } from '../components/edit-profile.styled';
+import {
+  FormContainer,
+  Field,
+  Info,
+  Input,
+  Label,
+} from '../components/edit-profile.styled';
 import { Button } from '../../common/components/button/button';
+import { Icon } from '../../common/components/button/icon';
+import { useProfileData } from '../../common/hooks/use-profile-data';
 
 const NAME = 'Name';
 const PHONE = 'Phone number';
 const EMAIL = 'E-mail';
 
 export const EditProfileScreen = ({ navigation }) => {
-  const { userData, setUserData } = useUser();
+  const {
+    name,
+    phone,
+    email,
+    image,
+    changeName,
+    changePhone,
+    changeEmail,
+    changeImage,
+    updateUserData
+  } = useProfileData();
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -26,19 +43,19 @@ export const EditProfileScreen = ({ navigation }) => {
     });
 
     if (!result.canceled) {
-      setUserData(prevState => ({ ...prevState, image: result.assets[0].uri }));
+      changeImage(result.assets[0].uri);
     }
   };
 
-  const imagePath = userData?.image
-    ? { uri: userData.image }
+  const imagePath = image
+    ? { uri: image }
     : require('../../../../assets/user-icon.png');
 
   return (
     <ScreenContainer>
       <Menu navigation={navigation} />
       <TouchableOpacity
-        style={{ alignSelf: 'center', flex: 1 }}
+        style={{ alignSelf: 'center', flex: 2, paddingTop: 20 }}
         onPress={pickImage}
       >
         <Avatar source={imagePath} />
@@ -46,27 +63,29 @@ export const EditProfileScreen = ({ navigation }) => {
       <FormContainer behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <FormFields>
           <Field>
-            <Text>{NAME}</Text>
-            <Input
-              value={userData?.name}
-              onChangeText={text => setUserData({ ...userData, name: text })}
+            <Label>{NAME}</Label>
+            <Input value={name} onChangeText={text => changeName(text)} />
+            <Icon
+              iconName="person"
+              size={30}
+              iconStyle={{ top: 15, left: 10 }}
             />
           </Field>
           <Field>
-            <Text>{PHONE}</Text>
-            <Input
-              value={userData?.phone}
-              onChangeText={text => setUserData({ ...userData, phone: text })}
+            <Label>{PHONE}</Label>
+            <Input value={phone} onChangeText={text => changePhone(text)} />
+            <Icon
+              iconName="phone"
+              size={35}
+              iconStyle={{ top: 15, left: 12 }}
             />
           </Field>
           <Field>
-            <Text>{EMAIL}</Text>
-            <Input
-              value={userData?.email}
-              onChangeText={text => setUserData({ ...userData, emil: text })}
-            />
+            <Label>{EMAIL}</Label>
+            <Input value={email} onChangeText={text => changeEmail(text)} />
+            <Icon iconName="email" iconStyle={{ top: 15, left: 10 }} />
           </Field>
-          <Button onPress={()=>{}} color="primary" text="Save" />
+          <Button onPress={updateUserData} color="primary" text="Save" />
         </FormFields>
       </FormContainer>
       <Info>
