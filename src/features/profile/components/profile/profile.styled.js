@@ -9,7 +9,7 @@ export const Avatar = styled.Image`
   width: 140px;
   height: 140px;
   object-fit: contain;
-  border-radius: 100%;
+  border-radius: 100px;
 `;
 
 export const Name = styled.Text`
