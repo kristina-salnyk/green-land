@@ -17,7 +17,11 @@ export const  SearchOptions = ({navigation}) => {
                 <Title>Find by:</Title>
             </SearchHeading>
             <SearchButton
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate("CategoriesPage", {
+            screen: 'CategoriesPage'
+           })
+        }}
         text="The names of items"
         iconName="shopping-bag"
         iconStyle={{ top: 30 }}

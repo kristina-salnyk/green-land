@@ -6,6 +6,7 @@ import { LoginScreen } from '../../features/login/screens/login.screen';
 import { HomeScreen } from '../../features/home/screens/home.screen';
 import { ProfileScreen } from '../../features/profile/screens/profile.screen';
 import { SearchOptions } from '../../features/search-options/search-options';
+import { CategoriesScreen } from '../../features/categories-search/screens/categories.screen';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
@@ -37,6 +38,7 @@ export const Navigation = () => {
             <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
             <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
             <MainStack.Screen name="SearchOptions" component={SearchOptions} />
+            <MainStack.Screen name="CategoriesPage" component={CategoriesScreen} />
           </MainStack.Navigator>
         </NavigationContainer>)
         : null}
