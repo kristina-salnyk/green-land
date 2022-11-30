@@ -11,8 +11,8 @@ export const ProfileScreen = ({ navigation }) => {
   const { userData, logOut } = useUser();
 
   const imagePath = userData?.image
-    ? { uri: userData.image }
-    : require('../../../../assets/user-icon.png');
+    ? { uri: userData?.image }
+    : require('../../../../assets/user-default.png');
 
   return (
     <ScreenContainer>

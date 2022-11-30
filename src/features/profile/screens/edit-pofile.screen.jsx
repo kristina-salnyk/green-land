@@ -1,11 +1,20 @@
 import { useUser } from '../../../contexts/user-context';
-import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
-import { Avatar, Name, Profile } from '../components/profile/profile.styled';
-import React, { useState } from 'react';
+import {
+  FormFields,
+  ScreenContainer,
+} from '../../common/components/screen-container/screen-container.styled';
+import { Avatar } from '../components/profile/profile.styled';
+import React from 'react';
 import { Menu } from '../../common/components/menu/menu';
 import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
-import { TouchableOpacity } from 'react-native';
+import { Platform, Text, TouchableOpacity } from 'react-native';
+import { FormContainer, Field, Info, Input } from '../components/edit-profile.styled';
+import { Button } from '../../common/components/button/button';
+
+const NAME = 'Name';
+const PHONE = 'Phone number';
+const EMAIL = 'E-mail';
 
 export const EditProfileScreen = ({ navigation }) => {
   const { userData, setUserData } = useUser();
@@ -28,12 +37,42 @@ export const EditProfileScreen = ({ navigation }) => {
   return (
     <ScreenContainer>
       <Menu navigation={navigation} />
-      <Profile>
-        <TouchableOpacity onPress={pickImage}>
-          <Avatar source={imagePath} />
-        </TouchableOpacity>
-        <Name>{userData?.name ?? ''}</Name>
-      </Profile>
+      <TouchableOpacity
+        style={{ alignSelf: 'center', flex: 1 }}
+        onPress={pickImage}
+      >
+        <Avatar source={imagePath} />
+      </TouchableOpacity>
+      <FormContainer behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <FormFields>
+          <Field>
+            <Text>{NAME}</Text>
+            <Input
+              value={userData?.name}
+              onChangeText={text => setUserData({ ...userData, name: text })}
+            />
+          </Field>
+          <Field>
+            <Text>{PHONE}</Text>
+            <Input
+              value={userData?.phone}
+              onChangeText={text => setUserData({ ...userData, phone: text })}
+            />
+          </Field>
+          <Field>
+            <Text>{EMAIL}</Text>
+            <Input
+              value={userData?.email}
+              onChangeText={text => setUserData({ ...userData, emil: text })}
+            />
+          </Field>
+          <Button onPress={()=>{}} color="primary" text="Save" />
+        </FormFields>
+      </FormContainer>
+      <Info>
+        By providing your email, you agree to receive updates from {'\n'} the
+        <Text style={{ color: 'green' }}> Green Land </Text>App
+      </Info>
     </ScreenContainer>
   );
 };
