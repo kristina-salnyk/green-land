@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const ScreenContainer = styled.View`
-  padding: ${props => props.theme.space[5]} ${props => props.theme.space[3]};
+  padding: ${props => props.theme.space[props.space]} ${props => props.theme.space[3]};
   position: relative;
   flex: 1;
 `;

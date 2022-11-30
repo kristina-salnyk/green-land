@@ -6,16 +6,16 @@ import { Button } from '../../common/components/button/button';
 import PropTypes from 'prop-types';
 import { ROUTES } from '../../../constants';
 import { Title } from '../../common/components/screen-container/screen-container.styled';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 export const HomeScreen = ({ navigation }) => {
   return (
-    <ScreenContainer>
+    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
       <Heading>
         <Title>Welcome to</Title>
         <Logo />
       </Heading>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <Button
           onPress={() => navigation.navigate(ROUTES.LOGIN)}
           text="Login"

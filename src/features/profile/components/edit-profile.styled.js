@@ -25,8 +25,9 @@ export const Input = styled.TextInput`
 `;
 
 export const Info = styled.Text`
+  padding-top: ${props => props.theme.space[4]};
   font-size: ${props => props.theme.fontSizes.title};
   text-align: center;
   font-style: italic;
-  flex: 3;
+  flex: 2;
 `;

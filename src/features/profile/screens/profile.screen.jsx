@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScreenContainer } from '../../common/components/screen-container/screen-container.styled';
-import { TouchableOpacity, View } from 'react-native';
+import { Platform, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Profile, Avatar, Name } from '../components/profile/profile.styled';
 import { Options } from '../components/options/options';
@@ -15,7 +15,7 @@ export const ProfileScreen = ({ navigation }) => {
     : require('../../../../assets/user-default.png');
 
   return (
-    <ScreenContainer>
+    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
       <View style={{ marginLeft: 'auto', marginBottom: 5 }}>
         <TouchableOpacity onPress={() => logOut(navigation)}>
           <Ionicons name="exit-outline" size={50} />

@@ -23,7 +23,7 @@ export const LoginScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ScreenContainer>
+    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
       <Heading>
         <Title>Log in</Title>
         <Logo />

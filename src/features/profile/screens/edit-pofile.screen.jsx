@@ -52,7 +52,7 @@ export const EditProfileScreen = ({ navigation }) => {
     : require('../../../../assets/user-icon.png');
 
   return (
-    <ScreenContainer>
+    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
       <Menu navigation={navigation} />
       <TouchableOpacity
         style={{ alignSelf: 'center', flex: 2, paddingTop: 20 }}
@@ -68,7 +68,7 @@ export const EditProfileScreen = ({ navigation }) => {
             <Icon
               iconName="person"
               size={30}
-              iconStyle={{ top: 15, left: 10 }}
+              iconStyle={{ top: 20, left: 10 }}
             />
           </Field>
           <Field>
@@ -77,13 +77,13 @@ export const EditProfileScreen = ({ navigation }) => {
             <Icon
               iconName="phone"
               size={35}
-              iconStyle={{ top: 15, left: 12 }}
+              iconStyle={{ top: 20, left: 12 }}
             />
           </Field>
           <Field>
             <Label>{EMAIL}</Label>
             <Input value={email} onChangeText={text => changeEmail(text)} />
-            <Icon iconName="email" iconStyle={{ top: 15, left: 10 }} />
+            <Icon iconName="email" iconStyle={{ top: 20, left: 10 }} />
           </Field>
           <Button onPress={updateUserData} color="primary" text="Save" />
         </FormFields>
