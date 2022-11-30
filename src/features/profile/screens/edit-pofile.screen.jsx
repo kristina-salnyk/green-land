@@ -49,7 +49,7 @@ export const EditProfileScreen = ({ navigation }) => {
 
   const imagePath = image
     ? { uri: image }
-    : require('../../../../assets/user-icon.png');
+    : require('../../../../assets/user-add-icon.png');
 
   return (
     <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
