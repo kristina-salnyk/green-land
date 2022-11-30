@@ -17,7 +17,7 @@ import { useLoading } from '../../../contexts/loading-context';
 
 export const RegistrationScreen = ({ navigation }) => {
   const { isLoading } = useLoading();
-    
+
   return (
     <ScreenContainer>
       <Heading>

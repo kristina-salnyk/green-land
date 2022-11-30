@@ -18,7 +18,7 @@ import { Alert } from 'react-native';
 const NAME = 'Name';
 const LOGIN = 'E-mail or phone number';
 const PASSWORD = 'Password';
-const IS_ADMIN = 'I am an administrator';
+const IS_ADMIN = 'For companies';
 
 export const AuthForm = ({ navigation, authType }) => {
   const {
@@ -74,7 +74,13 @@ export const AuthForm = ({ navigation, authType }) => {
         userData = await authLogin({ login, password });
         break;
       case AUTH_TYPES.REGISTRATION:
-        userData = await authRegister({ name, login, password, isAdmin });
+        userData = await authRegister({
+          name,
+          login,
+          password,
+          isAdmin,
+          image: '',
+        });
         break;
       default:
         return;

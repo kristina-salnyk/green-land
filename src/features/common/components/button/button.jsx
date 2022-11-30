@@ -3,7 +3,14 @@ import { Button as ButtonStyled, Text } from './button.styled';
 import PropTypes from 'prop-types';
 import { Icon } from './icon';
 
-export const Button = ({ onPress, text, color, size = 'normal', iconName, iconStyle }) => {
+export const Button = ({
+  onPress,
+  text,
+  color,
+  size = 'normal',
+  iconName,
+  iconStyle,
+}) => {
   return (
     <ButtonStyled onPress={onPress} color={color} size={size}>
       {iconName && <Icon iconName={iconName} iconStyle={iconStyle} />}
