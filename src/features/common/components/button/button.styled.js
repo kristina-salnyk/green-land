@@ -8,10 +8,6 @@ export const Button = styled.TouchableOpacity`
   border-radius: ${props => props.theme.radii.normal};
   width: 100%;
   position: relative;
-  shadow-opacity: 0.4;
-  shadow-radius: 5px;
-  shadow-color: ${props => props.theme.colors.ui.primary};
-  shadow-offset: 0px 2px;
 `;
 
 export const Text = styled.Text`
