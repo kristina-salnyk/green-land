@@ -22,14 +22,16 @@ const Info = styled.View`
 padding: ${(props) => props.theme.space[3]};
 `;
 
-function CategoriesInfoCard({title, img}){
+function CategoriesInfoCard({title, img, onPress}){
   console.log(img)
   return (
     
   <View style={styles.gridItem}>
     
     <Pressable android_ripple={{color: '#ccc'}} 
-    style={({pressed}) => [styles.button, pressed ? styles.buttonPressed : null]}
+    style={({pressed}) => [styles.button, pressed ? styles.buttonPressed : null,
+    ]}
+    onPress={onPress}
     >
       <Card.Cover  style={styles.photo} key={id} source={{ uri: img }}/>
       <View style={styles.innerContainer}>

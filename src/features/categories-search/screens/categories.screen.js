@@ -5,11 +5,19 @@ import { func } from "prop-types";
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import CategoriesInfoCard from '../components/categories-info-card'
 import {StyleSheet, Text} from 'react-native';
-function renderCategoryItem(itemData){
-  return <CategoriesInfoCard  title={itemData.item.title} img={itemData.item.img}/>
-}
 
-export function CategoriesScreen(){
+
+export function CategoriesScreen({navigation}){
+  function renderCategoryItem(itemData){
+    function pressHandler(){
+      navigation.navigate('CategoryOptionsOverview', {
+        categoryId: itemData.item.id,
+      })
+    }
+    return (
+    <CategoriesInfoCard  title={itemData.item.title} img={itemData.item.img} onPress={pressHandler}/>
+    )
+  }
   return (
     <SafeArea >
       <Text style={styles.header}>Choose the best option</Text>
