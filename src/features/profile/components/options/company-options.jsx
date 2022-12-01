@@ -4,7 +4,7 @@ import { useUser } from '../../../../contexts/user-context';
 import PropTypes from 'prop-types';
 import { ROUTES } from '../../../../constants';
 
-export const Options = ({ navigation }) => {
+export const CompanyOptions = ({ navigation }) => {
   const { userData } = useUser();
 
   return (
@@ -18,49 +18,33 @@ export const Options = ({ navigation }) => {
               : ROUTES.EDIT_PROFILE
           )
         }
-        text="Edit profile"
+        text="Edit company's profile"
         iconName="edit"
         iconStyle={{ top: 12 }}
       />
-      {userData?.isAdmin && (
-        <Button
-          onPress={() => {}}
-          text="My company"
-          iconName="building-o"
-          iconStyle={{ top: 10 }}
-        />
-      )}
       <Button
         onPress={() => {}}
-        text="My message"
+        text="Messages from customers"
         iconName="envelope-o"
         iconStyle={{ top: 8 }}
       />
       <Button
         onPress={() => {}}
-        text="Invite friends"
-        iconName="calendar-o"
+        text="Add the collection point"
+        iconName="sourcetree"
         iconStyle={{ top: 10 }}
       />
       <Button
         onPress={() => {}}
-        text="FAQ"
-        iconName="message-question-outline"
+        text="Edit the collection point"
+        iconName="edit-point"
         iconStyle={{ top: 12 }}
       />
-      {!userData?.isAdmin && (
-        <Button
-          onPress={() => {}}
-          text="Go to utilize!"
-          color="secondary"
-          size="large"
-        />
-      )}
     </>
   );
 };
 
-Options.propTypes = {
+CompanyOptions.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }),

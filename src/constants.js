@@ -1,6 +1,6 @@
 import FontAwesomeIcons from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Entypo, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Entypo, FontAwesome, Fontisto, Ionicons } from '@expo/vector-icons';
 
 // TODO: replace to backend URL
 export const BASE_URL = 'https://637e5719cfdbfd9a63aeea44.mockapi.io/';
@@ -48,7 +48,16 @@ export const ICONS = [
   },
   {
     name: 'email',
-    component: MaterialCommunityIcons
+    component: MaterialCommunityIcons,
+  },
+  {
+    name: 'sourcetree',
+    component: Fontisto,
+  },
+  {
+    name: 'edit-point',
+    source: 'edit',
+    component: Entypo
   }
 ];
 
@@ -60,4 +69,5 @@ export const ROUTES = {
   REGISTER: 'Registration',
   LOGIN: 'Login',
   EDIT_PROFILE: 'EditProfile',
+  EDIT_COMPANY_PROFILE: 'EditCompanyProfile',
 };

@@ -8,9 +8,9 @@ export const Icon = ({ iconName, size= 35, iconStyle = {} }) => {
 
   return (
     <IconComponent
-      name={iconName}
+      name={icon.source ?? iconName}
       size={size}
-      style={{ position: 'absolute', top: 10, left: 30, ...iconStyle }}
+      style={{ position: 'absolute', top: 10, left: 20, ...iconStyle }}
     />
   );
 };
