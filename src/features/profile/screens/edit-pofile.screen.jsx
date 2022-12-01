@@ -14,7 +14,7 @@ import {
   Info,
   Input,
   Label,
-} from '../components/edit-profile.styled';
+} from '../components/profile/edit-profile.styled';
 import { Button } from '../../common/components/button/button';
 import { Icon } from '../../common/components/button/icon';
 import { useProfileData } from '../../common/hooks/use-profile-data';
