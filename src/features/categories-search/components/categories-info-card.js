@@ -2,30 +2,18 @@ import React from 'react';
 import styled from 'styled-components/native';
 import {StyleSheet, Text, Platform} from 'react-native';
 import { Card } from 'react-native-paper';
-import {Pressable, View} from 'react-native'
+import {Pressable, View, Image} from 'react-native'
+import { images } from '../../../../images';
 
 
 
-const CategoryCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-  margin-bottom: ${(props) => props.theme.space[3]};
-`;
+function CategoriesInfoCard({title, img, onPress, id}){
+console.log(id)
 
-
-
-const Title = styled(Text)`
-
-color: ${(props) => props.theme.colors.ui.primary};
-`;
-
-const Info = styled.View`
-padding: ${(props) => props.theme.space[3]};
-`;
-
-function CategoriesInfoCard({title, img, onPress}){
-  console.log(img)
   return (
-    
+ 
+
+  
   <View style={styles.gridItem}>
     
     <Pressable android_ripple={{color: '#ccc'}} 
@@ -33,14 +21,20 @@ function CategoriesInfoCard({title, img, onPress}){
     ]}
     onPress={onPress}
     >
-      <Card.Cover  style={styles.photo} key={id} source={{ uri: img }}/>
+    
+      <Card.Cover style={styles.photo} key={title}  source={images[id - 1]}/>
+      
       <View style={styles.innerContainer}>
-     
+ 
         <Text style={styles.title}>{title}</Text>
+      
       </View>
-    </Pressable>  
+    
+    </Pressable> 
+
   </View>
-  );
+
+  )
 }
 
 export default CategoriesInfoCard
@@ -54,8 +48,9 @@ const styles = StyleSheet.create({
     elevation: 4,
     backgroundColor: '#3BB03D',
     overflow: Platform.OS === 'android' ?'hidden' : 'visible',
-
-    
+    borderRadius: 8,
+    borderWidth: 2,
+ 
   },
   button:{
     flex: 1
@@ -71,12 +66,14 @@ flex: 1,
   },
   photo:{
     flex: 1,
-  marginBottom: 8
+  marginBottom: 8,
+
 
   },
   title:{
     fontWeight: 'bold',
     fontSize: 16,
+    textAlign: "center" 
 
   },
 })

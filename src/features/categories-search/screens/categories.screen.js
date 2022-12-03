@@ -6,8 +6,8 @@ import { SafeArea } from '../../../components/utility/safe-area.component';
 import CategoriesInfoCard from '../components/categories-info-card'
 import {StyleSheet, Text} from 'react-native';
 
-
 export function CategoriesScreen({navigation}){
+  
   function renderCategoryItem(itemData){
     function pressHandler(){
       navigation.navigate('CategoryOptionsOverview', {
@@ -15,9 +15,10 @@ export function CategoriesScreen({navigation}){
       })
     }
     return (
-    <CategoriesInfoCard  title={itemData.item.title} img={itemData.item.img} onPress={pressHandler}/>
+    <CategoriesInfoCard  title={itemData.item.title} img={itemData.item.img} onPress={pressHandler} id={itemData.item.id}/>
     )
   }
+
   return (
     <SafeArea >
       <Text style={styles.header}>Choose the best option</Text>

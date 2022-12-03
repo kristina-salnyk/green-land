@@ -5,14 +5,14 @@ import OptionItem from "../components/OptionItem";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 function CategoryOptionsOverview({route}){
     const catId = route.params.categoryId;
-console.log(OPTIONS)
+
     const  displayedOptions = OPTIONS.filter((optionItem)=>{
         return  optionItem.categoryIds.indexOf(catId) >=0
     });
 
 
     function renderOptionItem(itemData){
-        return  <OptionItem title={itemData.item.title} imageUrl={itemData.item.imageUrl}/>
+        return  <OptionItem title={itemData.item.title} imageUrl={itemData.item.imageUrl} id={itemData.item.id}/>
         
     }
     return (
