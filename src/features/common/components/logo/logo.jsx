@@ -3,9 +3,9 @@ import { Text, Img } from './logo.styled';
 
 export const Logo = () => {
   return (
-    <View>
+    <View style={{width: '100%', alignItems: 'center'}}>
       <Img source={require('../../../../../assets/logo.png')} />
-      <Text>Green Land</Text>
+      <Text style={{width: '100%'}}>Green Land</Text>
     </View>
   );
 };
