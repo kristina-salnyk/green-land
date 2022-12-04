@@ -36,7 +36,7 @@ export const ICONS = [
     component: FontAwesomeIcons,
   },
   
-
+{
     name: 'reply',
     component: Entypo,
   },

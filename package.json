@@ -43,7 +43,7 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^13.1.0",
     "react-proptypes-generate": "^1.7.6"
   },
   "private": true
