@@ -5,6 +5,12 @@ import { RegistrationScreen } from '../../features/registration/screens/registra
 import { LoginScreen } from '../../features/login/screens/login.screen';
 import { HomeScreen } from '../../features/home/screens/home.screen';
 import { ProfileScreen } from '../../features/profile/screens/profile.screen';
+import { SearchOptions } from '../../features/search-options/search-options';
+import { CategoriesScreen } from '../../features/categories-search/screens/categories.screen';
+import { CompaniesScreen } from '../../features/categories/screens/companies.screen';
+import { CompanyDetailScreen } from '../../features/categories/screens/companies-detail.screen';
+import { NavigationBar } from './index';
+import CategoryOptionsOverview from '../../features/categories-search/screens/category-options.screen';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
@@ -37,6 +43,16 @@ export const Navigation = () => {
             <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
             <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
             <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
+
+            <MainStack.Screen name="SearchOptions" component={SearchOptions} />
+            <MainStack.Screen name="CategoriesPage" component={CategoriesScreen} />
+            <MainStack.Screen name="CategoryOptionsOverview" component={CategoryOptionsOverview} />
+            <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
+            <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
+            <MainStack.Screen name="NavigationBar" component={NavigationBar} />
+
+
+
             <MainStack.Screen
               name={ROUTES.EDIT_PROFILE}
               component={EditProfileScreen}
@@ -45,6 +61,7 @@ export const Navigation = () => {
               name={ROUTES.EDIT_COMPANY_PROFILE}
               component={EditCompanyProfileScreen}
             />
+
           </MainStack.Navigator>
         </NavigationContainer>
       ) : null}

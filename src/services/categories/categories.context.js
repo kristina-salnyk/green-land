@@ -1,23 +1,23 @@
 import React, {useState,  useContext, createContext, useEffect, useMemo} from 'react';
 
-import { companiesRequest, companiesTransform } from './companies.service';
+import { categoriesRequest, categoriesTransform } from './categories.service';
 
 import { LocationContext } from '../location/location.context';
 
-export const CompaniesContext = createContext();
+export const CategoriesContext = createContext();
 
-export const CompaniesContextProvider = ({children}) => {
-  const [companies, setCompanies] = useState([]);
+export const CategoriesContextProvider = ({children}) => {
+  const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {location} = useContext(LocationContext);
 
-  const retrieveCompanies = (loc) => {
+
+  const retrieveCategories = (loc) => {
 
     setIsLoading(true);
-    setCompanies([]);
+    setCategories([]);
     setTimeout(()=>{
-      companiesRequest(loc)
+      categoriesRequest(loc)
         .then(companiesTransform)
         .then((results) => {
           setIsLoading(false);
@@ -32,11 +32,12 @@ export const CompaniesContextProvider = ({children}) => {
 
 
   useEffect(() => {
+    console.log(location);
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
       retrieveCompanies(locationString);
     }
-  }, [location]);
+  }, [location?.lat, location?.lng]);
 
 
 

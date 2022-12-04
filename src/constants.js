@@ -27,6 +27,16 @@ export const ICONS = [
     component: MaterialCommunityIcons,
   },
   {
+
+    name: 'shopping-bag',
+    component: FontAwesomeIcons,
+  },
+  {
+    name: 'map-marker',
+    component: FontAwesomeIcons,
+  },
+  
+
     name: 'reply',
     component: Entypo,
   },
@@ -59,6 +69,7 @@ export const ICONS = [
     source: 'edit',
     component: Entypo
   }
+
 ];
 
 export const AUTH_TYPES = { LOGIN: 'login', REGISTRATION: 'register' };
