@@ -23,11 +23,14 @@ export const CompaniesScreen = ({navigation}) => {
         renderItem={({item})=>{
           return(
             <TouchableOpacity
-              onPress={()=>
-                navigation.navigate('CompanyDetailScreen', {
-                  company:item,
-                })
-              }
+            onPress={()=>
+               
+              navigation.navigate('CompanyDetailt', {
+                screen: "CompanyDetailt",
+                company:item,
+           
+              })
+            }
             >
               <CompaniesInfoCard company={item}/>
               

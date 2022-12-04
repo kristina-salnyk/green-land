@@ -28,7 +28,11 @@ export const  SearchOptions = ({navigation}) => {
      
       />
      <SearchButton
-        onPress={() => {}}
+         onPress={() => {
+          navigation.navigate("NavigationBar", {
+            screen: 'CategoriesPage'
+           })
+        }}
         text="The location"
         iconName="map-marker"
         iconStyle={{ top: 30 }}
