@@ -2,7 +2,7 @@ import { View, Text, Pressable, Image, StyleSheet } from "react-native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { categoryImages } from "../../../../images";
 import { Card } from 'react-native-paper';
-function OptionItem({title, imageUrl, id}){
+function OptionItem({title, imageUrl, id, navigation}){
   
     return (
         <SafeArea>
@@ -13,6 +13,11 @@ function OptionItem({title, imageUrl, id}){
              pressed ? styles.buttonPressed : null
         }
     
+        onPress={() => {
+            navigation.navigate("NavigationBar", {
+                screen: 'CategoriesPage'
+               })
+        }}
         >
             <View>
                 <Image source={categoryImages[id - 1]} style={styles.image}/>

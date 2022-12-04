@@ -32,12 +32,11 @@ export const CompaniesContextProvider = ({children}) => {
 
 
   useEffect(() => {
-    console.log(location);
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
       retrieveCompanies(locationString);
     }
-  }, [location?.lat, location?.lng]);
+  }, [location]);
 
 
 

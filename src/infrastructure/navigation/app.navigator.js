@@ -6,9 +6,9 @@ import { MapScreen } from '../../features/map/screens/map.screen';
 const Tab = createBottomTabNavigator();
 
 export const AppNavigator = () => (
-  <NavigationContainer>
-    <Tab.Navigator>
-      <Tab.Screen name="Companys" component={CompaniesNavigator} />
+  <NavigationContainer independent= {true}>
+    <Tab.Navigator  screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Companys" component={CompaniesNavigator}   />
       <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   </NavigationContainer>

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native"
 import { OPTIONS } from "../../../data/category-data";
 import OptionItem from "../components/OptionItem";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-function CategoryOptionsOverview({route}){
+function CategoryOptionsOverview({route, navigation}){
     const catId = route.params.categoryId;
 
     const  displayedOptions = OPTIONS.filter((optionItem)=>{
@@ -12,7 +12,7 @@ function CategoryOptionsOverview({route}){
 
 
     function renderOptionItem(itemData){
-        return  <OptionItem title={itemData.item.title} imageUrl={itemData.item.imageUrl} id={itemData.item.id}/>
+        return  <OptionItem title={itemData.item.title} imageUrl={itemData.item.imageUrl} id={itemData.item.id} navigation={navigation}/>
         
     }
     return (
