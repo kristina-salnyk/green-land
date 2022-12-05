@@ -5,6 +5,7 @@ import { ValidationSchema } from '../components/auth-form/validation';
 import { Alert } from 'react-native';
 import { useLoading } from '../../../contexts/loading-context';
 import { profileUpdate } from '../../../api/profile-update';
+import { profilePicture } from '../../../api/profile-picture';
 
 export const useProfileData = () => {
   const { userData, updateData } = useUser();
@@ -40,6 +41,9 @@ export const useProfileData = () => {
     setError(null);
 
     try {
+      const picture = await profilePicture(image);
+      console.log(picture);
+
       const data = await profileUpdate(userData.id, {
         name,
         phone,

@@ -1,28 +1,29 @@
 import { useState } from 'react';
+import { ROLES } from '../../../constants';
 
 export const useAuthData = () => {
-  const [name, setName] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [role, setRole] = useState(ROLES.USER);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   const changeName = text => setName(text);
-  const changeLogin = text => setLogin(text);
+  const changeEmail = text => setEmail(text);
   const changePassword = text => setPassword(text);
-  const changeIsAdmin = () => setIsAdmin(!isAdmin);
+  const changeRole = value => setRole(value ? ROLES.COMPANY : ROLES.USER);
   const toggleIsPasswordHidden = () => setIsPasswordHidden(!isPasswordHidden);
 
   return {
     name,
-    login,
+    email,
     password,
-    isAdmin,
+    role,
     isPasswordHidden,
     changeName,
-    changeLogin,
+    changeEmail,
     changePassword,
-    changeIsAdmin,
+    changeRole,
     toggleIsPasswordHidden,
   };
 };

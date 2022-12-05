@@ -9,7 +9,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
-import { EditCompanyProfileScreen } from '../../features/profile/screens/edit-company-profile.screen';
+import { CompanyProfileScreen } from '../../features/profile/screens/company-profile.screen';
 
 const MainStack = createStackNavigator();
 
@@ -19,7 +19,7 @@ export const Navigation = () => {
 
   const screenOptions = {
     headerShown: false,
-    cardStyle: { backgroundColor: theme.colors.bg.primary },
+    cardStyle: { backgroundColor: theme.colors.bg.secondary },
   };
 
   return (
@@ -43,7 +43,7 @@ export const Navigation = () => {
             />
             <MainStack.Screen
               name={ROUTES.EDIT_COMPANY_PROFILE}
-              component={EditCompanyProfileScreen}
+              component={CompanyProfileScreen}
             />
           </MainStack.Navigator>
         </NavigationContainer>

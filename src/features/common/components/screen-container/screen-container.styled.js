@@ -18,7 +18,7 @@ export const Title = styled.Text`
 `;
 
 export const FormContainer = styled.KeyboardAvoidingView`
-  background-color: ${props => props.theme.colors.bg.primary};
+  background-color: ${props => props.theme.colors.bg.secondary};
   flex: 1;
 `;
 
