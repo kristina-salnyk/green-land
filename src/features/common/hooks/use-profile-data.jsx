@@ -41,8 +41,7 @@ export const useProfileData = () => {
     setError(null);
 
     try {
-      const picture = await profilePicture(image);
-      console.log(picture);
+      await profilePicture(image);
 
       const data = await profileUpdate(userData.id, {
         name,
