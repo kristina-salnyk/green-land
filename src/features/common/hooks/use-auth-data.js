@@ -8,7 +8,8 @@ export const useAuthData = () => {
   const [role, setRole] = useState(ROLES.USER);
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
-  const changeName = text => setName(text);
+  const changeName = text =>
+    setName(text ? text[0].toUpperCase() + text.slice(1) : text);
   const changeEmail = text => setEmail(text);
   const changePassword = text => setPassword(text);
   const changeRole = value => setRole(value ? ROLES.COMPANY : ROLES.USER);

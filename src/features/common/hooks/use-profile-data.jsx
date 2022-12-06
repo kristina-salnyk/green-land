@@ -16,13 +16,14 @@ export const useProfileData = () => {
   const [email, setEmail] = useState(userData.email);
   const [image, setImage] = useState(userData.image);
 
-  const changeName = text => setName(text);
+  const changeName = text =>
+    setName(text ? (text[0].toUpperCase() + text.slice(1)) : text);
   const changePhone = text => setPhone(text);
   const changeEmail = text => setEmail(text);
   const changeImage = text => setImage(text);
 
   const updateUserData = async () => {
-    try{
+    try {
       await Yup.object({
         name: ValidationSchema.name,
         phone: ValidationSchema.phone,
@@ -30,7 +31,7 @@ export const useProfileData = () => {
       }).validate({
         name,
         phone,
-        email
+        email,
       });
     } catch (error) {
       Alert.alert(error.message);
@@ -41,17 +42,17 @@ export const useProfileData = () => {
     setError(null);
 
     try {
-      await profilePicture(image);
-
-      const data = await profileUpdate(userData.id, {
-        name,
+      if (image) {
+        await profilePicture(image);
+      }
+      await profileUpdate({
+        firstName: name,
+        lastName: name,
         phone,
-        email,
-        image,
+        email
       });
-      updateData(data);
+      updateData({ name, phone, email, image });
 
-      Alert.alert('Profile data updated');
     } catch (error) {
       setError(error.message);
       Alert.alert(error.message);
@@ -59,7 +60,7 @@ export const useProfileData = () => {
       setIsLoading(false);
     }
   };
-  
+
   return {
     name,
     phone,

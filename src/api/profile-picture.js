@@ -18,7 +18,5 @@ export const profilePicture = async file => {
       Accept: '*/*',
     },
   });
-
-  console.log(response);
   return response.data;
 };

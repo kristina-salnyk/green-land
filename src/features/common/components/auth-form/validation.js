@@ -5,14 +5,15 @@ export const ValidationSchema = {
   password: Yup.string()
     .required('Password is required')
     .min(6, 'Password must be at least 6 char'),
-  phone: Yup.string().test(
+  phone: Yup.string().required('Phone number is required').test(
     'phone-validation',
-    'Enter valid phone number',
+    'Enter valid phone number in the format +XXXXXXXXXXXX',
     function (value) {
-      if (value === '') {
-        return true;
-      }
-      const phoneRegex = /^[+]?[(]?\d{3}[)]?[-\s.]?\d{3}[-\s.]?\d{4,6}$/;
+      // if (value === '') {
+      //   return true;
+      // }
+      // const phoneRegex = /^[+]?[(]?\d{3}[)]?[-\s.]?\d{3}[-\s.]?\d{4,6}$/;
+      const phoneRegex = /^\+\d{12}$/;
       return phoneRegex.test(value);
     }
   ),

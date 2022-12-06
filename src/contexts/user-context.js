@@ -10,13 +10,13 @@ import {
 import { clearAuthHeader, setAuthHeader } from '../api/api';
 
 const initUserState = {
-  name: null,
-  email: null,
-  phone: null,
-  password: null,
+  name: '',
+  email: '',
+  phone: '',
+  password: '',
   role: null,
   image: null,
-  companyName: null,
+  companyName: '',
 };
 const UserContext = createContext();
 

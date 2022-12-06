@@ -15,6 +15,7 @@ import { ValidationSchema } from './validation';
 import * as Yup from 'yup';
 import { Alert } from 'react-native';
 import { setAuthHeader } from '../../../../api/api';
+import * as FileSystem from 'expo-file-system';
 
 const NAME = 'Name';
 const EMAIL = 'E-mail';
@@ -78,7 +79,7 @@ export const AuthForm = ({ navigation, authType }) => {
       case AUTH_TYPES.REGISTRATION:
         data = await authRegister({
           firstName: name,
-          lastName: '',
+          lastName: name,
           email,
           password,
           confirmPassword: password,
@@ -88,12 +89,27 @@ export const AuthForm = ({ navigation, authType }) => {
       default:
         return;
       }
+
+      let image = null;
+      if(data.profilePicture){
+        image = FileSystem.cacheDirectory + 'profile_image.png';
+        await FileSystem.writeAsStringAsync(
+          image,
+          data.profilePicture,
+          {
+            'encoding': FileSystem.EncodingType.Base64
+          }
+        );
+      }
+
       logIn(
         {
           name: data.firstName,
           email: data.email,
           password,
           role: data.roles && data.roles.length > 0 ? data.roles[0].name : role,
+          phone: data.phone,
+          image,
         },
         navigation
       );
