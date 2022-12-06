@@ -6,19 +6,22 @@ import { CompaniesContextProvider } from './src/services/companies/companies.con
 import { LocationContextProvider } from './src/services/location/location.context';
 import { Navigation } from './src/infrastructure/navigation/navigation';
 import { LoadingProvider } from './src/contexts/loading-context';
+import { ToastExtension } from './src/infrastructure/toast-extention/toast-extention';
 
 export default function App() {
   return (
     <>
       <ThemeExtension>
         <UserProvider>
-          <LoadingProvider>
-            <LocationContextProvider>
-              <CompaniesContextProvider>
-                <Navigation />
-              </CompaniesContextProvider>
-            </LocationContextProvider>
-          </LoadingProvider>
+          <ToastExtension>
+            <LoadingProvider>
+              <LocationContextProvider>
+                <CompaniesContextProvider>
+                  <Navigation />
+                </CompaniesContextProvider>
+              </LocationContextProvider>
+            </LoadingProvider>
+          </ToastExtension>
         </UserProvider>
       </ThemeExtension>
       <ExpoStatusBar style="auto" />

@@ -13,9 +13,9 @@ import { FormFields } from '../screen-container/screen-container.styled';
 import { useLoading } from '../../../../contexts/loading-context';
 import { ValidationSchema } from './validation';
 import * as Yup from 'yup';
-import { Alert } from 'react-native';
 import { setAuthHeader } from '../../../../api/api';
 import * as FileSystem from 'expo-file-system';
+import { useToast } from 'react-native-toast-notifications';
 
 const NAME = 'Name';
 const EMAIL = 'E-mail';
@@ -38,6 +38,7 @@ export const AuthForm = ({ navigation, authType }) => {
 
   const { logIn } = useUser();
   const { setIsLoading, setError } = useLoading();
+  const toast = useToast();
 
   const onSubmit = async () => {
     try {
@@ -62,7 +63,11 @@ export const AuthForm = ({ navigation, authType }) => {
         return;
       }
     } catch (error) {
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
       return;
     }
 
@@ -115,7 +120,11 @@ export const AuthForm = ({ navigation, authType }) => {
       );
     } catch (error) {
       setError(error.message);
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
     } finally {
       setIsLoading(false);
     }
