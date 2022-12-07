@@ -44,7 +44,7 @@ export const Options = ({ navigation }) => {
             toast.show('Link copied to clipboard', {
               type: 'custom_toast',
               animationDuration: 100,
-              data: {type: 'success'}
+              data: { type: 'success' },
             })
           );
         }}
@@ -53,7 +53,7 @@ export const Options = ({ navigation }) => {
         iconStyle={{ top: 10 }}
       />
       <Button
-        onPress={() => {}}
+        onPress={() => navigation.navigate(ROUTES.FAQ)}
         text="FAQ"
         iconName="message-question-outline"
         iconStyle={{ top: 12 }}
