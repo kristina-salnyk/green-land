@@ -71,6 +71,7 @@ export const ROUTES = {
   LOGIN: 'Login',
   EDIT_PROFILE: 'EditProfile',
   EDIT_COMPANY_PROFILE: 'EditCompanyProfile',
+  FAQ: 'FAQ',
 };
 
 export const STORE_LINK = 'https://play.google.com/store/search?q=GreenLand&c=apps';
