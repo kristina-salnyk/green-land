@@ -112,7 +112,7 @@ export const AuthForm = ({ navigation, authType }) => {
           name: data.firstName,
           email: data.email,
           password,
-          role: data.roles && data.roles.length > 0 ? data.roles[0].name : role,
+          role: data?.roles?.length > 0 ? data.roles[0].name : role,
           phone: data.phone,
           image,
         },

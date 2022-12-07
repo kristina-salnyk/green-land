@@ -73,7 +73,7 @@ export const EditProfileScreen = ({ navigation }) => {
         <FormFields>
           <Field>
             <Label>{NAME}</Label>
-            <Input value={name} onChangeText={text => changeName(text)} />
+            <Input value={name} onChangeText={changeName} />
             <Icon
               iconName="person"
               size={30}
@@ -82,7 +82,7 @@ export const EditProfileScreen = ({ navigation }) => {
           </Field>
           <Field>
             <Label>{PHONE}</Label>
-            <Input value={phone} onChangeText={text => changePhone(text)} />
+            <Input value={phone} onChangeText={changePhone} />
             <Icon
               iconName="phone"
               size={35}
@@ -93,7 +93,7 @@ export const EditProfileScreen = ({ navigation }) => {
             <Label>{EMAIL}</Label>
             <Input
               value={email}
-              onChangeText={text => changeEmail(text)}
+              onChangeText={changeEmail}
               editable={false}
             />
             <Icon iconName="email" iconStyle={{ top: 20, left: 10 }} />

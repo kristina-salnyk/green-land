@@ -1,7 +1,7 @@
 import { api } from './api';
 import FormData from 'form-data';
 
-export const profilePicture = async file => {
+export const uploadProfilePicture = async file => {
   const uriParts = file.split('.');
   const fileType = uriParts[uriParts.length - 1];
 
