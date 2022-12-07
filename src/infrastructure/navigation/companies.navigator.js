@@ -7,10 +7,12 @@ const CompanyStack = createStackNavigator();
 export const CompaniesNavigator = () => {
   return (
     <CompanyStack.Navigator headerMode='none'
+    
       screenOptions={{
         ...TransitionPresets.ModalPresentationIOS
       }}>
-      <CompanyStack.Screen
+      <CompanyStack.Screen 
+      
         name="Companies"
         component={CompaniesScreen } 
       />

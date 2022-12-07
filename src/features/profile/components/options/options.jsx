@@ -60,7 +60,9 @@ export const Options = ({ navigation }) => {
       />
       {!isCompany && (
         <Button
-          onPress={() => {}}
+          onPress={() => {
+            navigation.navigate("SearchOptions")
+          }}
           text="Go to utilize!"
           color="secondary"
           size="large"

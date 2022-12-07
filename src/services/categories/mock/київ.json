@@ -1,0 +1,119 @@
+{
+  "html_attributions": [],
+  "next_page_token": "some token",
+  "results": [
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": 50.4405849,
+          "lng": 30.5316892
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 50.4405849,
+            "lng": 30.5316892
+          },
+          "southwest": {
+            "lat": 50.4405849,
+            "lng": 30.5316892
+          }
+        }
+      },
+      "name": "Супер утилізація",
+      "rating": 4.2,
+      "vicinity": "вулиця В'ячеслава Липинського, 4, Київ"
+    },
+
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": 50.4358285,
+          "lng": 30.6154399
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 50.4358285,
+            "lng": 30.6154399
+          },
+          "southwest": {
+            "lat": 50.4358285,
+            "lng": 30.6154399
+          }
+        }
+      },
+      "name": "Еко світ",
+      "rating": 4.2,
+      "vicinity": "проспект Соборності, 17, корп. 2, Київ"
+    },
+
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": 50.4614389,
+          "lng": 30.5878972
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 50.4614389,
+            "lng": 30.5878972
+          },
+          "southwest": {
+            "lat": 50.4614389,
+            "lng": 30.5878972
+          }
+        }
+      },
+      "name": "Поможи природі",
+      "rating": 4.2,
+      "vicinity": "79A, вулиця Євгена Маланюка, 79А, Київ"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": 50.3812034,
+          "lng": 30.5446466
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 50.3812034,
+            "lng": 30.5446466
+          },
+          "southwest": {
+            "lat": 50.3812034,
+            "lng": 30.5446466
+          }
+        }
+      },
+      "name": "Ти класний",
+      "rating": 4.2,
+      "vicinity": "вулиця Пирогівський шлях, 28а, Київ"
+    },
+    {
+      "business_status": "OPERATIONAL",
+      "geometry": {
+        "location": {
+          "lat": 50.4575738,
+          "lng": 30.486716
+        },
+        "viewport": {
+          "northeast": {
+            "lat": 50.4575738,
+            "lng": 30.486716
+          },
+          "southwest": {
+            "lat": 50.4575738,
+            "lng": 30.486716
+          }
+        }
+      },
+      "name": "Утилізуй у НАС",
+      "rating": 4.2,
+      "vicinity": "вулиця Січових Стрільців, 82, Київ"
+    }
+  ],
+  "status": "OK"
+}

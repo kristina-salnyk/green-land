@@ -11,6 +11,11 @@ export const Heading = styled.View`
   flex: 1;
 `;
 
+export const SearchHeading = styled.View`
+  align-items: center; 
+  margin-bottom: 50px;
+`;
+
 export const Title = styled.Text`
   padding: ${props => props.theme.space[4]} 0;
   font-size: ${props => props.theme.fontSizes.h2};

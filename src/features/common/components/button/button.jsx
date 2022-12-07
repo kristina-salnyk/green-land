@@ -30,7 +30,25 @@ export const Button = ({
   );
 };
 
+export const SearchButton = ({ onPress, text, color, size = 'large', iconName, iconStyle }) => {
+  return (
+    <ButtonStyled onPress={onPress} color={color} size={size}>
+      {iconName && <Icon iconName={iconName} iconStyle={iconStyle} />}
+      <Text size={size}>{text}</Text>
+    </ButtonStyled>
+  );
+};
+
 Button.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  size: PropTypes.string,
+  iconName: PropTypes.string,
+  iconStyle: PropTypes.object,
+};
+
+SearchButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   color: PropTypes.string,

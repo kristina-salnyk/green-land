@@ -32,7 +32,7 @@ export const MapScreen = ({navigation})=> {
 
   return (
     <>
-      <Search />
+      {/* <Search /> */}
       <Map
         region={{
           latitude: lat,

@@ -12,9 +12,9 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-native-community/clipboard": "^1.5.1",
-    "@react-navigation/bottom-tabs": "^6.4.1",
-    "@react-navigation/native": "^6.0.14",
-    "@react-navigation/stack": "^6.3.5",
+    "@react-navigation/bottom-tabs": "^6.4.3",
+    "@react-navigation/native": "^6.0.16",
+    "@react-navigation/stack": "^6.3.7",
     "axios": "^1.2.0",
     "camelize": "^1.0.1",
     "expo": "^47.0.8",
@@ -46,12 +46,12 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
+    "@babel/core": "^7.20.5",
     "eslint": "8.22.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.3",
+    "lint-staged": "^13.1.0",
     "react-proptypes-generate": "^1.7.6"
   },
   "private": true
