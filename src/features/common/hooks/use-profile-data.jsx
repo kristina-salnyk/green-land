@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { ValidationSchema } from '../components/auth-form/validation';
 import { useLoading } from '../../../contexts/loading-context';
 import { profileUpdate } from '../../../api/profile-update';
-import { uploadProfilePicture } from '../../../api/profile-picture';
+import { uploadProfilePicture } from '../../../api/upload-profile-picture';
 import { useToast } from 'react-native-toast-notifications';
 
 export const useProfileData = () => {
