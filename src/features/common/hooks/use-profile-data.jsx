@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { useUser } from '../../../contexts/user-context';
 import * as Yup from 'yup';
 import { ValidationSchema } from '../components/auth-form/validation';
-import { Alert } from 'react-native';
 import { useLoading } from '../../../contexts/loading-context';
 import { profileUpdate } from '../../../api/profile-update';
 import { profilePicture } from '../../../api/profile-picture';
+import { useToast } from 'react-native-toast-notifications';
 
 export const useProfileData = () => {
   const { userData, updateData } = useUser();
   const { setIsLoading, setError } = useLoading();
+  const toast = useToast();
 
   const [name, setName] = useState(userData.name);
   const [phone, setPhone] = useState(userData.phone);
@@ -34,7 +35,11 @@ export const useProfileData = () => {
         email,
       });
     } catch (error) {
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
       return;
     }
 
@@ -52,10 +57,18 @@ export const useProfileData = () => {
         email
       });
       updateData({ name, phone, email, image });
-
+      toast.show('User profile updated', {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'success'}
+      });
     } catch (error) {
       setError(error.message);
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
     } finally {
       setIsLoading(false);
     }

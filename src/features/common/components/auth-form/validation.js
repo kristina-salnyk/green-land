@@ -21,9 +21,9 @@ export const ValidationSchema = {
     'email-validation',
     'Enter valid e-mail',
     function (value) {
-      if (value === '') {
-        return true;
-      }
+      // if (value === '') {
+      //   return true;
+      // }
       const emailRegex =
         /^([a-zA-Z\d_.-])+@(([a-zA-Z\d-])+\.)+([a-zA-Z\d]{2,4})+$/;
       return emailRegex.test(value);
