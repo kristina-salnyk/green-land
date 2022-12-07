@@ -24,7 +24,11 @@ export const Options = ({ navigation }) => {
       />
       {userData?.isAdmin && (
         <Button
-          onPress={() => {}}
+        onPress={() => {
+          navigation.navigate("CompaniesOverview", {
+            screen: 'CompaniesOverview'
+           })
+        }}
           text="My company"
           iconName="building-o"
           iconStyle={{ top: 10 }}
