@@ -2,7 +2,7 @@ import React from 'react-native';
 import { Button } from '../../../common/components/button/button';
 import { useUser } from '../../../../contexts/user-context';
 import PropTypes from 'prop-types';
-import { ROUTES } from '../../../../constants';
+import { ROLES, ROUTES } from '../../../../constants';
 
 export const CompanyOptions = ({ navigation }) => {
   const { userData } = useUser();
@@ -13,7 +13,7 @@ export const CompanyOptions = ({ navigation }) => {
         navigation={navigation}
         onPress={() =>
           navigation.navigate(
-            userData?.isAdmin
+            userData.role === ROLES.COMPANY
               ? ROUTES.EDIT_COMPANY_PROFILE
               : ROUTES.EDIT_PROFILE
           )
@@ -24,7 +24,7 @@ export const CompanyOptions = ({ navigation }) => {
       />
       <Button
         onPress={() => {}}
-        text="Messages from customers"
+        text="Messages from the customers"
         iconName="envelope-o"
         iconStyle={{ top: 8 }}
       />

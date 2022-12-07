@@ -15,7 +15,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
-import { EditCompanyProfileScreen } from '../../features/profile/screens/edit-company-profile.screen';
+import { CompanyProfileScreen } from '../../features/profile/screens/company-profile.screen';
+import { FaqScreen } from '../../features/profile/screens/faq.screen';
 
 const MainStack = createStackNavigator();
 
@@ -25,7 +26,7 @@ export const Navigation = () => {
 
   const screenOptions = {
     headerShown: false,
-    cardStyle: { backgroundColor: theme.colors.bg.primary },
+    cardStyle: { backgroundColor: theme.colors.bg.secondary },
   };
 
   return (
@@ -43,25 +44,21 @@ export const Navigation = () => {
             <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
             <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
             <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
-
             <MainStack.Screen name="SearchOptions" component={SearchOptions} />
             <MainStack.Screen name="CategoriesPage" component={CategoriesScreen} />
             <MainStack.Screen name="CategoryOptionsOverview" component={CategoryOptionsOverview} />
             <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
             <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
             <MainStack.Screen name="NavigationBar" component={NavigationBar} />
-
-
-
             <MainStack.Screen
               name={ROUTES.EDIT_PROFILE}
               component={EditProfileScreen}
             />
             <MainStack.Screen
               name={ROUTES.EDIT_COMPANY_PROFILE}
-              component={EditCompanyProfileScreen}
+              component={CompanyProfileScreen}
             />
-
+            <MainStack.Screen name={ROUTES.FAQ} component={FaqScreen} />
           </MainStack.Navigator>
         </NavigationContainer>
       ) : null}

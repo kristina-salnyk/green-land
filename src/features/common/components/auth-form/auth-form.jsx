@@ -6,61 +6,68 @@ import { useUser } from '../../../../contexts/user-context';
 import { useAuthData } from '../../hooks/use-auth-data';
 import PropTypes from 'prop-types';
 import { authLogin } from '../../../../api/auth-login';
-import { AUTH_TYPES } from '../../../../constants';
+import { AUTH_TYPES, ROLES } from '../../../../constants';
 import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 import { FormFields } from '../screen-container/screen-container.styled';
 import { useLoading } from '../../../../contexts/loading-context';
 import { ValidationSchema } from './validation';
 import * as Yup from 'yup';
-import { Alert } from 'react-native';
+import { setAuthHeader } from '../../../../api/api';
+import * as FileSystem from 'expo-file-system';
+import { useToast } from 'react-native-toast-notifications';
 
 const NAME = 'Name';
-const LOGIN = 'E-mail or phone number';
+const EMAIL = 'E-mail';
 const PASSWORD = 'Password';
-const IS_ADMIN = 'For companies';
+const IS_COMPANY = 'For companies';
 
 export const AuthForm = ({ navigation, authType }) => {
   const {
     name,
-    login,
+    email,
     password,
-    isAdmin,
+    role,
     isPasswordHidden,
     changeName,
-    changeLogin,
+    changeEmail,
     changePassword,
-    changeIsAdmin,
+    changeRole,
     toggleIsPasswordHidden,
   } = useAuthData();
 
   const { logIn } = useUser();
   const { setIsLoading, setError } = useLoading();
+  const toast = useToast();
 
   const onSubmit = async () => {
     try {
       switch (authType) {
       case AUTH_TYPES.LOGIN:
         await Yup.object({
-          login: ValidationSchema.login,
+          email: ValidationSchema.email,
           password: ValidationSchema.password,
         }).validate({
-          login,
+          email,
           password,
         });
         break;
       case AUTH_TYPES.REGISTRATION:
         await Yup.object({
           name: ValidationSchema.name,
-          login: ValidationSchema.login,
+          email: ValidationSchema.email,
           password: ValidationSchema.password,
-        }).validate({ name, login, password });
+        }).validate({ name, email, password });
         break;
       default:
         return;
       }
     } catch (error) {
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
       return;
     }
 
@@ -68,27 +75,56 @@ export const AuthForm = ({ navigation, authType }) => {
     setError(null);
 
     try {
-      let userData = null;
+      let data = null;
       switch (authType) {
       case AUTH_TYPES.LOGIN:
-        userData = await authLogin({ login, password });
+        setAuthHeader(email, password);
+        data = await authLogin(email, password);
         break;
       case AUTH_TYPES.REGISTRATION:
-        userData = await authRegister({
-          name,
-          login,
+        data = await authRegister({
+          firstName: name,
+          lastName: name,
+          email,
           password,
-          isAdmin,
-          image: '',
+          confirmPassword: password,
+          role,
         });
         break;
       default:
         return;
       }
-      logIn(userData, navigation);
+
+      let image = null;
+      if(data.profilePicture){
+        image = FileSystem.cacheDirectory + 'profile_image.png';
+        await FileSystem.writeAsStringAsync(
+          image,
+          data.profilePicture,
+          {
+            'encoding': FileSystem.EncodingType.Base64
+          }
+        );
+      }
+
+      logIn(
+        {
+          name: data.firstName,
+          email: data.email,
+          password,
+          role: data?.roles?.length > 0 ? data.roles[0].name : role,
+          phone: data.phone,
+          image,
+        },
+        navigation
+      );
     } catch (error) {
       setError(error.message);
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
     } finally {
       setIsLoading(false);
     }
@@ -103,7 +139,7 @@ export const AuthForm = ({ navigation, authType }) => {
           </Field>
         )}
         <Field>
-          <Input placeholder={LOGIN} value={login} onChangeText={changeLogin} />
+          <Input placeholder={EMAIL} value={email} onChangeText={changeEmail} />
         </Field>
         <Field>
           <Input
@@ -121,9 +157,9 @@ export const AuthForm = ({ navigation, authType }) => {
         </Field>
         {authType === AUTH_TYPES.REGISTRATION && (
           <Checkbox
-            isChecked={isAdmin}
-            onPress={changeIsAdmin}
-            text={IS_ADMIN}
+            isChecked={role === ROLES.COMPANY}
+            onPress={changeRole}
+            text={IS_COMPANY}
           />
         )}
         <Button onPress={onSubmit} color="primary" text="Submit" />

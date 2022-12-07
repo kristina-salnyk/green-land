@@ -1,6 +1,6 @@
-import api from './api';
+import {api} from './api';
 
-export const profileUpdate = async (id, data) => {
-  const response = await api.put(`/users/${id}`, data);
+export const profileUpdate = async (data) => {
+  const response = await api.patch('/api/v1/users', data);
   return response.data;
 };

@@ -2,26 +2,29 @@ import { useState } from 'react';
 import { useUser } from '../../../contexts/user-context';
 import * as Yup from 'yup';
 import { ValidationSchema } from '../components/auth-form/validation';
-import { Alert } from 'react-native';
 import { useLoading } from '../../../contexts/loading-context';
 import { profileUpdate } from '../../../api/profile-update';
+import { uploadProfilePicture } from '../../../api/profile-picture';
+import { useToast } from 'react-native-toast-notifications';
 
 export const useProfileData = () => {
   const { userData, updateData } = useUser();
   const { setIsLoading, setError } = useLoading();
+  const toast = useToast();
 
   const [name, setName] = useState(userData.name);
   const [phone, setPhone] = useState(userData.phone);
   const [email, setEmail] = useState(userData.email);
   const [image, setImage] = useState(userData.image);
 
-  const changeName = text => setName(text);
+  const changeName = text =>
+    setName(text ? (text[0].toUpperCase() + text.slice(1)) : text);
   const changePhone = text => setPhone(text);
   const changeEmail = text => setEmail(text);
   const changeImage = text => setImage(text);
 
   const updateUserData = async () => {
-    try{
+    try {
       await Yup.object({
         name: ValidationSchema.name,
         phone: ValidationSchema.phone,
@@ -29,10 +32,14 @@ export const useProfileData = () => {
       }).validate({
         name,
         phone,
-        email
+        email,
       });
     } catch (error) {
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
       return;
     }
 
@@ -40,23 +47,33 @@ export const useProfileData = () => {
     setError(null);
 
     try {
-      const data = await profileUpdate(userData.id, {
-        name,
+      if (image) {
+        await uploadProfilePicture(image);
+      }
+      await profileUpdate({
+        firstName: name,
+        lastName: name,
         phone,
-        email,
-        image,
+        email
       });
-      updateData(data);
-
-      Alert.alert('Profile data updated');
+      updateData({ name, phone, email, image });
+      toast.show('User profile updated', {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'success'}
+      });
     } catch (error) {
       setError(error.message);
-      Alert.alert(error.message);
+      toast.show(error.message, {
+        type: 'custom_toast',
+        animationDuration: 100,
+        data: {type: 'fail'}
+      });
     } finally {
       setIsLoading(false);
     }
   };
-  
+
   return {
     name,
     phone,
