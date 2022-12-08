@@ -5,18 +5,12 @@ import PropTypes from 'prop-types';
 import { ROLES, ROUTES } from '../../../../constants';
 
 export const CompanyOptions = ({ navigation }) => {
-  const { userData } = useUser();
-
   return (
     <>
       <Button
         navigation={navigation}
         onPress={() =>
-          navigation.navigate(
-            userData.role === ROLES.COMPANY
-              ? ROUTES.EDIT_COMPANY_PROFILE
-              : ROUTES.EDIT_PROFILE
-          )
+          navigation.navigate(ROUTES.EDIT_COMPANY)
         }
         text="Edit company's profile"
         iconName="edit"

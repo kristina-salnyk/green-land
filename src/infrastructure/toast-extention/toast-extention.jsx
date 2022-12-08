@@ -23,7 +23,6 @@ export const ToastExtension = ({ children }) => {
             style={{
               maxWidth: '85%',
               width: '100%',
-              paddingHorizontal: 15,
               paddingVertical: 10,
               backgroundColor: '#fff',
               borderRadius: 8,
@@ -31,7 +30,7 @@ export const ToastExtension = ({ children }) => {
               borderLeftColor:
                 toast.data.type === 'success' ? '#3cb03c' : '#c90606',
               borderLeftWidth: 6,
-              paddingLeft: 16,
+              paddingLeft: 8,
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
@@ -46,7 +45,7 @@ export const ToastExtension = ({ children }) => {
               style={{
                 fontSize: 16,
                 color: '#333',
-                marginLeft: 10,
+                marginHorizontal: 8,
               }}
             >
               {toast.message}

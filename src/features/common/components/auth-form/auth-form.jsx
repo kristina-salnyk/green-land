@@ -115,6 +115,7 @@ export const AuthForm = ({ navigation, authType }) => {
           role: data?.roles?.length > 0 ? data.roles[0].name : role,
           phone: data.phone,
           image,
+          companyId: data?.companyId ?? -1,
         },
         navigation
       );
