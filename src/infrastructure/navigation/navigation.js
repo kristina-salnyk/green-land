@@ -23,6 +23,9 @@ import { EditCompanyProfileScreen } from '../../features/profile/screens/edit-co
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconButton from '../../admin/components/UI/IconButton';
 import CompaniesContextEditProvider from '../../admin/store/companies-context';
+import Map from '../../admin/screens/Map';
+import AddPlace from '../../admin/screens/AddPlace';
+import LocationPicker from '../../admin/components/Location/LocationPicker';
 const MainStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -39,7 +42,9 @@ function CompaniesOverview(){
       size={24} 
       color='red' 
       onPress={()=>{
-        navigation.navigate('ManageCompany')
+        navigation.navigate('ManageCompany', {
+          companyId: id
+      })
       }}/>
     )
     
@@ -53,6 +58,8 @@ function CompaniesOverview(){
       ),
     }}
     />
+
+    
   </BottomTabs.Navigator>
   )
 }
@@ -63,7 +70,7 @@ export const Navigation = () => {
   const { isLoading, isLoggedIn } = useUser();
 
   const screenOptions = {
-    headerShown: false,
+    // headerShown: false,
     cardStyle: { backgroundColor: theme.colors.bg.primary },
   };
 
@@ -92,7 +99,9 @@ export const Navigation = () => {
             <MainStack.Screen name="NavigationBar" component={NavigationBar} />
             <MainStack.Screen name="CompaniesOverview" component={CompaniesOverview} options={{headerShown: false}} />
             <MainStack.Screen name="ManageCompany" component={ManageCompany} />
-           
+            <MainStack.Screen name="Map" component={Map} />
+            <MainStack.Screen name="AddPlace" component={AddPlace} />
+            <MainStack.Screen name="LocationPicker" component={LocationPicker} />
 
             <MainStack.Screen
               name={ROUTES.EDIT_PROFILE}

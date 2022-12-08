@@ -21,15 +21,15 @@ const DUMMY_COMPANIES = [
           },
           name:  'Hello',
           rating:  60,
-          vicinity:  3434
+          address:  3434
     },
 ]
 
 export const CompaniesContextEdit = createContext({
   companies: [],
-  addCompany: ({ lat, lng, name, rating,  vicinity}) => {},
+  addCompany: ({name, location,  hours}) => {},
   deleteCompany: (id) => {},
-  updateCompany: (id, { lat, lng, name, rating,  vicinity }) => {},
+  updateCompany: (id, {name, location,  hours }) => {},
 });
 
 function CompaniesReducer(state, action) {

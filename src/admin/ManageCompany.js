@@ -38,6 +38,7 @@ function ManageCompany({route, navigation}){
     navigation.goBack();
  }
 
+ console.log(companiesCtx)
     return (
     <View style={styles.container}>
         <CompanyForm 
