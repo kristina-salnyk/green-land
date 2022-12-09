@@ -10,16 +10,63 @@ import { CategoriesScreen } from '../../features/categories-search/screens/categ
 import { CompaniesScreen } from '../../features/categories/screens/companies.screen';
 import { CompanyDetailScreen } from '../../features/categories/screens/companies-detail.screen';
 import { NavigationBar } from './index';
+
+import AllCompanies from '../../admin/AllCompanies';
+import ManageCompany from '../../admin/ManageCompany';
 import CategoryOptionsOverview from '../../features/categories-search/screens/category-options.screen';
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
+import { EditCompanyProfileScreen } from '../../features/profile/screens/edit-company-profile.screen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import IconButton from '../../admin/components/UI/IconButton';
+import CompaniesContextEditProvider from '../../admin/store/companies-context';
+import Map from '../../admin/screens/Map';
+import AddPlace from '../../admin/screens/AddPlace';
+import LocationPicker from '../../admin/components/Location/LocationPicker';
 import { CompanyProfileScreen } from '../../features/profile/screens/company-profile.screen';
 import { FaqScreen } from '../../features/profile/screens/faq.screen';
 import { EditCompanyScreen } from '../../features/company/screens/edit-company.screen';
-
 const MainStack = createStackNavigator();
+const BottomTabs = createBottomTabNavigator();
+
+function CompaniesOverview(){
+  return (
+  <BottomTabs.Navigator 
+  screenOptions={({navigation})=>({
+    headerStyle:{backgroundColor: 'green'},
+    headerTintColor: 'white',
+    
+    headerRight: () =>(
+      <IconButton 
+      icon="add" 
+      size={24} 
+      color='red' 
+      onPress={()=>{
+        navigation.navigate('ManageCompany', {
+          companyId: id
+      })
+      }}/>
+    )
+    
+  })}>
+    
+    <BottomTabs.Screen name="AllCompanies" component={AllCompanies} options={{
+      title: 'All Companies',
+      tabBarLabel: 'All',
+      tabBarIcon: ({color, size})=> (
+      <Ionicons name='hourglass'/>
+      ),
+    }}
+    />
+
+    
+  </BottomTabs.Navigator>
+  )
+}
+
 
 export const Navigation = () => {
   const theme = useTheme();
@@ -33,6 +80,7 @@ export const Navigation = () => {
   return (
     <>
       {!isLoading ? (
+        <CompaniesContextEditProvider>
         <NavigationContainer>
           <MainStack.Navigator
             initialRouteName={isLoggedIn ? ROUTES.PROFILE : ROUTES.HOME}
@@ -51,6 +99,13 @@ export const Navigation = () => {
             <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
             <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
             <MainStack.Screen name="NavigationBar" component={NavigationBar} />
+
+            <MainStack.Screen name="CompaniesOverview" component={CompaniesOverview} options={{headerShown: false}} />
+            <MainStack.Screen name="ManageCompany" component={ManageCompany} />
+            <MainStack.Screen name="Map" component={Map} />
+            <MainStack.Screen name="AddPlace" component={AddPlace} />
+            <MainStack.Screen name="LocationPicker" component={LocationPicker} />
+
             <MainStack.Screen
               name={ROUTES.EDIT_PROFILE}
               component={EditProfileScreen}
@@ -64,6 +119,7 @@ export const Navigation = () => {
 
           </MainStack.Navigator>
         </NavigationContainer>
+        </CompaniesContextEditProvider>
       ) : null}
     </>
   );

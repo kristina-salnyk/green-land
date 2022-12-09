@@ -44,7 +44,9 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-webview": "11.23.1",
     "styled-components": "^5.3.6",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "expo-image-picker": "~14.0.2",
+    "expo-location": "~15.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
