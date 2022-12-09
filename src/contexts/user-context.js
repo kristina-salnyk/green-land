@@ -7,18 +7,28 @@ import {
   retrieveUserData,
   storeUserData,
 } from '../infrastructure/data-store/data-store';
+import { clearAuthHeader, setAuthHeader } from '../api/api';
 
+const initUserState = {
+  name: '',
+  email: '',
+  phone: '',
+  password: '',
+  role: null,
+  image: null,
+  companyId: -1,
+};
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState(initUserState);
 
   useEffect(() => {
-    if (!userData) {
+    if (!userData?.email) {
       return;
     }
     storeUserData(userData);
@@ -34,6 +44,7 @@ export const UserProvider = ({ children }) => {
         }
         setUserData({ ...data });
         setIsLoggedIn(true);
+        setAuthHeader(data.email, data.password);
       })
       .finally(() => setIsLoading(false));
   }, [setUserData]);
@@ -41,6 +52,7 @@ export const UserProvider = ({ children }) => {
   const logIn = (data, navigation) => {
     setUserData({ ...data });
     setIsLoggedIn(true);
+    setAuthHeader(data.email, data.password);
 
     navigation.reset({
       index: 0,
@@ -49,8 +61,9 @@ export const UserProvider = ({ children }) => {
   };
 
   const logOut = navigation => {
+    setUserData(initUserState);
     setIsLoggedIn(false);
-    setUserData(null);
+    clearAuthHeader();
 
     deleteUserData();
 

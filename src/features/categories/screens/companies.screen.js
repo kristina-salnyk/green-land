@@ -5,12 +5,6 @@ import { SafeArea } from '../../../components/utility/safe-area.component';
 import { StyleSheet } from 'react-native';
 import { CompaniesContext } from '../../../services/companies/companies.context';
 import { Search } from '../components/search.component';
-import { AppNavigator } from '../../../infrastructure/navigation/app.navigator';
-import { MapScreen } from '../../map/screens/map.screen';
-// const CompanyListContainer = styled.View`
-//   flex: 1;
-//   padding: ${(props) => props.theme.space[3]};
-// `;
 
 export const CompaniesScreen = ({navigation}) => {
   const {isLoading, companies, error} = useContext(CompaniesContext);
@@ -23,14 +17,14 @@ export const CompaniesScreen = ({navigation}) => {
         renderItem={({item})=>{
           return(
             <TouchableOpacity
-            onPress={()=>
+              onPress={()=>
                
-              navigation.navigate('CompanyDetailt', {
-                screen: "CompanyDetailt",
-                company:item,
+                navigation.navigate('CompanyDetailt', {
+                  screen: 'CompanyDetailt',
+                  company:item,
            
-              })
-            }
+                })
+              }
             >
               <CompaniesInfoCard company={item}/>
               
@@ -66,4 +60,4 @@ const styles = StyleSheet.create({
  
   },
 
-})
+});

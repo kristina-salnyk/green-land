@@ -3,7 +3,7 @@ import {
   ScreenContainer,
 } from '../../common/components/screen-container/screen-container.styled';
 import { Avatar } from '../components/profile/profile.styled';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu } from '../../common/components/menu/menu';
 import PropTypes from 'prop-types';
 import * as ImagePicker from 'expo-image-picker';
@@ -18,6 +18,8 @@ import {
 import { Button } from '../../common/components/button/button';
 import { Icon } from '../../common/components/button/icon';
 import { useProfileData } from '../../common/hooks/use-profile-data';
+import { useLoading } from '../../../contexts/loading-context';
+import { Loader } from '../../common/components/loader/loader';
 
 const NAME = 'Name';
 const PHONE = 'Phone number';
@@ -33,8 +35,15 @@ export const EditProfileScreen = ({ navigation }) => {
     changePhone,
     changeEmail,
     changeImage,
-    updateUserData
+    updateUserData,
   } = useProfileData();
+  const { isLoading, setError } = useLoading();
+
+  useEffect(() => {
+    return () => {
+      setError(null);
+    };
+  }, []);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -52,7 +61,7 @@ export const EditProfileScreen = ({ navigation }) => {
     : require('../../../../assets/user-add-icon.png');
 
   return (
-    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
+    <ScreenContainer space={Platform.OS === 'ios' ? 5 : 4}>
       <Menu navigation={navigation} />
       <TouchableOpacity
         style={{ alignSelf: 'center', flex: 2, paddingTop: 20 }}
@@ -64,7 +73,7 @@ export const EditProfileScreen = ({ navigation }) => {
         <FormFields>
           <Field>
             <Label>{NAME}</Label>
-            <Input value={name} onChangeText={text => changeName(text)} />
+            <Input value={name} onChangeText={changeName} />
             <Icon
               iconName="person"
               size={30}
@@ -73,7 +82,7 @@ export const EditProfileScreen = ({ navigation }) => {
           </Field>
           <Field>
             <Label>{PHONE}</Label>
-            <Input value={phone} onChangeText={text => changePhone(text)} />
+            <Input value={phone} onChangeText={changePhone} />
             <Icon
               iconName="phone"
               size={35}
@@ -82,7 +91,11 @@ export const EditProfileScreen = ({ navigation }) => {
           </Field>
           <Field>
             <Label>{EMAIL}</Label>
-            <Input value={email} onChangeText={text => changeEmail(text)} />
+            <Input
+              value={email}
+              onChangeText={changeEmail}
+              editable={false}
+            />
             <Icon iconName="email" iconStyle={{ top: 20, left: 10 }} />
           </Field>
           <Button onPress={updateUserData} color="primary" text="Save" />
@@ -92,6 +105,7 @@ export const EditProfileScreen = ({ navigation }) => {
         By providing your email, you agree to receive updates from {'\n'} the
         <Text style={{ color: 'green' }}> Green Land </Text>App
       </Info>
+      {isLoading && <Loader />}
     </ScreenContainer>
   );
 };

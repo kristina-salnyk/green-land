@@ -9,7 +9,7 @@ import { Platform } from 'react-native';
 import { useUser } from '../../../contexts/user-context';
 import { CompanyOptions } from '../components/options/company-options';
 
-export const EditCompanyProfileScreen = ({ navigation }) => {
+export const CompanyProfileScreen = ({ navigation }) => {
   const { userData } = useUser();
 
   return (
@@ -17,13 +17,13 @@ export const EditCompanyProfileScreen = ({ navigation }) => {
       <Menu navigation={navigation} />
       <Profile>
         <Avatar source={require('../../../../assets/company-default.png')} />
-        <Name>{userData.company ?? ''}</Name>
+        <Name>{userData.companyId}</Name>
       </Profile>
       <CompanyOptions navigation={navigation} />
     </ScreenContainer>
   );
 };
 
-EditCompanyProfileScreen.propTypes = {
+CompanyProfileScreen.propTypes = {
   navigation: PropTypes.object,
 };

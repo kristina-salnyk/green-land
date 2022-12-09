@@ -26,6 +26,9 @@ import CompaniesContextEditProvider from '../../admin/store/companies-context';
 import Map from '../../admin/screens/Map';
 import AddPlace from '../../admin/screens/AddPlace';
 import LocationPicker from '../../admin/components/Location/LocationPicker';
+import { CompanyProfileScreen } from '../../features/profile/screens/company-profile.screen';
+import { FaqScreen } from '../../features/profile/screens/faq.screen';
+import { EditCompanyScreen } from '../../features/company/screens/edit-company.screen';
 const MainStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
@@ -70,8 +73,8 @@ export const Navigation = () => {
   const { isLoading, isLoggedIn } = useUser();
 
   const screenOptions = {
-    // headerShown: false,
-    cardStyle: { backgroundColor: theme.colors.bg.primary },
+    headerShown: false,
+    cardStyle: { backgroundColor: theme.colors.bg.secondary },
   };
 
   return (
@@ -90,13 +93,13 @@ export const Navigation = () => {
             <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
             <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
             <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
-
             <MainStack.Screen name="SearchOptions" component={SearchOptions} />
             <MainStack.Screen name="CategoriesPage" component={CategoriesScreen} />
             <MainStack.Screen name="CategoryOptionsOverview" component={CategoryOptionsOverview} />
             <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
             <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
             <MainStack.Screen name="NavigationBar" component={NavigationBar} />
+
             <MainStack.Screen name="CompaniesOverview" component={CompaniesOverview} options={{headerShown: false}} />
             <MainStack.Screen name="ManageCompany" component={ManageCompany} />
             <MainStack.Screen name="Map" component={Map} />
@@ -108,9 +111,11 @@ export const Navigation = () => {
               component={EditProfileScreen}
             />
             <MainStack.Screen
-              name={ROUTES.EDIT_COMPANY_PROFILE}
-              component={EditCompanyProfileScreen}
+              name={ROUTES.COMPANY_PROFILE}
+              component={CompanyProfileScreen}
             />
+            <MainStack.Screen name={ROUTES.EDIT_COMPANY} component={EditCompanyScreen}/>
+            <MainStack.Screen name={ROUTES.FAQ} component={FaqScreen} />
 
           </MainStack.Navigator>
         </NavigationContainer>
