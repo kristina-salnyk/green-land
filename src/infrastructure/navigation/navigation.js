@@ -19,7 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
-import { EditCompanyProfileScreen } from '../../features/profile/screens/edit-company-profile.screen';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconButton from '../../admin/components/UI/IconButton';
 import CompaniesContextEditProvider from '../../admin/store/companies-context';
@@ -46,7 +46,7 @@ function CompaniesOverview(){
       color='red' 
       onPress={()=>{
         navigation.navigate('ManageCompany', {
-          companyId: id
+
       })
       }}/>
     )
@@ -99,7 +99,6 @@ export const Navigation = () => {
             <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
             <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
             <MainStack.Screen name="NavigationBar" component={NavigationBar} />
-
             <MainStack.Screen name="CompaniesOverview" component={CompaniesOverview} options={{headerShown: false}} />
             <MainStack.Screen name="ManageCompany" component={ManageCompany} />
             <MainStack.Screen name="Map" component={Map} />
