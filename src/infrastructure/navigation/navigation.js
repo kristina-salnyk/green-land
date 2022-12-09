@@ -73,7 +73,7 @@ export const Navigation = () => {
   const { isLoading, isLoggedIn } = useUser();
 
   const screenOptions = {
-    headerShown: false,
+    // headerShown: false,
     cardStyle: { backgroundColor: theme.colors.bg.secondary },
   };
 

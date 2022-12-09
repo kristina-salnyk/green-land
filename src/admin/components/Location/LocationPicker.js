@@ -102,10 +102,10 @@ function LocationPicker({onPickLocation}) {
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
-        <Button icon="location" onPress={getLocationHandler}>
+        <Button icon="location" onPress={getLocationHandler} text='Find your location'>
           Locate User
         </Button>
-        <Button icon="map" onPress={pickOnMapHandler}>
+        <Button icon="map" onPress={pickOnMapHandler} text='Find the adress on the map'>
           Pick on Map
         </Button>
       </View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'green',
+
     borderRadius: 4,
     overflow: 'hidden',
   },

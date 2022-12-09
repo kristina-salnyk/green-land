@@ -75,8 +75,14 @@ export const EditCompanyScreen = ({ navigation }) => {
                 <Input value={email} onChangeText={changeEmail} />
               </Field>
               <Field>
-                <Label>{ADDRESS}</Label>
-                <Input value={address} onChangeText={changeAddress} />
+                <Button text ={ADDRESS}
+                 onPress={()=>
+                  navigation.navigate('ManageCompany', {
+                    screen: 'ManageCompany',
+                  })
+                }></Button>
+                <Input value={address} onChangeText={changeAddress} editable={false} />
+             
               </Field>
               <Field>
                 <Label>{PHONE}</Label>

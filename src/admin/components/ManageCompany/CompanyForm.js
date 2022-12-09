@@ -2,7 +2,7 @@ import { useCallback, useState } from "react"
 import { View } from "react-native"
 import { Place } from "../../models/place";
 import LocationPicker from "../Location/LocationPicker";
-import Button from "../UI/Button"
+import { Button } from "../../../features/common/components/button/button";
 import Input from "./Input"
 
 
@@ -52,14 +52,15 @@ function CompanyForm({submitButtonLabel, onCancel, onSubmit , defaultValues}) {
     }
     return (
         <View>
-            <Input label="name"  textInputConfig={{
+            {/* <Input label="name"  textInputConfig={{
                   onChangeText: inputChangeHandler.bind(this, 'name'),
                   value: inputValues.name
-            }}/>
+            }}/> */}
                    <LocationPicker onPickLocation={pickLocationHandler}/>
                 <View>
-            <Button mode="flat" onPress={onCancel}>Cancel</Button>
-            <Button  onPress={submitHandler}>{submitButtonLabel}</Button>
+                <Button  onPress={submitHandler} text={submitButtonLabel}></Button>
+            <Button mode="flat" onPress={onCancel} text='Cancel'></Button>
+           
  
         </View>
         </View>
