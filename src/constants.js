@@ -35,7 +35,7 @@ export const ICONS = [
     component: FontAwesomeIcons,
   },
   
-{
+  {
     name: 'reply',
     component: Entypo,
   },
@@ -81,8 +81,31 @@ export const ROUTES = {
   REGISTER: 'Registration',
   LOGIN: 'Login',
   EDIT_PROFILE: 'EditProfile',
-  EDIT_COMPANY_PROFILE: 'EditCompanyProfile',
+  COMPANY_PROFILE: 'CompanyProfile',
   FAQ: 'FAQ',
+  EDIT_COMPANY: 'EditCompany'
 };
 
 export const STORE_LINK = 'https://play.google.com/store/search?q=GreenLand&c=apps';
+
+export const SERVICE_TYPE_OPTIONS = [
+  {
+    label: 'Paid',
+    value: 'PAID'
+  },
+  {
+    label: 'Free',
+    value: 'FREE'
+  },
+];
+
+export const TAKING_OUT_OPTIONS = [
+  {
+    label: 'Yes',
+    value: true,
+  },
+  {
+    label: 'No',
+    value: false,
+  },
+];

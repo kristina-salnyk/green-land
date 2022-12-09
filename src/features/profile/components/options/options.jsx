@@ -10,23 +10,27 @@ export const Options = ({ navigation }) => {
   const { userData } = useUser();
   const toast = useToast();
 
+  const openCompanyHandler = () => {
+    if (userData.companyId === -1) {
+      navigation.navigate(ROUTES.EDIT_COMPANY);
+      return;
+    }
+    navigation.navigate(ROUTES.COMPANY_PROFILE);
+  };
+
   const isCompany = userData.role === ROLES.COMPANY;
   return (
     <>
       <Button
         navigation={navigation}
-        onPress={() =>
-          navigation.navigate(
-            isCompany ? ROUTES.EDIT_COMPANY_PROFILE : ROUTES.EDIT_PROFILE
-          )
-        }
+        onPress={() => navigation.navigate(ROUTES.EDIT_PROFILE)}
         text="Edit profile"
         iconName="edit"
         iconStyle={{ top: 12 }}
       />
       {isCompany && (
         <Button
-          onPress={() => {}}
+          onPress={openCompanyHandler}
           text="My company"
           iconName="building-o"
           iconStyle={{ top: 10 }}
@@ -61,7 +65,7 @@ export const Options = ({ navigation }) => {
       {!isCompany && (
         <Button
           onPress={() => {
-            navigation.navigate("SearchOptions")
+            navigation.navigate('SearchOptions');
           }}
           text="Go to utilize!"
           color="secondary"

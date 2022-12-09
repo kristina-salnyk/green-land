@@ -17,7 +17,7 @@ export const CompanyProfileScreen = ({ navigation }) => {
       <Menu navigation={navigation} />
       <Profile>
         <Avatar source={require('../../../../assets/company-default.png')} />
-        <Name>{userData.companyName}</Name>
+        <Name>{userData.companyId}</Name>
       </Profile>
       <CompanyOptions navigation={navigation} />
     </ScreenContainer>

@@ -16,7 +16,7 @@ const initUserState = {
   password: '',
   role: null,
   image: null,
-  companyName: '',
+  companyId: -1,
 };
 const UserContext = createContext();
 

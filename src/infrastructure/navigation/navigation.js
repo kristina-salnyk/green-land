@@ -17,6 +17,7 @@ import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
 import { CompanyProfileScreen } from '../../features/profile/screens/company-profile.screen';
 import { FaqScreen } from '../../features/profile/screens/faq.screen';
+import { EditCompanyScreen } from '../../features/company/screens/edit-company.screen';
 
 const MainStack = createStackNavigator();
 
@@ -55,10 +56,12 @@ export const Navigation = () => {
               component={EditProfileScreen}
             />
             <MainStack.Screen
-              name={ROUTES.EDIT_COMPANY_PROFILE}
+              name={ROUTES.COMPANY_PROFILE}
               component={CompanyProfileScreen}
             />
+            <MainStack.Screen name={ROUTES.EDIT_COMPANY} component={EditCompanyScreen}/>
             <MainStack.Screen name={ROUTES.FAQ} component={FaqScreen} />
+
           </MainStack.Navigator>
         </NavigationContainer>
       ) : null}
