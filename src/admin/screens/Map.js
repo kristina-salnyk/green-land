@@ -8,7 +8,7 @@ function Map({ navigation }) {
   const [selectedLocation, setSelectedLocation] = useState();
 
   const region = {
-    latitude: 37.78,
+    latitude: 47.78,
     longitude: -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
@@ -38,11 +38,11 @@ function Map({ navigation }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerShown: true,
       headerRight: ({ tintColor }) => (
         <IconButton
           icon="save"
           size={24}
-          color={tintColor}
           onPress={savePickedLocationHandler}
         />
       ),

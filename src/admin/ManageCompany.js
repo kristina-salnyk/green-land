@@ -35,10 +35,14 @@ function ManageCompany({route, navigation}){
     } else {
         companiesCtx.addCompany(companyData)
     }
-    navigation.goBack();
+    navigation.navigate('EditCompanyScreen',{
+      addressData: companyData.address
+    });
+
+
  }
 
- console.log(companiesCtx)
+
     return (
     <View style={styles.container}>
         <CompanyForm 
