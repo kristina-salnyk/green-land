@@ -8,7 +8,7 @@ import { images } from '../../../../images';
 
 
 function CategoriesInfoCard({title, img, onPress, id}){
-console.log(id)
+
 
   return (
  

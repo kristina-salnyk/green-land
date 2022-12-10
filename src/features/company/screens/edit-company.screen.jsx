@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Menu } from '../../common/components/menu/menu';
 import React, { useState } from 'react';
 import {
@@ -17,6 +17,7 @@ import { Button } from '../../common/components/button/button';
 import { useCompanyData } from '../../common/hooks/use-company-data';
 import { Radio } from '../../common/components/radio/radio';
 import { SERVICE_TYPE_OPTIONS, TAKING_OUT_OPTIONS } from '../../../constants';
+import { Ionicons } from '@expo/vector-icons';
 
 const NAME = 'The name of company (description optional)';
 const EMAIL = 'The e-mail address';
@@ -26,7 +27,9 @@ const WORK_HOURS = 'The work hours';
 const SERVICE = 'The service is';
 const TAKING_OUT = 'Taking out';
 
-export const EditCompanyScreen = ({ navigation }) => {
+export const EditCompanyScreen = ({ navigation, route }) => {
+  const addressData = route.params?.addressData
+console.log(addressData)
   const {
     name,
     email,
@@ -45,6 +48,8 @@ export const EditCompanyScreen = ({ navigation }) => {
     updateCompanyData,
   } = useCompanyData();
   const [page, setPage] = useState(1);
+
+
 
   return (
     <ScreenContainer space={Platform.OS === 'ios' ? 5 : 4}>
@@ -70,23 +75,31 @@ export const EditCompanyScreen = ({ navigation }) => {
                 <Label>{NAME}</Label>
                 <Input value={name} onChangeText={changeName} />
               </Field>
+    
               <Field>
                 <Label>{EMAIL}</Label>
                 <Input value={email} onChangeText={changeEmail} />
               </Field>
-              <Field>
-                <Button text ={ADDRESS}
-                 onPress={()=>
-                  navigation.navigate('ManageCompany', {
-                    screen: 'ManageCompany',
-                  })
-                }></Button>
-                <Input value={address} onChangeText={changeAddress} editable={false} />
-             
+              <Field >
+                  <Label>{ADDRESS}</Label>
+                  <View style={styles.parent}>
+                <Input  style={styles.textInput}  value={addressData} onChangeText={changeAddress}/>
+                <TouchableOpacity
+            style={styles.ButtonParent}
+            onPress={()=>
+              navigation.navigate('ManageCompany', {
+                screen: 'ManageCompany',
+              })
+            }
+          >
+           <Ionicons name='location' size={42}/>
+          </TouchableOpacity>
+                </View>
               </Field>
               <Field>
                 <Label>{PHONE}</Label>
                 <Input value={phone} onChangeText={changePhone} />
+              
               </Field>
               <Field>
                 <Label>{WORK_HOURS}</Label>
@@ -133,3 +146,20 @@ export const EditCompanyScreen = ({ navigation }) => {
 EditCompanyScreen.propTypes = {
   navigation: PropTypes.object,
 };
+
+
+
+const styles = StyleSheet.create({
+  parent: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  textInput: {
+    width: "85%",
+  },
+  ButtonParent: {
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+  },
+});

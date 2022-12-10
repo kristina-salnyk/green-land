@@ -10,7 +10,6 @@ import { CategoriesScreen } from '../../features/categories-search/screens/categ
 import { CompaniesScreen } from '../../features/categories/screens/companies.screen';
 import { CompanyDetailScreen } from '../../features/categories/screens/companies-detail.screen';
 import { NavigationBar } from './index';
-
 import AllCompanies from '../../admin/AllCompanies';
 import ManageCompany from '../../admin/ManageCompany';
 import CategoryOptionsOverview from '../../features/categories-search/screens/category-options.screen';
@@ -73,7 +72,7 @@ export const Navigation = () => {
   const { isLoading, isLoggedIn } = useUser();
 
   const screenOptions = {
-    // headerShown: false,
+    headerShown: false,
     cardStyle: { backgroundColor: theme.colors.bg.secondary },
   };
 
@@ -104,7 +103,10 @@ export const Navigation = () => {
             <MainStack.Screen name="Map" component={Map} />
             <MainStack.Screen name="AddPlace" component={AddPlace} />
             <MainStack.Screen name="LocationPicker" component={LocationPicker} />
+            <MainStack.Screen name="EditCompanyScreen" component={EditCompanyScreen} />
 
+
+            
             <MainStack.Screen
               name={ROUTES.EDIT_PROFILE}
               component={EditProfileScreen}

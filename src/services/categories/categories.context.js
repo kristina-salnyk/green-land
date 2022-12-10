@@ -32,7 +32,7 @@ export const CategoriesContextProvider = ({children}) => {
 
 
   useEffect(() => {
-    console.log(location);
+
     if (location) {
       const locationString = `${location.lat},${location.lng}`;
       retrieveCompanies(locationString);

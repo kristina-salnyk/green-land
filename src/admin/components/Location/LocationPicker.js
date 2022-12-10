@@ -21,13 +21,21 @@ function LocationPicker({onPickLocation}) {
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
 
+
+
   useEffect(() => {
     if (isFocused && route.params) {
       const mapPickedLocation = {
         lat: route.params.pickedLat,
         lng: route.params.pickedLng,
       };
-      setPickedLocation(mapPickedLocation);
+      console.log(mapPickedLocation)
+       if(mapPickedLocation.lat === undefined){
+        return
+       } else {
+        setPickedLocation(mapPickedLocation);
+       }
+   
     }
   }, [route, isFocused]);
 
@@ -67,6 +75,7 @@ function LocationPicker({onPickLocation}) {
     return true;
   }
 
+  
   async function getLocationHandler() {
     const hasPermission = await verifyPermissions();
 

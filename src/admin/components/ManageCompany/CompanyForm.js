@@ -48,7 +48,7 @@ function CompanyForm({submitButtonLabel, onCancel, onSubmit , defaultValues}) {
     }, [])
 
     function saveForm(){
-        console.log(pickedLocation)
+
     }
     return (
         <View>
