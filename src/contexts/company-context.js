@@ -11,6 +11,7 @@ const initCompanyState = {
   workHours: '',
   serviceType: 'PAID',
   takingOut: true,
+  services: [],
 };
 
 const CompanyContext = createContext();
@@ -26,7 +27,7 @@ export const CompanyProvider = ({ children }) => {
 
   return (
     <CompanyContext.Provider value={{ companyData, updateData }}>
-      { children }
+      {children}
     </CompanyContext.Provider>
   );
 };
