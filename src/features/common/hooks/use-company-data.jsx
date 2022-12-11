@@ -4,6 +4,7 @@ import { ValidationSchema } from '../components/auth-form/validation';
 import { useLoading } from '../../../contexts/loading-context';
 import { useToast } from 'react-native-toast-notifications';
 import { useCompany } from '../../../contexts/company-context';
+import { createCompany } from '../../../api/create-company';
 
 export const useCompanyData = () => {
   const { companyData } = useCompany();
@@ -17,6 +18,7 @@ export const useCompanyData = () => {
   const [workHours, setWorkHours] = useState(companyData.workHours);
   const [serviceType, setServiceType] = useState(companyData.serviceType);
   const [takingOut, setTakingOut] = useState(companyData.takingOut);
+  const [services, setServices] = useState(companyData.services);
 
   const changeName = text =>
     setName(text ? text[0].toUpperCase() + text.slice(1) : text);
@@ -51,6 +53,8 @@ export const useCompanyData = () => {
     setError(null);
 
     try {
+      const data = await createCompany({ name, phone, description: '' });
+      console.log(data);
       // await profileUpdate({
       //   firstName: name,
       //   lastName: name,
@@ -83,6 +87,7 @@ export const useCompanyData = () => {
     workHours,
     serviceType,
     takingOut,
+    services,
     changeName,
     changeEmail,
     changeAddress,
@@ -90,6 +95,7 @@ export const useCompanyData = () => {
     changeWorkHours,
     changeServiceType,
     changeTakingOut,
-    updateCompanyData
+    setServices,
+    updateCompanyData,
   };
 };

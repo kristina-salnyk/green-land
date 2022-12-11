@@ -1,17 +1,14 @@
 import React from 'react-native';
 import { Button } from '../../../common/components/button/button';
-import { useUser } from '../../../../contexts/user-context';
 import PropTypes from 'prop-types';
-import { ROLES, ROUTES } from '../../../../constants';
+import { ROUTES } from '../../../../constants';
 
 export const CompanyOptions = ({ navigation }) => {
   return (
     <>
       <Button
         navigation={navigation}
-        onPress={() =>
-          navigation.navigate(ROUTES.EDIT_COMPANY)
-        }
+        onPress={() => navigation.navigate(ROUTES.EDIT_COMPANY)}
         text="Edit company's profile"
         iconName="edit"
         iconStyle={{ top: 12 }}

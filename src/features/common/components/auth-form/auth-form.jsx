@@ -43,30 +43,30 @@ export const AuthForm = ({ navigation, authType }) => {
   const onSubmit = async () => {
     try {
       switch (authType) {
-      case AUTH_TYPES.LOGIN:
-        await Yup.object({
-          email: ValidationSchema.email,
-          password: ValidationSchema.password,
-        }).validate({
-          email,
-          password,
-        });
-        break;
-      case AUTH_TYPES.REGISTRATION:
-        await Yup.object({
-          name: ValidationSchema.name,
-          email: ValidationSchema.email,
-          password: ValidationSchema.password,
-        }).validate({ name, email, password });
-        break;
-      default:
-        return;
+        case AUTH_TYPES.LOGIN:
+          await Yup.object({
+            email: ValidationSchema.email,
+            password: ValidationSchema.password,
+          }).validate({
+            email,
+            password,
+          });
+          break;
+        case AUTH_TYPES.REGISTRATION:
+          await Yup.object({
+            name: ValidationSchema.name,
+            email: ValidationSchema.email,
+            password: ValidationSchema.password,
+          }).validate({ name, email, password });
+          break;
+        default:
+          return;
       }
     } catch (error) {
       toast.show(error.message, {
         type: 'custom_toast',
         animationDuration: 100,
-        data: {type: 'fail'}
+        data: { type: 'fail' },
       });
       return;
     }
@@ -77,34 +77,30 @@ export const AuthForm = ({ navigation, authType }) => {
     try {
       let data = null;
       switch (authType) {
-      case AUTH_TYPES.LOGIN:
-        setAuthHeader(email, password);
-        data = await authLogin(email, password);
-        break;
-      case AUTH_TYPES.REGISTRATION:
-        data = await authRegister({
-          firstName: name,
-          lastName: name,
-          email,
-          password,
-          confirmPassword: password,
-          role,
-        });
-        break;
-      default:
-        return;
+        case AUTH_TYPES.LOGIN:
+          setAuthHeader(email, password);
+          data = await authLogin(email, password);
+          break;
+        case AUTH_TYPES.REGISTRATION:
+          data = await authRegister({
+            firstName: name,
+            lastName: name,
+            email,
+            password,
+            confirmPassword: password,
+            role,
+          });
+          break;
+        default:
+          return;
       }
 
       let image = null;
-      if(data.profilePicture){
+      if (data.profilePicture) {
         image = FileSystem.cacheDirectory + 'profile_image.png';
-        await FileSystem.writeAsStringAsync(
-          image,
-          data.profilePicture,
-          {
-            'encoding': FileSystem.EncodingType.Base64
-          }
-        );
+        await FileSystem.writeAsStringAsync(image, data.profilePicture, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
       }
 
       logIn(
@@ -120,11 +116,12 @@ export const AuthForm = ({ navigation, authType }) => {
         navigation
       );
     } catch (error) {
+      console.log(error.response.message);
       setError(error.message);
       toast.show(error.message, {
         type: 'custom_toast',
         animationDuration: 100,
-        data: {type: 'fail'}
+        data: { type: 'fail' },
       });
     } finally {
       setIsLoading(false);
