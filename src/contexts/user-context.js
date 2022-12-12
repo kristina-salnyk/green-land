@@ -26,7 +26,7 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userData, setUserData] = useState(initUserState);
+  const [userData, setUserData] = useState({ ...initUserState });
 
   const logIn = async ({ email, password }) => {
     setAuthHeader(email, password);
@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
 
     let image = null;
     if (data.profilePicture) {
-      image = FileSystem.cacheDirectory + 'profile_image.png';
+      image = FileSystem.cacheDirectory + `profile_image_${Date.now()}.png`;
       await FileSystem.writeAsStringAsync(image, data.profilePicture, {
         encoding: FileSystem.EncodingType.Base64,
       });
@@ -80,18 +80,25 @@ export const UserProvider = ({ children }) => {
 
   const logOut = async () => {
     clearAuthHeader();
-    setUserData(initUserState);
+    setUserData({ ...initUserState });
     setIsLoggedIn(false);
     await deleteUserData();
   };
 
-  const updateData = data => {
+  const updateUserContextData = data => {
     setUserData(prevState => ({ ...prevState, ...data }));
   };
 
   return (
     <UserContext.Provider
-      value={{ isLoggedIn, userData, isLoading, logIn, logOut, updateData }}
+      value={{
+        isLoggedIn,
+        userData,
+        isLoading,
+        logIn,
+        logOut,
+        updateUserContextData,
+      }}
     >
       {children}
     </UserContext.Provider>

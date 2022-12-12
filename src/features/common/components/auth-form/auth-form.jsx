@@ -10,7 +10,7 @@ import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 import { FormFields } from '../screen-container/screen-container.styled';
 import { useLoading } from '../../../../contexts/loading-context';
-import { ValidationSchema } from './validation';
+import { ValidationSchema } from '../../../../utils/validation';
 import * as Yup from 'yup';
 import { useToast } from 'react-native-toast-notifications';
 

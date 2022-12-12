@@ -39,9 +39,7 @@ const WORK_HOURS = 'The work hours';
 const SERVICE = 'The service is';
 const TAKING_OUT = 'Taking out';
 
-export const EditCompanyScreen = ({ navigation, route }) => {
-  const addressData = route.params?.addressData;
-
+export const EditCompanyScreen = ({ navigation }) => {
   const {
     name,
     email,
@@ -51,6 +49,8 @@ export const EditCompanyScreen = ({ navigation, route }) => {
     serviceType,
     takingOut,
     services,
+    locationLatitude,
+    locationLongitude,
     changeName,
     changeEmail,
     changeAddress,
@@ -59,10 +59,13 @@ export const EditCompanyScreen = ({ navigation, route }) => {
     changeServiceType,
     changeTakingOut,
     setServices,
+    changeLocationLatitude,
+    changeLocationLongitude,
     updateCompanyData,
   } = useCompanyData();
   const [page, setPage] = useState(1);
   const { isLoading, setIsLoading, setError } = useLoading();
+  const [myaddress, setmyaddress] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -87,6 +90,12 @@ export const EditCompanyScreen = ({ navigation, route }) => {
       newServices[idx].checked = state;
       return newServices;
     });
+  };
+
+  const onChangeAddress = location => {
+    changeAddress(location.address);
+    changeLocationLatitude(location.locationLatitude);
+    changeLocationLongitude(location.locationLongitude);
   };
 
   return (
@@ -127,11 +136,11 @@ export const EditCompanyScreen = ({ navigation, route }) => {
                 />
                 <TouchableOpacity
                   style={styles.ButtonParent}
-                  onPress={() =>
+                  onPress={() => {
                     navigation.navigate('ManageCompany', {
-                      screen: 'ManageCompany',
-                    })
-                  }
+                      onChange: onChangeAddress,
+                    });
+                  }}
                 >
                   <Ionicons name="location" size={42} />
                 </TouchableOpacity>
