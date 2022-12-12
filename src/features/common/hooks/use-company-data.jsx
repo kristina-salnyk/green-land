@@ -55,18 +55,6 @@ export const useCompanyData = () => {
     try {
       const data = await createCompany({ name, phone, description: '' });
       console.log(data);
-      // await profileUpdate({
-      //   firstName: name,
-      //   lastName: name,
-      //   phone,
-      //   email
-      // });
-      // updateData({ name, phone, email, image });
-      // toast.show('User profile updated', {
-      //   type: 'custom_toast',
-      //   animationDuration: 100,
-      //   data: {type: 'success'}
-      // });
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {

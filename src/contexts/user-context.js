@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react-native';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ROUTES } from '../constants';
 import {
   deleteUserData,
   retrieveUserData,
   storeUserData,
 } from '../infrastructure/data-store/data-store';
 import { clearAuthHeader, setAuthHeader } from '../api/api';
+import { authLogin } from '../api/auth-login';
+import * as FileSystem from 'expo-file-system';
 
 const initUserState = {
   name: '',
@@ -27,50 +28,61 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState(initUserState);
 
-  useEffect(() => {
-    if (!userData?.email) {
-      return;
-    }
-    storeUserData(userData);
-  }, [userData]);
+  const logIn = async ({ email, password }) => {
+    setAuthHeader(email, password);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    retrieveUserData()
-      .then(data => {
-        if (!data) {
-          return;
-        }
-        setUserData({ ...data });
-        setIsLoggedIn(true);
-        setAuthHeader(data.email, data.password);
-      })
-      .finally(() => setIsLoading(false));
-  }, [setUserData]);
-
-  const logIn = (data, navigation) => {
-    setUserData({ ...data });
-    setIsLoggedIn(true);
-    setAuthHeader(data.email, data.password);
-
-    navigation.reset({
-      index: 0,
-      routes: [{ name: ROUTES.PROFILE }],
+    const data = await authLogin({
+      email,
+      password,
     });
+
+    let image = null;
+    if (data.profilePicture) {
+      image = FileSystem.cacheDirectory + 'profile_image.png';
+      await FileSystem.writeAsStringAsync(image, data.profilePicture, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+    }
+
+    setUserData(prevState => ({
+      ...prevState,
+      name: data.firstName,
+      email,
+      phone: data.phone,
+      password,
+      image,
+      role: data.roles[0].name,
+    }));
+
+    setIsLoggedIn(true);
+    await storeUserData({ email, password });
   };
 
-  const logOut = navigation => {
+  useEffect(() => {
+    (async () => {
+      const credentials = await retrieveUserData();
+      if (!credentials) {
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        await logIn(credentials);
+      } catch (error) {
+        clearAuthHeader();
+        await deleteUserData();
+        setIsLoggedIn(false);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
+  const logOut = async () => {
+    clearAuthHeader();
     setUserData(initUserState);
     setIsLoggedIn(false);
-    clearAuthHeader();
-
-    deleteUserData();
-
-    navigation.reset({
-      index: 0,
-      routes: [{ name: ROUTES.HOME }],
-    });
+    await deleteUserData();
   };
 
   const updateData = data => {

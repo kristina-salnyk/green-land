@@ -6,6 +6,7 @@ import { Profile, Avatar, Name } from '../components/profile/profile.styled';
 import { Options } from '../components/options/options';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useUser } from '../../../contexts/user-context';
+import { ROUTES } from '../../../constants';
 
 export const ProfileScreen = ({ navigation }) => {
   const { userData, logOut } = useUser();
@@ -15,9 +16,17 @@ export const ProfileScreen = ({ navigation }) => {
     : require('../../../../assets/user-default.png');
 
   return (
-    <ScreenContainer space={(Platform.OS === 'ios') ? 5 : 4}>
+    <ScreenContainer space={Platform.OS === 'ios' ? 5 : 4}>
       <View style={{ marginLeft: 'auto', marginBottom: 5 }}>
-        <TouchableOpacity onPress={() => logOut(navigation)}>
+        <TouchableOpacity
+          onPress={() => {
+            logOut();
+            navigation.reset({
+              index: 0,
+              routes: [{ name: ROUTES.HOME }],
+            });
+          }}
+        >
           <Ionicons name="exit-outline" size={50} />
         </TouchableOpacity>
       </View>
