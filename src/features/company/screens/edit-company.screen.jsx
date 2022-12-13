@@ -70,7 +70,6 @@ export const EditCompanyScreen = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-
       try {
         const data = await getCategories();
         changeServices(data.map(item => ({ ...item, checked: false })));
@@ -201,7 +200,7 @@ export const EditCompanyScreen = ({ navigation }) => {
 
       {page === 2 && (
         <>
-          <Button onPress={updateCompanyData} color="primary" text="Create" />
+          <Button onPress={updateCompanyData} color="primary" text="Save" />
           <Button
             onPress={() => setPage(1)}
             color="secondary"

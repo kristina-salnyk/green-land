@@ -7,6 +7,7 @@ import { getCollectionPointById } from '../api/get-collection-point-by-id';
 
 const initCompanyState = {
   companyId: -1,
+  collectionPointId: -1,
   name: '',
   email: '',
   address: '',
@@ -25,49 +26,64 @@ export const useCompany = () => useContext(CompanyContext);
 
 export const CompanyProvider = ({ children }) => {
   const [companyData, setCompanyData] = useState(initCompanyState);
-  const { userData } = useUser();
+  const { userData, isLoading } = useUser();
 
   useEffect(() => {
-    if (userData.companyId === -1) {
-      return;
-    }
-
     (async () => {
       try {
+        if (userData.companyId === -1) {
+          return;
+        }
         const companyData = await getCompanyById(userData.companyId);
-        console.log(companyData);
-        const collectionPointId = companyData.collectionPoints[0].id;
-        const collectionPointData = await getCollectionPointById(
-          collectionPointId
-        );
-        console.log(collectionPointData);
+        const pointsLength = companyData?.collectionPoints?.length;
+        const collectionPointId =
+          companyData?.collectionPoints[pointsLength - 1]?.id ?? -1;
+
         updateCompanyContextData({
           companyId: companyData.id,
           name: companyData.name,
-          email: companyData.email,
-          address: collectionPointData.address,
+          email: companyData.description,
           phone: companyData.phone,
-          workHours: '',
+          collectionPointId,
+        });
+
+        if (collectionPointId === -1) {
+          return;
+        }
+        const collectionPointData = await getCollectionPointById(
+          collectionPointId
+        );
+
+        updateCompanyContextData({
+          collectionPointId: collectionPointData.id,
+          address: collectionPointData.address,
+          workHours: collectionPointData.description,
           paymentType: collectionPointData.paymentType,
           takingOut: collectionPointData.takingOut,
-          services: [],
+          services: collectionPointData.serviceTypeIds,
           locationLatitude: collectionPointData.locationLatitude,
           locationLongitude: collectionPointData.locationLongitude,
         });
       } catch (error) {
-        return;
+        return null;
       }
     })();
-  }, []);
+  }, [userData.companyId]);
 
   const updateCompanyContextData = data => {
     setCompanyData(prevState => ({ ...prevState, ...data }));
   };
 
   return (
-    <CompanyContext.Provider value={{ companyData, updateCompanyContextData }}>
-      {children}
-    </CompanyContext.Provider>
+    <>
+      {!isLoading ? (
+        <CompanyContext.Provider
+          value={{ companyData, updateCompanyContextData }}
+        >
+          {children}
+        </CompanyContext.Provider>
+      ) : null}
+    </>
   );
 };
 
