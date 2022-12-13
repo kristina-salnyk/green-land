@@ -5,16 +5,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../../../contexts/user-context';
 import { useAuthData } from '../../hooks/use-auth-data';
 import PropTypes from 'prop-types';
-import { authLogin } from '../../../../api/auth-login';
-import { AUTH_TYPES, ROLES } from '../../../../constants';
+import { AUTH_TYPES, ROLES, ROUTES } from '../../../../constants';
 import { authRegister } from '../../../../api/auth-register';
 import { Checkbox } from '../checkbox/checkbox';
 import { FormFields } from '../screen-container/screen-container.styled';
 import { useLoading } from '../../../../contexts/loading-context';
-import { ValidationSchema } from './validation';
+import { ValidationSchema } from '../../../../utils/validation';
 import * as Yup from 'yup';
-import { setAuthHeader } from '../../../../api/api';
-import * as FileSystem from 'expo-file-system';
 import { useToast } from 'react-native-toast-notifications';
 
 const NAME = 'Name';
@@ -75,48 +72,23 @@ export const AuthForm = ({ navigation, authType }) => {
     setError(null);
 
     try {
-      let data = null;
-      switch (authType) {
-        case AUTH_TYPES.LOGIN:
-          setAuthHeader(email, password);
-          data = await authLogin(email, password);
-          break;
-        case AUTH_TYPES.REGISTRATION:
-          data = await authRegister({
-            firstName: name,
-            lastName: name,
-            email,
-            password,
-            confirmPassword: password,
-            role,
-          });
-          break;
-        default:
-          return;
-      }
-
-      let image = null;
-      if (data.profilePicture) {
-        image = FileSystem.cacheDirectory + 'profile_image.png';
-        await FileSystem.writeAsStringAsync(image, data.profilePicture, {
-          encoding: FileSystem.EncodingType.Base64,
+      if (authType === AUTH_TYPES.REGISTRATION) {
+        await authRegister({
+          firstName: name,
+          lastName: name,
+          email,
+          password,
+          confirmPassword: password,
+          role,
         });
       }
 
-      logIn(
-        {
-          name: data.firstName,
-          email: data.email,
-          password,
-          role: data?.roles?.length > 0 ? data.roles[0].name : role,
-          phone: data.phone,
-          image,
-          companyId: data?.companyId ?? -1,
-        },
-        navigation
-      );
+      await logIn({ email, password });
+      navigation.reset({
+        index: 0,
+        routes: [{ name: ROUTES.PROFILE }],
+      });
     } catch (error) {
-      console.log(error.response.message);
       setError(error.message);
       toast.show(error.message, {
         type: 'custom_toast',

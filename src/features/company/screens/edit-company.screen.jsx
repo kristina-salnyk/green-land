@@ -1,4 +1,5 @@
 import {
+  DeviceEventEmitter,
   FlatList,
   Platform,
   StyleSheet,
@@ -13,11 +14,10 @@ import {
   ScreenContainer,
 } from '../../common/components/screen-container/screen-container.styled';
 import PropTypes from 'prop-types';
-import { SubTitle, Title } from '../components/edit-company.styled';
+import { Input, SubTitle, Title } from '../components/edit-company.styled';
 import {
   Field,
   FormContainer,
-  Input,
   Label,
 } from '../../profile/components/profile/edit-profile.styled';
 import { Button } from '../../common/components/button/button';
@@ -39,26 +39,28 @@ const WORK_HOURS = 'The work hours';
 const SERVICE = 'The service is';
 const TAKING_OUT = 'Taking out';
 
-export const EditCompanyScreen = ({ navigation, route }) => {
-  const addressData = route.params?.addressData;
-
+export const EditCompanyScreen = ({ navigation }) => {
   const {
+    companyId,
     name,
     email,
     address,
     phone,
     workHours,
-    serviceType,
-    takingOut,
+    paymentType,
     services,
+    takingOut,
     changeName,
     changeEmail,
     changeAddress,
     changePhone,
     changeWorkHours,
-    changeServiceType,
+    changePaymentType,
     changeTakingOut,
-    setServices,
+    changeServiceState,
+    changeServices,
+    changeLocationLatitude,
+    changeLocationLongitude,
     updateCompanyData,
   } = useCompanyData();
   const [page, setPage] = useState(1);
@@ -70,8 +72,7 @@ export const EditCompanyScreen = ({ navigation, route }) => {
 
       try {
         const data = await getCategories();
-        const list = data.map(({ id, name }) => ({ id, name, checked: false }));
-        setServices(list);
+        changeServices(data.map(item => ({ ...item, checked: false })));
       } catch (error) {
         setError(error);
       } finally {
@@ -80,13 +81,10 @@ export const EditCompanyScreen = ({ navigation, route }) => {
     })();
   }, []);
 
-  const changeCategoryState = (id, state) => {
-    setServices(prevState => {
-      const newServices = [...prevState];
-      const idx = newServices.findIndex(item => item.id === id);
-      newServices[idx].checked = state;
-      return newServices;
-    });
+  const onChangeAddress = location => {
+    changeAddress(location.address);
+    changeLocationLatitude(location.locationLatitude);
+    changeLocationLongitude(location.locationLongitude);
   };
 
   return (
@@ -124,14 +122,18 @@ export const EditCompanyScreen = ({ navigation, route }) => {
                   style={styles.textInput}
                   value={address}
                   onChangeText={changeAddress}
+                  editable={false}
+                  multiline={true}
                 />
                 <TouchableOpacity
                   style={styles.ButtonParent}
-                  onPress={() =>
-                    navigation.navigate('ManageCompany', {
-                      screen: 'ManageCompany',
-                    })
-                  }
+                  onPress={() => {
+                    DeviceEventEmitter.addListener(
+                      'event.onChangeAddress',
+                      eventData => onChangeAddress(eventData)
+                    );
+                    navigation.navigate('ManageCompany');
+                  }}
                 >
                   <Ionicons name="location" size={42} />
                 </TouchableOpacity>
@@ -149,8 +151,8 @@ export const EditCompanyScreen = ({ navigation, route }) => {
               <Label>{SERVICE}</Label>
               <Radio
                 data={SERVICE_TYPE_OPTIONS}
-                initial={serviceType}
-                onSelect={({ value }) => changeServiceType(value)}
+                initial={paymentType}
+                onSelect={({ value }) => changePaymentType(value)}
               />
             </Field>
             <Field>
@@ -170,7 +172,7 @@ export const EditCompanyScreen = ({ navigation, route }) => {
               renderItem={({ item }) => (
                 <Checkbox
                   isChecked={item.checked}
-                  onPress={state => changeCategoryState(item.id, state)}
+                  onPress={state => changeServiceState(item.id, state)}
                   text={item.name}
                 />
               )}

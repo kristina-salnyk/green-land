@@ -31,41 +31,37 @@ import { EditCompanyScreen } from '../../features/company/screens/edit-company.s
 const MainStack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
-function CompaniesOverview(){
+function CompaniesOverview() {
   return (
-  <BottomTabs.Navigator 
-  screenOptions={({navigation})=>({
-    headerStyle:{backgroundColor: 'green'},
-    headerTintColor: 'white',
-    
-    headerRight: () =>(
-      <IconButton 
-      icon="add" 
-      size={24} 
-      color='red' 
-      onPress={()=>{
-        navigation.navigate('ManageCompany', {
+    <BottomTabs.Navigator
+      screenOptions={({ navigation }) => ({
+        headerStyle: { backgroundColor: 'green' },
+        headerTintColor: 'white',
 
-      })
-      }}/>
-    )
-    
-  })}>
-    
-    <BottomTabs.Screen name="AllCompanies" component={AllCompanies} options={{
-      title: 'All Companies',
-      tabBarLabel: 'All',
-      tabBarIcon: ({color, size})=> (
-      <Ionicons name='hourglass'/>
-      ),
-    }}
-    />
-
-    
-  </BottomTabs.Navigator>
-  )
+        headerRight: () => (
+          <IconButton
+            icon="add"
+            size={24}
+            color="red"
+            onPress={() => {
+              navigation.navigate('ManageCompany', {});
+            }}
+          />
+        ),
+      })}
+    >
+      <BottomTabs.Screen
+        name="AllCompanies"
+        component={AllCompanies}
+        options={{
+          title: 'All Companies',
+          tabBarLabel: 'All',
+          tabBarIcon: ({ color, size }) => <Ionicons name="hourglass" />,
+        }}
+      />
+    </BottomTabs.Navigator>
+  );
 }
-
 
 export const Navigation = () => {
   const theme = useTheme();
@@ -80,46 +76,80 @@ export const Navigation = () => {
     <>
       {!isLoading ? (
         <CompaniesContextEditProvider>
-        <NavigationContainer>
-          <MainStack.Navigator
-            initialRouteName={isLoggedIn ? ROUTES.PROFILE : ROUTES.HOME}
-            screenOptions={screenOptions}
-          >
-            <MainStack.Screen
-              name={ROUTES.REGISTER}
-              component={RegistrationScreen}
-            />
-            <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
-            <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
-            <MainStack.Screen name={ROUTES.PROFILE} component={ProfileScreen} />
-            <MainStack.Screen name="SearchOptions" component={SearchOptions} />
-            <MainStack.Screen name="CategoriesPage" component={CategoriesScreen} />
-            <MainStack.Screen name="CategoryOptionsOverview" component={CategoryOptionsOverview} />
-            <MainStack.Screen name="CompaniesScreen" component={CompaniesScreen} />
-            <MainStack.Screen name="CompanyDetailScreen" component={CompanyDetailScreen} />
-            <MainStack.Screen name="NavigationBar" component={NavigationBar} />
-            <MainStack.Screen name="CompaniesOverview" component={CompaniesOverview} options={{headerShown: false}} />
-            <MainStack.Screen name="ManageCompany" component={ManageCompany} />
-            <MainStack.Screen name="Map" component={Map} />
-            <MainStack.Screen name="AddPlace" component={AddPlace} />
-            <MainStack.Screen name="LocationPicker" component={LocationPicker} />
-            <MainStack.Screen name="EditCompanyScreen" component={EditCompanyScreen} />
+          <NavigationContainer>
+            <MainStack.Navigator
+              initialRouteName={isLoggedIn ? ROUTES.PROFILE : ROUTES.HOME}
+              screenOptions={screenOptions}
+            >
+              <MainStack.Screen
+                name={ROUTES.REGISTER}
+                component={RegistrationScreen}
+              />
+              <MainStack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
+              <MainStack.Screen name={ROUTES.HOME} component={HomeScreen} />
+              <MainStack.Screen
+                name={ROUTES.PROFILE}
+                component={ProfileScreen}
+              />
+              <MainStack.Screen
+                name="SearchOptions"
+                component={SearchOptions}
+              />
+              <MainStack.Screen
+                name="CategoriesPage"
+                component={CategoriesScreen}
+              />
+              <MainStack.Screen
+                name="CategoryOptionsOverview"
+                component={CategoryOptionsOverview}
+              />
+              <MainStack.Screen
+                name="CompaniesScreen"
+                component={CompaniesScreen}
+              />
+              <MainStack.Screen
+                name="CompanyDetailScreen"
+                component={CompanyDetailScreen}
+              />
+              <MainStack.Screen
+                name="NavigationBar"
+                component={NavigationBar}
+              />
+              <MainStack.Screen
+                name="CompaniesOverview"
+                component={CompaniesOverview}
+                options={{ headerShown: false }}
+              />
+              <MainStack.Screen
+                name="ManageCompany"
+                component={ManageCompany}
+              />
+              <MainStack.Screen name="Map" component={Map} />
+              <MainStack.Screen name="AddPlace" component={AddPlace} />
+              <MainStack.Screen
+                name="LocationPicker"
+                component={LocationPicker}
+              />
+              <MainStack.Screen
+                name="EditCompanyScreen"
+                component={EditCompanyScreen}
+              />
 
-
-            
-            <MainStack.Screen
-              name={ROUTES.EDIT_PROFILE}
-              component={EditProfileScreen}
-            />
-            <MainStack.Screen
-              name={ROUTES.COMPANY_PROFILE}
-              component={CompanyProfileScreen}
-            />
-            <MainStack.Screen name={ROUTES.EDIT_COMPANY} component={EditCompanyScreen}/>
-            <MainStack.Screen name={ROUTES.FAQ} component={FaqScreen} />
-
-          </MainStack.Navigator>
-        </NavigationContainer>
+              <MainStack.Screen
+                name={ROUTES.EDIT_PROFILE}
+                component={EditProfileScreen}
+              />
+              <MainStack.Screen
+                name={ROUTES.COMPANY_PROFILE}
+                component={CompanyProfileScreen}
+              />
+              <MainStack.Screen
+                name={ROUTES.EDIT_COMPANY}
+                component={EditCompanyScreen}
+              />
+              <MainStack.Screen name={ROUTES.FAQ} component={FaqScreen} />
+            </MainStack.Navigator>
+          </NavigationContainer>
         </CompaniesContextEditProvider>
       ) : null}
     </>

@@ -9,9 +9,11 @@ const initCompanyState = {
   address: '',
   phone: '',
   workHours: '',
-  serviceType: 'PAID',
+  paymentType: 'PAID',
   takingOut: true,
   services: [],
+  locationLatitude: 0,
+  locationLongitude: 0,
 };
 
 const CompanyContext = createContext();
@@ -21,12 +23,12 @@ export const useCompany = () => useContext(CompanyContext);
 export const CompanyProvider = ({ children }) => {
   const [companyData, setCompanyData] = useState(initCompanyState);
 
-  const updateData = data => {
+  const updateCompanyContextData = data => {
     setCompanyData(prevState => ({ ...prevState, ...data }));
   };
 
   return (
-    <CompanyContext.Provider value={{ companyData, updateData }}>
+    <CompanyContext.Provider value={{ companyData, updateCompanyContextData }}>
       {children}
     </CompanyContext.Provider>
   );

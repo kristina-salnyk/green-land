@@ -6,12 +6,15 @@ import {
   PermissionStatus,
 } from 'expo-location';
 
-
 import { Button } from '../../../features/common/components/button/button';
 import { getAddress, getMapPreview } from '../../util/location';
-import { useNavigation, useRoute, useIsFocused } from '@react-navigation/native';
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from '@react-navigation/native';
 
-function LocationPicker({onPickLocation}) {
+function LocationPicker({ onPickLocation }) {
   const [pickedLocation, setPickedLocation] = useState();
   const isFocused = useIsFocused();
 
@@ -21,39 +24,34 @@ function LocationPicker({onPickLocation}) {
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
 
-
-
   useEffect(() => {
     if (isFocused && route.params) {
       const mapPickedLocation = {
         lat: route.params.pickedLat,
         lng: route.params.pickedLng,
       };
-      console.log(mapPickedLocation)
-       if(mapPickedLocation.lat === undefined){
-        return
-       } else {
+      // console.log(mapPickedLocation)
+      if (mapPickedLocation.lat === undefined) {
+        return;
+      } else {
         setPickedLocation(mapPickedLocation);
-       }
-   
+      }
     }
   }, [route, isFocused]);
 
-
-
-    useEffect(() => {
-      async function handleLocation() {
-        if (pickedLocation) {
-          const address = await getAddress(
-            pickedLocation.lat,
-            pickedLocation.lng
-          );
-          onPickLocation({ ...pickedLocation, address: address });
-        }
+  useEffect(() => {
+    async function handleLocation() {
+      if (pickedLocation) {
+        const address = await getAddress(
+          pickedLocation.lat,
+          pickedLocation.lng
+        );
+        onPickLocation({ ...pickedLocation, address: address });
       }
-    
-    handleLocation()
-  }, [pickedLocation, onPickLocation])
+    }
+
+    handleLocation();
+  }, [pickedLocation, onPickLocation]);
 
   async function verifyPermissions() {
     if (
@@ -75,7 +73,6 @@ function LocationPicker({onPickLocation}) {
     return true;
   }
 
-  
   async function getLocationHandler() {
     const hasPermission = await verifyPermissions();
 
@@ -111,10 +108,18 @@ function LocationPicker({onPickLocation}) {
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
-        <Button icon="location" onPress={getLocationHandler} text='Find your location'>
+        <Button
+          icon="location"
+          onPress={getLocationHandler}
+          text="Find your location"
+        >
           Locate User
         </Button>
-        <Button icon="map" onPress={pickOnMapHandler} text='Find the adress on the map'>
+        <Button
+          icon="map"
+          onPress={pickOnMapHandler}
+          text="Find the adress on the map"
+        >
           Pick on Map
         </Button>
       </View>
@@ -135,9 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: 'hidden',
   },
-  actions: {
-
-  },
+  actions: {},
   image: {
     width: '100%',
     height: '100%',

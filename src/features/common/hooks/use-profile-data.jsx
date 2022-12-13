@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useUser } from '../../../contexts/user-context';
 import * as Yup from 'yup';
-import { ValidationSchema } from '../components/auth-form/validation';
+import { ValidationSchema } from '../../../utils/validation';
 import { useLoading } from '../../../contexts/loading-context';
 import { profileUpdate } from '../../../api/profile-update';
 import { uploadProfilePicture } from '../../../api/upload-profile-picture';
 import { useToast } from 'react-native-toast-notifications';
 
 export const useProfileData = () => {
-  const { userData, updateData } = useUser();
+  const { userData, updateUserContextData } = useUser();
   const { setIsLoading, setError } = useLoading();
   const toast = useToast();
 
@@ -18,7 +18,7 @@ export const useProfileData = () => {
   const [image, setImage] = useState(userData.image);
 
   const changeName = text =>
-    setName(text ? (text[0].toUpperCase() + text.slice(1)) : text);
+    setName(text ? text[0].toUpperCase() + text.slice(1) : text);
   const changePhone = text => setPhone(text);
   const changeEmail = text => setEmail(text);
   const changeImage = text => setImage(text);
@@ -28,17 +28,15 @@ export const useProfileData = () => {
       await Yup.object({
         name: ValidationSchema.name,
         phone: ValidationSchema.phone,
-        email: ValidationSchema.email,
       }).validate({
         name,
         phone,
-        email,
       });
     } catch (error) {
       toast.show(error.message, {
         type: 'custom_toast',
         animationDuration: 100,
-        data: {type: 'fail'}
+        data: { type: 'fail' },
       });
       return;
     }
@@ -54,20 +52,20 @@ export const useProfileData = () => {
         firstName: name,
         lastName: name,
         phone,
-        email
+        email,
       });
-      updateData({ name, phone, email, image });
+      updateUserContextData({ name, phone, email, image });
       toast.show('User profile updated', {
         type: 'custom_toast',
         animationDuration: 100,
-        data: {type: 'success'}
+        data: { type: 'success' },
       });
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {
         type: 'custom_toast',
         animationDuration: 100,
-        data: {type: 'fail'}
+        data: { type: 'fail' },
       });
     } finally {
       setIsLoading(false);

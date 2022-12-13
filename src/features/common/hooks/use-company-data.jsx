@@ -1,33 +1,59 @@
 import { useState } from 'react';
 import * as Yup from 'yup';
-import { ValidationSchema } from '../components/auth-form/validation';
+import { ValidationSchema } from '../../../utils/validation';
 import { useLoading } from '../../../contexts/loading-context';
 import { useToast } from 'react-native-toast-notifications';
 import { useCompany } from '../../../contexts/company-context';
 import { createCompany } from '../../../api/create-company';
+import { useUser } from '../../../contexts/user-context';
+import { createCollectionPoint } from '../../../api/create-collection-point';
 
 export const useCompanyData = () => {
-  const { companyData } = useCompany();
+  const { companyData, updateCompanyContextData } = useCompany();
+  const { updateUserContextData } = useUser();
   const { setIsLoading, setError } = useLoading();
   const toast = useToast();
 
+  const [companyId, setCompanyId] = useState(companyData.companyId);
   const [name, setName] = useState(companyData.name);
   const [email, setEmail] = useState(companyData.email);
   const [address, setAddress] = useState(companyData.address);
   const [phone, setPhone] = useState(companyData.phone);
   const [workHours, setWorkHours] = useState(companyData.workHours);
-  const [serviceType, setServiceType] = useState(companyData.serviceType);
+  const [paymentType, setPaymentType] = useState(companyData.paymentType);
   const [takingOut, setTakingOut] = useState(companyData.takingOut);
   const [services, setServices] = useState(companyData.services);
+  const [locationLatitude, setLocationLatitude] = useState(
+    companyData.locationLatitude
+  );
+  const [locationLongitude, setLocationLongitude] = useState(
+    companyData.locationLongitude
+  );
 
+  const changeCompanyId = value => setCompanyId(value);
   const changeName = text =>
     setName(text ? text[0].toUpperCase() + text.slice(1) : text);
   const changeEmail = text => setEmail(text);
-  const changeAddress = text => setAddress(text);
+  const changeAddress = text => {
+    setAddress(text);
+  };
   const changePhone = text => setPhone(text);
   const changeWorkHours = text => setWorkHours(text);
-  const changeServiceType = text => setServiceType(text);
+  const changePaymentType = text => setPaymentType(text);
   const changeTakingOut = value => setTakingOut(value);
+  const changeServiceState = (id, state) => {
+    setServices(prevState => {
+      const newServices = [...prevState];
+      const idx = newServices.findIndex(item => item.id === id);
+      newServices[idx].checked = state;
+      return newServices;
+    });
+  };
+  const changeServices = items => {
+    setServices([...items]);
+  };
+  const changeLocationLatitude = value => setLocationLatitude(value);
+  const changeLocationLongitude = value => setLocationLongitude(value);
 
   const updateCompanyData = async () => {
     try {
@@ -35,10 +61,14 @@ export const useCompanyData = () => {
         name: ValidationSchema.name,
         phone: ValidationSchema.phone,
         email: ValidationSchema.email,
+        address: ValidationSchema.address,
+        services: ValidationSchema.services,
       }).validate({
         name,
         phone,
         email,
+        address,
+        services: services.filter(item => item.checked),
       });
     } catch (error) {
       toast.show(error.message, {
@@ -53,20 +83,22 @@ export const useCompanyData = () => {
     setError(null);
 
     try {
-      const data = await createCompany({ name, phone, description: '' });
-      console.log(data);
-      // await profileUpdate({
-      //   firstName: name,
-      //   lastName: name,
-      //   phone,
-      //   email
-      // });
-      // updateData({ name, phone, email, image });
-      // toast.show('User profile updated', {
-      //   type: 'custom_toast',
-      //   animationDuration: 100,
-      //   data: {type: 'success'}
-      // });
+      const companyData = await createCompany({ name, phone, description: '' });
+      updateUserContextData({ companyId: companyData.id });
+
+      const collectionPointData = await createCollectionPoint({
+        address,
+        company: companyData.id,
+        description: '',
+        locationLatitude,
+        locationLongitude,
+        mainPoint: true,
+        paymentType,
+        serviceTypes: services.filter(item => item.checked),
+        takingOut,
+      });
+
+      console.log(collectionPointData);
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {
@@ -80,22 +112,29 @@ export const useCompanyData = () => {
   };
 
   return {
+    companyId,
     name,
     email,
     address,
     phone,
     workHours,
-    serviceType,
+    paymentType,
     takingOut,
     services,
+    locationLatitude,
+    locationLongitude,
+    changeCompanyId,
     changeName,
     changeEmail,
     changeAddress,
     changePhone,
     changeWorkHours,
-    changeServiceType,
+    changePaymentType,
     changeTakingOut,
-    setServices,
+    changeServiceState,
+    changeServices,
+    changeLocationLatitude,
+    changeLocationLongitude,
     updateCompanyData,
   };
 };
