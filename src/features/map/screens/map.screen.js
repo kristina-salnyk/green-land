@@ -1,19 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import styled from 'styled-components/native';
 import { CompaniesContext } from '../../../services/companies/companies.context';
 import { LocationContext } from '../../../services/location/location.context';
-import { MapCallout } from '../components/map-callout.component';
 
+import { Search } from '../components/search.component';
+import { MapCallout } from '../components/map-callout.component';
 const Map = styled(MapView)`
-  height: 100%;
-  width: 100%;
+height:100%;
+width: 100%
 `;
 
+
 const SomeText = styled.Text``;
-export const MapScreen = ({ navigation }) => {
-  const { location } = useContext(LocationContext);
-  const { companies = [] } = useContext(CompaniesContext);
+export const MapScreen = ({navigation})=> {
+  const {location} = useContext(LocationContext);
+  const {companies = []} = useContext(CompaniesContext);
   const [latDelta, setLatDelta] = useState(0);
   const { lat, lng, viewport } = location;
 
@@ -21,11 +23,16 @@ export const MapScreen = ({ navigation }) => {
     const northeastLat = viewport.northeast.lat;
     const southwestLat = viewport.southwest.lat;
 
+
     setLatDelta(northeastLat - southwestLat);
   }, [location, viewport]);
 
+
+
+
   return (
     <>
+      {/* <Search /> */}
       <Map
         region={{
           latitude: lat,
@@ -34,7 +41,7 @@ export const MapScreen = ({ navigation }) => {
           longitudeDelta: 0.02,
         }}
       >
-        {companies.map(company => {
+        {companies.map((company) => {
           return (
             <Marker
               key={company.name}
@@ -45,13 +52,13 @@ export const MapScreen = ({ navigation }) => {
               }}
             >
               <Callout
-                onPress={() =>
-                  navigation.navigate('CompanyDetail', {
-                    company,
-                  })
-                }
-              >
-                <MapCallout company={company} />
+                onPress={() =>navigation.navigate('CompanyDetailt', {
+                  company,
+                })}>
+                <MapCallout company={company}/>
+
+
+            
               </Callout>
             </Marker>
           );
