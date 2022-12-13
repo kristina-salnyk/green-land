@@ -7,8 +7,9 @@ import { useCompany } from '../../../contexts/company-context';
 import { createCompany } from '../../../api/create-company';
 import { useUser } from '../../../contexts/user-context';
 import { createCollectionPoint } from '../../../api/create-collection-point';
+import { ROUTES } from '../../../constants';
 
-export const useCompanyData = () => {
+export const useCompanyData = ({ navigation }) => {
   const { companyData, updateCompanyContextData } = useCompany();
   const { updateUserContextData } = useUser();
   const { setIsLoading, setError } = useLoading();
@@ -94,11 +95,25 @@ export const useCompanyData = () => {
         locationLongitude,
         mainPoint: true,
         paymentType,
-        serviceTypes: services.filter(item => item.checked),
+        serviceTypes: services,
         takingOut,
       });
 
-      console.log(collectionPointData);
+      updateCompanyContextData({
+        companyId: companyData.id,
+        name: companyData.name,
+        email: companyData.email,
+        address: collectionPointData.address,
+        phone: companyData.phone,
+        workHours,
+        paymentType: collectionPointData.paymentType,
+        takingOut: collectionPointData.takingOut,
+        services,
+        locationLatitude: collectionPointData.locationLatitude,
+        locationLongitude: collectionPointData.locationLongitude,
+      });
+
+      navigation.navigate(ROUTES.COMPANY_PROFILE);
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {

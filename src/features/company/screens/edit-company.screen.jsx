@@ -41,7 +41,6 @@ const TAKING_OUT = 'Taking out';
 
 export const EditCompanyScreen = ({ navigation }) => {
   const {
-    companyId,
     name,
     email,
     address,
@@ -50,6 +49,8 @@ export const EditCompanyScreen = ({ navigation }) => {
     paymentType,
     services,
     takingOut,
+    locationLatitude,
+    locationLongitude,
     changeName,
     changeEmail,
     changeAddress,
@@ -62,7 +63,7 @@ export const EditCompanyScreen = ({ navigation }) => {
     changeLocationLatitude,
     changeLocationLongitude,
     updateCompanyData,
-  } = useCompanyData();
+  } = useCompanyData({ navigation });
   const [page, setPage] = useState(1);
   const { isLoading, setIsLoading, setError } = useLoading();
 
@@ -132,7 +133,16 @@ export const EditCompanyScreen = ({ navigation }) => {
                       'event.onChangeAddress',
                       eventData => onChangeAddress(eventData)
                     );
-                    navigation.navigate('ManageCompany');
+                    navigation.navigate('ManageCompany', {
+                      currentAddress: {
+                        name,
+                        location: {
+                          address,
+                          lat: locationLatitude,
+                          lng: locationLongitude,
+                        },
+                      },
+                    });
                   }}
                 >
                   <Ionicons name="location" size={42} />
