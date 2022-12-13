@@ -24,6 +24,7 @@ padding: ${(props) => props.theme.space[3]};
 `;
 
 export const CompaniesInfoCard = ({company = {}}) => {
+
   const {
     name = 'Some company',
     address = 'Some random address',
@@ -33,7 +34,7 @@ export const CompaniesInfoCard = ({company = {}}) => {
   } = company;
 
   return (
-    <CompanyCard elevation={5}>
+    <CompanyCard elevation={5} style={styles.card}>
       {/* <CompanyCardCover key={name}/> */}
       <Info>
         <Title>{name}</Title>
@@ -41,6 +42,7 @@ export const CompaniesInfoCard = ({company = {}}) => {
         <Title>{openingDays}</Title>
         <Title>{openingHours}</Title>
         <Title>{rating}</Title>
+ 
 
       </Info>
     </CompanyCard>
@@ -48,6 +50,10 @@ export const CompaniesInfoCard = ({company = {}}) => {
 };
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: 'white' },
+  card: { 
+    backgroundColor: 'white' ,
+    borderWidth: 3,
+    borderColor: '#3bb03d',
+  },
   cover: { padding: 20, backgroundColor: 'white' },
 });
