@@ -1,36 +1,35 @@
 import { createContext, useReducer } from 'react';
-import React from 'react-native';
 
 const DUMMY_COMPANIES = [
-  {
-    id: '1',
-    geometry: {
-      location: {
-        lat: 50.4405849,
-        lng: 30.5316892,
-      },
-      viewport: {
-        northeast: {
-          lat: 50.4405849,
-          lng: 30.5316892,
-        },
-        southwest: {
-          lat: 50.4405849,
-          lng: 30.5316892,
-        },
-      },
+    {
+        id: '1',
+        geometry: {
+            location: {
+              lat: 50.4405849,
+              lng: 30.5316892
+            },
+            viewport: {
+              northeast: {
+                lat: 50.4405849,
+                lng: 30.5316892
+              },
+              southwest: {
+                lat: 50.4405849,
+                lng: 30.5316892
+              }
+            }
+          },
+          name:  'Hello',
+          rating:  60,
+          address:  3434
     },
-    name: 'Hello',
-    rating: 60,
-    address: 3434,
-  },
-];
+]
 
 export const CompaniesContextEdit = createContext({
   companies: [],
-  addCompany: ({ name, location, hours }) => {},
-  deleteCompany: id => {},
-  updateCompany: (id, { name, location, hours }) => {},
+  addCompany: ({name, location,  hours}) => {},
+  deleteCompany: (id) => {},
+  updateCompany: (id, {name, location,  hours }) => {},
 });
 
 function CompaniesReducer(state, action) {
@@ -40,7 +39,7 @@ function CompaniesReducer(state, action) {
       return [{ ...action.payload, id: id }, ...state];
     case 'UPDATE':
       const updatableCompanyIndex = state.findIndex(
-        company => company.id === action.payload.id
+        (company) => company.id === action.payload.id
       );
       const updatableCompany = state[updatableCompanyIndex];
       const updatedItem = { ...updatableCompany, ...action.payload.data };
@@ -48,17 +47,14 @@ function CompaniesReducer(state, action) {
       updatedCompanies[updatableCompanyIndex] = updatedItem;
       return updatedCompanies;
     case 'DELETE':
-      return state.filter(company => company.id !== action.payload);
+      return state.filter((company) => company.id !== action.payload);
     default:
       return state;
   }
 }
 
 function CompaniesContextEditProvider({ children }) {
-  const [companiesState, dispatch] = useReducer(
-    CompaniesReducer,
-    DUMMY_COMPANIES
-  );
+  const [companiesState, dispatch] = useReducer(CompaniesReducer, DUMMY_COMPANIES);
 
   function addCompany(CompanyData) {
     dispatch({ type: 'ADD', payload: CompanyData });

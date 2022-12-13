@@ -5,6 +5,7 @@ import {
   useForegroundPermissions,
   PermissionStatus,
 } from 'expo-location';
+
 import { Button } from '../../../features/common/components/button/button';
 import { getAddress, getMapPreview } from '../../util/location';
 import {
@@ -29,8 +30,9 @@ function LocationPicker({ onPickLocation }) {
         lat: route.params.pickedLat,
         lng: route.params.pickedLng,
       };
+      // console.log(mapPickedLocation)
       if (mapPickedLocation.lat === undefined) {
-        return null;
+        return;
       } else {
         setPickedLocation(mapPickedLocation);
       }
@@ -116,7 +118,7 @@ function LocationPicker({ onPickLocation }) {
         <Button
           icon="map"
           onPress={pickOnMapHandler}
-          text="Find the address on the map"
+          text="Find the adress on the map"
         >
           Pick on Map
         </Button>
@@ -142,5 +144,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    // borderRadius: 4
   },
 });
