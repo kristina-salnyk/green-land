@@ -12,7 +12,7 @@ export const Button = styled.TouchableOpacity`
 
 export const Text = styled.Text`
   font-size: ${props =>
-    props.theme.fontSizes[props.size === 'large' ? 'р5' : 'button']};
+    props.theme.fontSizes[props.size === 'large' ? 'h5' : 'button']};
   font-weight: ${props => props.theme.fontWeights.bold};
   text-align: center;
 `;
