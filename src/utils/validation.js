@@ -36,4 +36,6 @@ export const ValidationSchema = {
         return emailRegex.test(value);
       }
     ),
+  address: Yup.string().required('Address is required. Please use the map'),
+  services: Yup.array().min(1, 'Choose at least one service'),
 };

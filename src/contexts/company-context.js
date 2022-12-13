@@ -9,7 +9,7 @@ const initCompanyState = {
   address: '',
   phone: '',
   workHours: '',
-  serviceType: 'PAID',
+  paymentType: 'PAID',
   takingOut: true,
   services: [],
   locationLatitude: 0,

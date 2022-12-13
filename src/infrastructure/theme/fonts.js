@@ -3,17 +3,18 @@ export const fonts = {
   heading: 'Lato_400Regular',
   monospace: 'Oswald_400Regular',
 };
-  
+
 export const fontWeights = {
   regular: 400,
   medium: 500,
   bold: 700,
 };
-  
+
 export const fontSizes = {
   caption: '12px',
   button: '20px',
   input: '16px',
+  smallInput: '14px',
   body: '16px',
   title: '20px',
   h5: '24px',

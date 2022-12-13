@@ -1,12 +1,11 @@
-import { useContext, useLayoutEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useContext, useEffect, useLayoutEffect } from 'react';
+import { DeviceEventEmitter, StyleSheet, Text, View } from 'react-native';
 import IconButton from './components/UI/IconButton';
 import Button from './components/UI/Button';
 import { CompaniesContextEdit } from './store/companies-context';
 import CompanyForm from './components/ManageCompany/CompanyForm';
 import PropTypes from 'prop-types';
 function ManageCompany({ route, navigation }) {
-  console.log(route);
   const companiesCtx = useContext(CompaniesContextEdit);
 
   const editedCompanyId = route.params?.companyId;
@@ -15,8 +14,6 @@ function ManageCompany({ route, navigation }) {
   const selectedCompany = companiesCtx.companies.find(
     company => company.id === editedCompanyId
   );
-
-  const onChangeAddress = route.params?.onChange;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,22 +31,22 @@ function ManageCompany({ route, navigation }) {
   }
 
   function confirmHandler(companyData) {
-    if (onChangeAddress) {
-      onChangeAddress({
-        address: companyData?.address,
-        locationLatitude: companyData?.location?.lat,
-        locationLongitude: companyData?.location?.lng,
-      });
-    }
+    DeviceEventEmitter.emit('event.onChangeAddress', {
+      address: companyData?.address,
+      locationLatitude: companyData?.location?.lat,
+      locationLongitude: companyData?.location?.lng,
+    });
+    DeviceEventEmitter.removeAllListeners('event.onChangeAddress');
 
     if (isEditing) {
       companiesCtx.updateCompany(editedCompanyId, companyData);
     } else {
       companiesCtx.addCompany(companyData);
     }
-    navigation.navigate('EditCompanyScreen', {
-      addressData: companyData.address,
-    });
+    // navigation.navigate('EditCompanyScreen', {
+    //   addressData: companyData.address,
+    // });
+    navigation.goBack();
   }
 
   return (
@@ -72,11 +69,6 @@ function ManageCompany({ route, navigation }) {
 
 ManageCompany.propTypes = {
   navigation: PropTypes.object,
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      onChange: PropTypes.func,
-    }),
-  }),
 };
 
 export default ManageCompany;
