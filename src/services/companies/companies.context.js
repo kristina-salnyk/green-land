@@ -1,35 +1,31 @@
-import React, {useState,  useContext, createContext, useEffect, useMemo} from 'react';
-
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import { companiesRequest, companiesTransform } from './companies.service';
-
 import { LocationContext } from '../location/location.context';
 
 export const CompaniesContext = createContext();
 
-export const CompaniesContextProvider = ({children}) => {
+export const CompaniesContextProvider = ({ children }) => {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {location} = useContext(LocationContext);
+  const { location } = useContext(LocationContext);
 
-  const retrieveCompanies = (loc) => {
-
+  const retrieveCompanies = loc => {
     setIsLoading(true);
     setCompanies([]);
-    setTimeout(()=>{
+    setTimeout(() => {
       companiesRequest(loc)
         .then(companiesTransform)
-        .then((results) => {
+        .then(results => {
           setIsLoading(false);
           setCompanies(results);
-        }).catch((err) => {
+        })
+        .catch(err => {
           setIsLoading(false);
           setError(err);
         });
-    },2000);
-
+    }, 2000);
   };
-
 
   useEffect(() => {
     if (location) {
@@ -38,15 +34,14 @@ export const CompaniesContextProvider = ({children}) => {
     }
   }, [location]);
 
-
-
-  return(
-    <CompaniesContext.Provider 
+  return (
+    <CompaniesContext.Provider
       value={{
         companies,
         isLoading,
         error,
-      }}>
+      }}
+    >
       {children}
     </CompaniesContext.Provider>
   );
