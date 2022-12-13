@@ -60,13 +60,15 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+
     (async () => {
       const credentials = await retrieveUserData();
       if (!credentials) {
+        setIsLoading(false);
         return;
       }
 
-      setIsLoading(true);
       try {
         await logIn(credentials);
       } catch (error) {
@@ -92,7 +94,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading ? (
         <UserContext.Provider
           value={{
             isLoggedIn,
@@ -106,7 +108,7 @@ export const UserProvider = ({ children }) => {
         >
           {children}
         </UserContext.Provider>
-      )}
+      ) : null}
     </>
   );
 };

@@ -1,3 +1,4 @@
+import React from 'react-native';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 function Button({ children, onPress, mode, style }) {
