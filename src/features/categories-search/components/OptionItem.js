@@ -1,3 +1,4 @@
+
 import React, { View, Text, Pressable, Image, StyleSheet } from 'react-native';
 import { SafeArea } from '../../../components/utility/safe-area.component';
 import { categoryImages } from '../../../../images';
@@ -14,6 +15,7 @@ function OptionItem({ title, imageUrl, id, navigation }) {
               screen: 'CategoriesPage',
             });
           }}
+
         >
           <View>
             <Image source={categoryImages[id - 1]} style={styles.image} />

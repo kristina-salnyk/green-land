@@ -25,7 +25,7 @@ function CompanyForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     onSubmit(companyData);
   }
 
-  const pickLocationHandler = useCallback(location => {
+  const pickLocationHandler = useCallback((location) => {
     setPickedLocation(location);
   }, []);
 

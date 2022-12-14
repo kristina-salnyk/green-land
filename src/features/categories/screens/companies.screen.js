@@ -5,18 +5,70 @@ import { SafeArea } from '../../../components/utility/safe-area.component';
 import { StyleSheet } from 'react-native';
 import { CompaniesContext } from '../../../services/companies/companies.context';
 import { Search } from '../components/search.component';
+import { OptionsInfoCard } from '../../categories-search/components/categories-info-option-card';
 
-export const CompaniesScreen = ({ navigation }) => {
-  const { isLoading, companies, error } = useContext(CompaniesContext);
-  return (
-    <SafeArea>
+
+export const CompaniesScreen = ({navigation, route}) => {
+   let itemId  = route.params?.catId;
+
+  const {isLoading, companies, categories, collectionpoint, error} = useContext(CompaniesContext);
+
+
+
+  if(itemId){
+   
+  
+    return  (
+      <SafeArea >
+        <Search />
+   
+        <FlatList
+   
+          data ={categories[itemId-1].collectionPoints}
+     
+          renderItem={({item})=>{
+            return(
+              <TouchableOpacity
+              key={item.name}
+                onPress={()=>
+                 
+                  navigation.navigate('CompanyDetailt', {
+                    screen: 'CompanyDetailt',
+                    company:item,
+             
+                  })
+                }
+              >
+                <OptionsInfoCard company={item}/>
+                
+              </TouchableOpacity>
+            );}}
+          keyExtractor={(item)=> item.id}
+          contentContainerStyle={{padding:16}}
+  
+  
+        />
+  
+        
+      </SafeArea>
+  
+    );
+  } else {
+    console.log('location')
+  return  (
+    <SafeArea >
+
       <Search />
       <FlatList
         data={companies}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() =>
+
+            key={item.id}
+              onPress={()=>
+               
+
                 navigation.navigate('CompanyDetailt', {
                   screen: 'CompanyDetailt',
                   company: item,
@@ -25,13 +77,19 @@ export const CompaniesScreen = ({ navigation }) => {
             >
               <CompaniesInfoCard company={item} />
             </TouchableOpacity>
-          );
-        }}
-        keyExtractor={item => item.name}
-        contentContainerStyle={{ padding: 16 }}
+
+          );}}
+        keyExtractor={(item)=> item.id}
+        contentContainerStyle={{padding:16}}
+
+
       />
+
+      
+
     </SafeArea>
   );
+            }
 };
 
 const styles = StyleSheet.create({
