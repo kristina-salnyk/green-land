@@ -13,7 +13,7 @@ export const CompaniesScreen = ({navigation, route}) => {
 
   const {isLoading, companies, categories, collectionpoint, error} = useContext(CompaniesContext);
 
-
+console.log(itemId)
 
   if(itemId){
    

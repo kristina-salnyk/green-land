@@ -10,7 +10,7 @@ export const CompaniesContext = createContext();
 
 export const CompaniesContextProvider = ({children}) => {
   const [categories, setCategories] = useState([]);
-=======
+
 
   const [companies, setCompanies] = useState([]);
   const [collectionpoint, setCollectionpoint] = useState([]);
