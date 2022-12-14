@@ -85,6 +85,7 @@ export const EditCompanyScreen = ({ navigation }) => {
     changeAddress(location.address);
     changeLocationLatitude(location.locationLatitude);
     changeLocationLongitude(location.locationLongitude);
+    DeviceEventEmitter.removeAllListeners('event.onChangeAddress');
   };
 
   return (
@@ -133,14 +134,8 @@ export const EditCompanyScreen = ({ navigation }) => {
                       eventData => onChangeAddress(eventData)
                     );
                     navigation.navigate('ManageCompany', {
-                      currentAddress: {
-                        name,
-                        location: {
-                          address,
-                          lat: locationLatitude,
-                          lng: locationLongitude,
-                        },
-                      },
+                      pickedLat: locationLatitude,
+                      pickedLng: locationLongitude,
                     });
                   }}
                 >

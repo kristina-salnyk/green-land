@@ -64,6 +64,8 @@ export const useCompanyData = ({ navigation }) => {
   const changeLocationLongitude = value => setLocationLongitude(value);
 
   const updateCompanyData = async () => {
+    const isNewCompany = companyId === -1;
+
     try {
       await Yup.object({
         name: ValidationSchema.name,
@@ -107,7 +109,7 @@ export const useCompanyData = ({ navigation }) => {
           description: email,
         });
       }
-      changeCompanyId(fetchedCompanyData);
+      changeCompanyId(fetchedCompanyData.id);
 
       updateCompanyContextData({
         companyId: fetchedCompanyData.id,
@@ -165,7 +167,15 @@ export const useCompanyData = ({ navigation }) => {
         locationLongitude: fetchedCollectionPointData.locationLongitude,
       });
 
-      navigation.navigate(ROUTES.COMPANY_PROFILE);
+      if (!isNewCompany) {
+        toast.show('Company data updated', {
+          type: 'custom_toast',
+          animationDuration: 100,
+          data: { type: 'success' },
+        });
+      } else {
+        navigation.navigate(ROUTES.COMPANY_PROFILE);
+      }
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {

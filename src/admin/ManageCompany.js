@@ -3,9 +3,7 @@ import { DeviceEventEmitter, StyleSheet, View } from 'react-native';
 import CompanyForm from './components/ManageCompany/CompanyForm';
 import PropTypes from 'prop-types';
 
-function ManageCompany({ route, navigation }) {
-  const currentAddress = route.params?.currentAddress;
-
+function ManageCompany({ navigation }) {
   function cancelHandler() {
     navigation.goBack();
   }
@@ -16,7 +14,6 @@ function ManageCompany({ route, navigation }) {
       locationLatitude: companyData?.location?.lat,
       locationLongitude: companyData?.location?.lng,
     });
-    DeviceEventEmitter.removeAllListeners('event.onChangeAddress');
 
     navigation.goBack();
   }
@@ -24,10 +21,9 @@ function ManageCompany({ route, navigation }) {
   return (
     <View style={styles.container}>
       <CompanyForm
-        submitButtonLabel="Add"
+        submitButtonLabel="Select"
         onSubmit={confirmHandler}
         onCancel={cancelHandler}
-        defaultValues={currentAddress}
       />
     </View>
   );
@@ -48,5 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
+    justifyContent: 'center',
   },
 });
