@@ -1,13 +1,12 @@
-import { View } from "react-native"
-import CompaniesList from "./CompaniesList"
+import React, { View } from 'react-native';
+import CompaniesList from './CompaniesList';
 
-
-function CompaniesOutput({companies, companiesPeriod}){
-    return (
+function CompaniesOutput({ companies, companiesPeriod }) {
+  return (
     <View>
-      <CompaniesList companies={companies}/>
+      <CompaniesList companies={companies} />
     </View>
-    )
+  );
 }
 
-export default CompaniesOutput
+export default CompaniesOutput;

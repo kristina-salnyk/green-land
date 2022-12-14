@@ -1,5 +1,5 @@
 export const locations = {
-  київ: {
+  kyiv: {
     results: [
       {
         geometry: {

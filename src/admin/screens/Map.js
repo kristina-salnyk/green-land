@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
@@ -40,11 +40,7 @@ function Map({ navigation }) {
     navigation.setOptions({
       headerShown: true,
       headerRight: ({ tintColor }) => (
-        <IconButton
-          icon="save"
-          size={24}
-          onPress={savePickedLocationHandler}
-        />
+        <IconButton icon="save" size={24} onPress={savePickedLocationHandler} />
       ),
     });
   }, [navigation, savePickedLocationHandler]);
