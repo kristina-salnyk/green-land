@@ -5,10 +5,12 @@ import { companiesRequest, companiesTransform } from './companies.service';
 import { LocationContext } from '../location/location.context';
 import { getCompanies } from '../../api/get-companies';
 import { getCollectionpoint } from '../../api/get-collectionpoint';
+import { getCategories } from '../../api/get-categories';
 
 export const CompaniesContext = createContext();
 
 export const CompaniesContextProvider = ({children}) => {
+  const [categories, setCategories] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [collectionpoint, setCollectionpoint] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +49,7 @@ export const CompaniesContextProvider = ({children}) => {
 
       try {
         const data = await getCompanies();
-        const list = data.map(({name }) => ({name }));
+        const list = data.map(({name, collectionPoints }) => ({name, collectionPoints }));
         
         setCompanies(list);
    
@@ -58,6 +60,7 @@ export const CompaniesContextProvider = ({children}) => {
       }
     })();
   }, []);
+  
 
   useEffect(() => {
     (async () => {
@@ -78,10 +81,29 @@ export const CompaniesContextProvider = ({children}) => {
   }, []);
 
 
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+
+      try {
+        const data = await getCategories();
+        const list = data.map(({name, collectionPoints }) => ({name, collectionPoints }));
+        
+        setCategories(list);
+   
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
 
   return(
     <CompaniesContext.Provider 
       value={{
+        categories,
         collectionpoint,
         companies,
         isLoading,

@@ -14,8 +14,10 @@ function OptionItem({title, imageUrl, id, navigation}){
         }
     
         onPress={() => {
-            navigation.navigate("NavigationBar", {
-                screen: 'CategoriesPage'
+
+            navigation.navigate("CompaniesScreen", {
+                screen: 'CompaniesScreen',
+                catId:id
                })
         }}
         >

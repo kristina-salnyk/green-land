@@ -98,7 +98,7 @@ export const useCompanyData = () => {
         takingOut,
       });
 
-      console.log(collectionPointData);
+
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {
