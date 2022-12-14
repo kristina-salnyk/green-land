@@ -1,7 +1,5 @@
-import React, {useState,  useContext, createContext, useEffect, useMemo} from 'react';
-
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import { companiesRequest, companiesTransform } from './companies.service';
-
 import { LocationContext } from '../location/location.context';
 import { getCompanies } from '../../api/get-companies';
 import { getCollectionpoint } from '../../api/get-collectionpoint';
@@ -9,12 +7,16 @@ import { getCategories } from '../../api/get-categories';
 
 export const CompaniesContext = createContext();
 
+
 export const CompaniesContextProvider = ({children}) => {
   const [categories, setCategories] = useState([]);
+=======
+
   const [companies, setCompanies] = useState([]);
   const [collectionpoint, setCollectionpoint] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
   const {location} = useContext(LocationContext);
 
   // const retrieveCompanies = (loc) => {
@@ -80,10 +82,12 @@ export const CompaniesContextProvider = ({children}) => {
     })();
   }, []);
 
+ 
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
+
 
       try {
         const data = await getCategories();
@@ -102,13 +106,16 @@ export const CompaniesContextProvider = ({children}) => {
 
   return(
     <CompaniesContext.Provider 
+
+
       value={{
         categories,
         collectionpoint,
         companies,
         isLoading,
         error,
-      }}>
+      }}
+    >
       {children}
     </CompaniesContext.Provider>
   );

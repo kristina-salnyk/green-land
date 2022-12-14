@@ -2,7 +2,7 @@ import React from 'react-native';
 import PropTypes from 'prop-types';
 import { getIconByName } from './getIconByName';
 
-export const Icon = ({ iconName, size= 35, iconStyle = {} }) => {
+export const Icon = ({ iconName, size = 35, iconStyle = {} }) => {
   const icon = getIconByName(iconName);
   const IconComponent = icon.component;
 
@@ -10,7 +10,7 @@ export const Icon = ({ iconName, size= 35, iconStyle = {} }) => {
     <IconComponent
       name={icon.source ?? iconName}
       size={size}
-      style={{ position: 'absolute', top: 10, left: 20, ...iconStyle }}
+      style={{ position: 'absolute', top: 10, left: 15, ...iconStyle }}
     />
   );
 };

@@ -52,6 +52,7 @@ export const UserProvider = ({ children }) => {
       password,
       image,
       role: data.roles[0].name,
+      companyId: data.companyId,
     }));
 
     setIsLoggedIn(true);
@@ -59,13 +60,15 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+
     (async () => {
       const credentials = await retrieveUserData();
       if (!credentials) {
+        setIsLoading(false);
         return;
       }
 
-      setIsLoading(true);
       try {
         await logIn(credentials);
       } catch (error) {
@@ -90,18 +93,23 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider
-      value={{
-        isLoggedIn,
-        userData,
-        isLoading,
-        logIn,
-        logOut,
-        updateUserContextData,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+    <>
+      {!isLoading ? (
+        <UserContext.Provider
+          value={{
+            isLoggedIn,
+            userData,
+            isLoading,
+            setIsLoading,
+            logIn,
+            logOut,
+            updateUserContextData,
+          }}
+        >
+          {children}
+        </UserContext.Provider>
+      ) : null}
+    </>
   );
 };
 

@@ -15,15 +15,15 @@ export const CompanyOptions = ({ navigation }) => {
       />
       <Button
         onPress={() => {}}
-        text="Messages from the customers"
+        text="Messages from customers"
         iconName="envelope-o"
-        iconStyle={{ top: 8 }}
+        iconStyle={{ top: 13 }}
       />
       <Button
         onPress={() => {}}
         text="Add the collection point"
         iconName="sourcetree"
-        iconStyle={{ top: 10 }}
+        iconStyle={{ top: 13 }}
       />
       <Button
         onPress={() => {}}

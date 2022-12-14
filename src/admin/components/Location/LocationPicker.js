@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, View, StyleSheet, Image, Text } from 'react-native';
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
   PermissionStatus,
 } from 'expo-location';
-
 import { Button } from '../../../features/common/components/button/button';
 import { getAddress, getMapPreview } from '../../util/location';
 import {
@@ -118,7 +117,7 @@ function LocationPicker({ onPickLocation }) {
         <Button
           icon="map"
           onPress={pickOnMapHandler}
-          text="Find the adress on the map"
+          text="Find the address on the map"
         >
           Pick on Map
         </Button>
@@ -136,7 +135,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',
-
     borderRadius: 4,
     overflow: 'hidden',
   },
@@ -144,6 +142,5 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    // borderRadius: 4
   },
 });

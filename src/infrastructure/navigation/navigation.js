@@ -18,7 +18,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROUTES } from '../../constants';
 import { EditProfileScreen } from '../../features/profile/screens/edit-pofile.screen';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconButton from '../../admin/components/UI/IconButton';
 import CompaniesContextEditProvider from '../../admin/store/companies-context';

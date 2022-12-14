@@ -41,7 +41,6 @@ const TAKING_OUT = 'Taking out';
 
 export const EditCompanyScreen = ({ navigation }) => {
   const {
-    companyId,
     name,
     email,
     address,
@@ -50,6 +49,8 @@ export const EditCompanyScreen = ({ navigation }) => {
     paymentType,
     services,
     takingOut,
+    locationLatitude,
+    locationLongitude,
     changeName,
     changeEmail,
     changeAddress,
@@ -62,14 +63,13 @@ export const EditCompanyScreen = ({ navigation }) => {
     changeLocationLatitude,
     changeLocationLongitude,
     updateCompanyData,
-  } = useCompanyData();
+  } = useCompanyData({ navigation });
   const [page, setPage] = useState(1);
   const { isLoading, setIsLoading, setError } = useLoading();
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-
       try {
         const data = await getCategories();
         changeServices(data.map(item => ({ ...item, checked: false })));
@@ -85,6 +85,7 @@ export const EditCompanyScreen = ({ navigation }) => {
     changeAddress(location.address);
     changeLocationLatitude(location.locationLatitude);
     changeLocationLongitude(location.locationLongitude);
+    DeviceEventEmitter.removeAllListeners('event.onChangeAddress');
   };
 
   return (
@@ -132,7 +133,10 @@ export const EditCompanyScreen = ({ navigation }) => {
                       'event.onChangeAddress',
                       eventData => onChangeAddress(eventData)
                     );
-                    navigation.navigate('ManageCompany');
+                    navigation.navigate('ManageCompany', {
+                      pickedLat: locationLatitude,
+                      pickedLng: locationLongitude,
+                    });
                   }}
                 >
                   <Ionicons name="location" size={42} />
@@ -191,7 +195,7 @@ export const EditCompanyScreen = ({ navigation }) => {
 
       {page === 2 && (
         <>
-          <Button onPress={updateCompanyData} color="primary" text="Create" />
+          <Button onPress={updateCompanyData} color="primary" text="Save" />
           <Button
             onPress={() => setPage(1)}
             color="secondary"
