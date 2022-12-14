@@ -1,9 +1,8 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import { Place } from '../../models/place';
 import LocationPicker from '../Location/LocationPicker';
 import { Button } from '../../../features/common/components/button/button';
-import Input from './Input';
 
 function CompanyForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
   const [inputValues, setInputValues] = useState({

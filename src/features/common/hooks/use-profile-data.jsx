@@ -30,7 +30,7 @@ export const useProfileData = () => {
         phone: ValidationSchema.phone,
       }).validate({
         name,
-        phone,
+        phone: '' + phone,
       });
     } catch (error) {
       toast.show(error.message, {
