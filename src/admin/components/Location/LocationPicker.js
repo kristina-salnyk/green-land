@@ -29,6 +29,7 @@ function LocationPicker({ onPickLocation }) {
         lat: route.params.pickedLat,
         lng: route.params.pickedLng,
       };
+
       if (mapPickedLocation.lat === undefined) {
         return;
       } else {

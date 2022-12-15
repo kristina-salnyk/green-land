@@ -21,29 +21,40 @@ const Info = styled.View`
   padding: ${props => props.theme.space[3]};
 `;
 
-export const CompaniesInfoCard = ({ company = {} }) => {
+
+export const CompaniesInfoCard = ({company = {}}) => {
+
+
   const {
     name = 'Some company',
-    address = 'Some random address',
+    address = 'dwdwd',
     openingDays = 'Mon - Fri',
     openingHours = '9 a.m - 6 p.m',
     rating = 4,
   } = company;
 
   return (
+
     <CompanyCard elevation={5}>
+
       <Info>
         <Title>{name}</Title>
         <Title>{address}</Title>
+        <Title>{company.collectionPoints?.map(el=> el.address)}</Title>
         <Title>{openingDays}</Title>
         <Title>{openingHours}</Title>
         <Title>{rating}</Title>
+
       </Info>
     </CompanyCard>
   );
 };
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: 'white' },
+  card: { 
+    backgroundColor: 'white' ,
+    borderWidth: 3,
+    borderColor: '#3bb03d',
+  },
   cover: { padding: 20, backgroundColor: 'white' },
 });

@@ -177,6 +177,7 @@ export const useCompanyData = ({ navigation }) => {
       } else {
         navigation.navigate(ROUTES.COMPANY_PROFILE);
       }
+
     } catch (error) {
       setError(error.message);
       toast.show(error.message, {

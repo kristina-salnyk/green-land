@@ -1,3 +1,4 @@
+
 export class Place {
   constructor(name, location, hours) {
     this.name = name;
