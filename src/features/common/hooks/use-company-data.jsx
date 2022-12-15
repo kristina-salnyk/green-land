@@ -110,6 +110,7 @@ export const useCompanyData = ({ navigation }) => {
         });
       }
       changeCompanyId(fetchedCompanyData.id);
+      updateUserContextData({ companyId: fetchedCompanyData.id });
 
       updateCompanyContextData({
         companyId: fetchedCompanyData.id,
